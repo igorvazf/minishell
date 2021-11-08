@@ -1,4 +1,4 @@
-NAME =		push_swap
+NAME =		minishell
 CC =		clang
 CFLAGS =	-Wall -Werror -Wextra
 RM =		rm -rf
