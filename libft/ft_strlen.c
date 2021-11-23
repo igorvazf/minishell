@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igvaz-fe <igvaz-fe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: igvaz-fe <igvaz-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/11/23 12:40:31 by igvaz-fe         ###   ########.fr       */
+/*   Created: 2021/07/29 09:46:52 by igvaz-fe          #+#    #+#             */
+/*   Updated: 2021/07/30 12:17:34 by igvaz-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+size_t	ft_strlen(const char *str)
 {
-	
-	return (0);
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

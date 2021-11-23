@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igvaz-fe <igvaz-fe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/11/23 12:40:31 by igvaz-fe         ###   ########.fr       */
+/*   Created: 2021/07/29 09:49:01 by igvaz-fe          #+#    #+#             */
+/*   Updated: 2021/11/23 12:35:49 by igvaz-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#ifndef LIBFT_H
+# define LIBFT_H
+# include <stdlib.h>
+# include <unistd.h>
 
-int	main(int argc, char *argv[], char *envp[])
-{
-	
-	return (0);
-}
+size_t	ft_strlen(const char *str);
+
+#endif
