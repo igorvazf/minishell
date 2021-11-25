@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/11/24 21:39:48 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/11/25 15:27:23 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+
+typedef struct s_mini
+{
+	char	*input;
+}	t_mini;
 
 void	minipwd(void);
 void	miniheader(void);
