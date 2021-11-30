@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/30 13:57:59 by paugusto          #+#    #+#             */
-/*   Updated: 2021/11/30 17:41:30 by paugusto         ###   ########.fr       */
+/*   Created: 2021/08/02 14:07:08 by paugusto          #+#    #+#             */
+/*   Updated: 2021/11/30 15:31:22 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-void	get_path(t_mini *mini)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*path;
-	char	*aux;
-	int		i;
+	size_t	total_len;
+	size_t	i;
+	size_t	j;
+	char	*ptr;
 
-	path = getenv("PATH");
-	aux = ft_strdup(path);
-	if(!aux)
-		return ;
-	mini->path = ft_split(aux, ':');
+	if (!s1 || !s2)
+		return (NULL);
 	i = 0;
-	while (mini->path[i])
+	j = 0;
+	total_len = ft_strlen(s1) + ft_strlen(s2);
+	ptr = (char *)malloc(total_len * sizeof(char) + 1);
+	if (!ptr)
+		return (NULL);
+	while (s1[i] != '\0')
 	{
-		mini->path[i] = ft_strjoin(mini->path[i], "/");
+		ptr[i] = s1[i];
 		i++;
 	}
-	free(aux);
-}
-
-void	init(t_mini *mini)
-{
-	get_path(mini);
-	mini->pipes = 0;
+	while (s2[j] != '\0')
+		ptr[i++] = s2[j++];
+	ptr[i] = '\0';
+	return (ptr);
 }

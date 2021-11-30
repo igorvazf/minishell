@@ -6,7 +6,11 @@ RM = rm -f
 SRC =	ft_strlen.c \
 		ft_strdup.c \
 		ft_memcpy.c \
-		ft_split.c
+		ft_split.c \
+		ft_strjoin.c \
+		ft_strtrim.c \
+		ft_strchr.c \
+		ft_substr.c
 
 OBJECTS = $(SRC:.c=.o)
 

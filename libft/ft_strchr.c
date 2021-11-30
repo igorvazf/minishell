@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/30 13:57:59 by paugusto          #+#    #+#             */
-/*   Updated: 2021/11/30 17:41:30 by paugusto         ###   ########.fr       */
+/*   Created: 2021/07/30 13:55:50 by paugusto          #+#    #+#             */
+/*   Updated: 2021/11/30 17:52:39 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-void	get_path(t_mini *mini)
+char	*ft_strchr(const char *s, int c)
 {
-	char	*path;
-	char	*aux;
-	int		i;
+	size_t	i;
+	char	*ptr;
+	char	x;
 
-	path = getenv("PATH");
-	aux = ft_strdup(path);
-	if(!aux)
-		return ;
-	mini->path = ft_split(aux, ':');
+	ptr = (char *)s;
+	x = (char)c;
 	i = 0;
-	while (mini->path[i])
+	if (x == '\0')
 	{
-		mini->path[i] = ft_strjoin(mini->path[i], "/");
+		i = ft_strlen(ptr);
+		return (&ptr[i]);
+	}
+	while (ptr[i] != '\0')
+	{
+		if (ptr[i] == x)
+			return (&ptr[i]);
 		i++;
 	}
-	free(aux);
-}
-
-void	init(t_mini *mini)
-{
-	get_path(mini);
-	mini->pipes = 0;
+	ptr = NULL;
+	return (ptr);
 }

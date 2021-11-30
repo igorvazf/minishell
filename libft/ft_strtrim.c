@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/30 13:57:59 by paugusto          #+#    #+#             */
-/*   Updated: 2021/11/30 17:41:30 by paugusto         ###   ########.fr       */
+/*   Created: 2021/08/05 16:40:16 by paugusto          #+#    #+#             */
+/*   Updated: 2021/11/30 18:59:05 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-void	get_path(t_mini *mini)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*path;
-	char	*aux;
-	int		i;
+	size_t	i;
 
-	path = getenv("PATH");
-	aux = ft_strdup(path);
-	if(!aux)
-		return ;
-	mini->path = ft_split(aux, ':');
-	i = 0;
-	while (mini->path[i])
-	{
-		mini->path[i] = ft_strjoin(mini->path[i], "/");
-		i++;
-	}
-	free(aux);
-}
-
-void	init(t_mini *mini)
-{
-	get_path(mini);
-	mini->pipes = 0;
+	if (!s1 || !set)
+		return (0);
+	while (*s1 && ft_strchr(set, *s1))
+		s1++;
+	i = ft_strlen(s1);
+	while (i && ft_strchr(set, s1[i]))
+		i--;
+	return (ft_substr(s1, 0, i + 1));
 }

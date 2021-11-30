@@ -1,6 +1,6 @@
 NAME =		minishell
 CC =		clang
-CFLAGS =	-Wall -Werror -Wextra
+CFLAGS =	-g -Wall -Werror -Wextra
 RM =		rm -rf
 
 LIBFT_DIR =	./libft
@@ -9,7 +9,8 @@ LIBFT =		$(LIBFT_DIR)/libft.a
 SRC_FILES =	minishell.c \
 			minipwd.c \
 			miniheader.c \
-			init.c
+			init.c \
+			input.c
 
 SRC =		$(addprefix src/, $(SRC_FILES))
 
