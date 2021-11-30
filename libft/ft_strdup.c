@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/29 09:49:01 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/11/30 14:30:53 by paugusto         ###   ########.fr       */
+/*   Created: 2021/08/02 11:28:38 by paugusto          #+#    #+#             */
+/*   Updated: 2021/11/30 14:26:11 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
-# include <stdlib.h>
-# include <unistd.h>
+#include "libft.h"
 
-size_t	ft_strlen(const char *str);
-char	*ft_strdup(const char *src);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-char	**ft_split(char const *s, char c);
+char	*ft_strdup(const char *src)
+{
+	char	*dest;
+	int		i;
 
-#endif
+	i = 0;
+	dest = (char *)malloc(ft_strlen(src) * sizeof(char) + 1);
+	if (!dest)
+		return (NULL);
+	ft_memcpy(dest, src, ft_strlen(src) + 1);
+	return (dest);
+}

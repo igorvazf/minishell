@@ -3,7 +3,10 @@ CC = clang
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
-SRC =	ft_strlen.c
+SRC =	ft_strlen.c \
+		ft_strdup.c \
+		ft_memcpy.c \
+		ft_split.c
 
 OBJECTS = $(SRC:.c=.o)
 

@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/29 09:49:01 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/11/30 14:30:53 by paugusto         ###   ########.fr       */
+/*   Created: 2021/11/30 13:57:59 by paugusto          #+#    #+#             */
+/*   Updated: 2021/11/30 14:47:38 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
-# include <stdlib.h>
-# include <unistd.h>
+#include "../include/minishell.h"
 
-size_t	ft_strlen(const char *str);
-char	*ft_strdup(const char *src);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-char	**ft_split(char const *s, char c);
+void	get_path(t_mini *mini)
+{
+	char	*path;
+	char	*aux;
 
-#endif
+	path = getenv("PATH");
+	aux = ft_strdup(path);
+	if(!aux)
+		return ;
+	mini->path = ft_split(aux, ':');
+	free(path);
+	free(aux);
+}
+
+void	init(t_mini *mini)
+{
+	get_path(mini);
+}

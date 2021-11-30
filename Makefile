@@ -8,7 +8,8 @@ LIBFT =		$(LIBFT_DIR)/libft.a
 
 SRC_FILES =	minishell.c \
 			minipwd.c \
-			miniheader.c 
+			miniheader.c \
+			init.c
 
 SRC =		$(addprefix src/, $(SRC_FILES))
 

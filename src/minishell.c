@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/11/25 15:44:46 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/11/30 14:49:10 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(void)
 {
 	t_mini mini;
 
+	init(&mini);
 	while (1)
 	{
 		get_input(&mini);
