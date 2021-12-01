@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/11/30 20:48:51 by paugusto         ###   ########.fr       */
+/*   Created: 2021/07/29 09:54:38 by pedroadias        #+#    #+#             */
+/*   Updated: 2021/11/30 21:17:12 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-
-
-int	main(void)
+int	ft_isalpha(int c)
 {
-	t_mini	mini;
-
-
-	init(&mini);
-	while (1)
-	{
-		get_input(&mini);
-		process_input(&mini);
-		// execute_cmd(&mini, mini.input_parsed[0]);
-		free(mini.input);
-	}
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+		return (1);
 	return (0);
 }

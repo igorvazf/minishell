@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/11/30 18:20:13 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/11/30 20:56:00 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 typedef struct s_mini
 {
 	char	*input;
-	char	**input_parsed;
+	char	***input_parsed;
 	char	**path;
 	int		pipes;
 }	t_mini;
