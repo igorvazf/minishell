@@ -13,7 +13,8 @@ SRC =	ft_strlen.c \
 		ft_substr.c \
 		ft_isalnum.c \
 		ft_isdigit.c \
-		ft_isalpha.c
+		ft_isalpha.c \
+		ft_isascii.c
 
 OBJECTS = $(SRC:.c=.o)
 

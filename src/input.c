@@ -6,21 +6,47 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 17:58:06 by paugusto          #+#    #+#             */
-/*   Updated: 2021/11/30 21:55:01 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/01 20:43:28 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	how_many_words(char *str)
+int	*is_quotes(int *quotes)
+{
+	
+}
+
+int	is_valid(char c, int d_quotes, int s_quotes)
+{
+	int	valid;
+
+	if(!c)
+	{
+		valid = 0;
+		return (valid);
+	}
+	if (((c != '|' && c != '<' && c != '>' ) && d_quotes == 0 && s_quotes == 0)
+		|| ((c == '|' || c == '<' || c == '>' )
+		&& (d_quotes == 1 || s_quotes == 1)))
+		valid = 1;
+	else
+		valid = 0;
+	return (valid);
+}
+
+/*
+** quotes[0] -> double quotes
+** quotes[1] -> single quotes
+*/
+int	how_many_words(char *str, t_mini *mini)
 {
 	static int	i;
 	int	words;
-	int	s_quotes;
-	int	d_quotes;
+	int	quotes[2];
 
-	s_quotes = 0;
-	d_quotes = 0;
+	quotes[0] = 0;
+	quotes[1] = 0;
 	if(!i)
 		i = 0;
 	else if (str[i] == '\0')
@@ -28,46 +54,11 @@ int	how_many_words(char *str)
 	else
 		i++;
 	words = 0;
-	while (str[i] != '|' && str[i] != '\0')
+	while (is_valid(str[i], quotes[0], quotes[1]))
 	{
-		if(str[i] == 34 && d_quotes == 1)
-		{
-			d_quotes = 0;
-			words++;
-		}
-		else if(str[i] == 34 && s_quotes == 0)
-			d_quotes = 1;
-		if(str[i] == 39 && s_quotes == 1)
-		{
-			s_quotes = 0;
-			words++;
-		}
-		else if(str[i] == 39 && d_quotes == 0)
-			s_quotes = 1;
-		if(str[i] == ' ' && str[i - 1] != ' ' && str[i - 1] != '|'
-			&& s_quotes == 0 && d_quotes == 0)
-			words++;
-		i++;
+
 	}
-	if (str[i] == '\0')
-		words++;
 	return (words);
-}
-
-void	how_many_pipes(t_mini *mini)
-{
-	int	i;
-	int	pipes;
-
-	i = 0;
-	pipes = 0;
-	while (mini->input[i])
-	{
-		if (mini->input[i] == '|')
-			pipes++;
-		i++;
-	}
-	mini->pipes = pipes;
 }
 
 void	process_input(t_mini *mini)
@@ -77,13 +68,16 @@ void	process_input(t_mini *mini)
 	int		j;
 
 	aux = ft_strtrim(mini->input, " ");
-	mini->input_parsed = malloc((mini->pipes + 1) * sizeof(char **));
+	mini->input_parsed = malloc((mini->n_pipes + 1) * sizeof(char **));
 	i = 0;
-	while (i <= mini->pipes)
+	while (i <= mini->n_pipes)
 	{
-		input_parsed[i] = malloc(sizeof(char *) * how_many_words(aux) + 1);
-		input_parsed[i] = ft_split()
+		mini->input_parsed[i] = malloc(sizeof(char *) * how_many_words(aux, mini) + 1);
 		i++;
+	}
+	if (mini->is_quotes_closed = 0)
+	{
+		//free em tudo, fecha tudo.
 	}
 }
 

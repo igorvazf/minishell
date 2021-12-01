@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:57:59 by paugusto          #+#    #+#             */
-/*   Updated: 2021/11/30 19:37:58 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:56:24 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,10 @@ void	get_path(t_mini *mini)
 void	init(t_mini *mini)
 {
 	get_path(mini);
-	mini->pipes = 0;
+	mini->n_pipes = 0;
+	mini->is_quotes_closed = 1;
+	mini->n_rredirects = 0;
+	mini->n_lredirects = 0;
+	mini->n_rhere_docs = 0;
+	mini->n_lhere_docs = 0;
 }

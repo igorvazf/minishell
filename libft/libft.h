@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 09:49:01 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/11/30 21:17:59 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/01 18:27:26 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_isalnum(int c);
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);
+int		ft_isascii(int c);
 
 #endif
