@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minipwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: igvaz-fe <igvaz-fe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 20:52:42 by paugusto          #+#    #+#             */
-/*   Updated: 2021/11/24 21:06:55 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/02 01:36:34 by igvaz-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	minipwd(void)
 {
 	char	wd[1024];
+
 	getcwd(wd, sizeof(wd));
 	printf("%s\n", wd);
 }

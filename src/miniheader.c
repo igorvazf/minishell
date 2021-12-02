@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: igvaz-fe <igvaz-fe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 21:23:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/11/25 15:39:25 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/02 01:14:18 by igvaz-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ void	miniheader(void)
 	printf("     $$$$$$$$$$****           **$$$$$$$$$$$*\n");
 	printf("       *$$$$$*                      **$$$$**\n");
 	printf("         $$$*                         $$$$*\n\n");
-	printf("            ** WELCOME TO MINIHELL **\n\n");
+	printf("            ** WELCOME TO MINISHELL **\n\n");
 }
