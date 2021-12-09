@@ -10,7 +10,10 @@ SRC_FILES =	minishell.c \
 			minipwd.c \
 			miniheader.c \
 			init.c \
-			input.c
+			input.c \
+			sanitizer.c \
+			split.c \
+			split_utils.c
 
 SRC =		$(addprefix src/, $(SRC_FILES))
 

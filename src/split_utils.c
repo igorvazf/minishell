@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   split_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/08 10:30:33 by paugusto         ###   ########.fr       */
+/*   Created: 2021/12/06 11:58:10 by paugusto          #+#    #+#             */
+/*   Updated: 2021/12/06 11:58:14 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+void	is_quotes_closed(t_mini *mini)
 {
-	t_mini	mini;
+	char	*str;
+	int		i;
 
-	(void)argc;
-	(void)argv;
-	init(&mini, envp);
-	while (1)
+	str = mini->input_sanitized;
+	i = 0;
+	while(str[i])
 	{
-		get_input(&mini);
-		split(&mini);
-
-		free(mini.input);
+		if (str[i] == D_QUOTE || str[i] == S_QUOTE)
+		{
+			if (mini->is_open == 0)
+				mini->is_open = 1;
+			else if (mini->is_open == 1)
+				mini->is_open = 0;
+		}
+		i++;
 	}
-	return (0);
+	if (mini->is_open == 1)
+	{
+		printf("erro, nao fechou aspas\n");
+		mini->is_open = 0;
+	}
 }

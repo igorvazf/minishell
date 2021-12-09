@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/01 20:24:57 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/06 11:58:59 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,38 @@
 
 # define MAXCOM 1000
 # define MAXLIST 100
-# define REDIRECTS "|"
+# define D_QUOTE '\"'
+# define S_QUOTE '\''
+
+
+typedef struct s_env
+{
+	char	**env;
+	char	**key;
+	char	**content;
+	char	**path;
+	int		len;
+}	t_env;
 
 /*
-** input -> linha lida do readline
-** input_parsed -> input divido em blocos de comandos
-** path -> variavel path dividida em blocos
-** red_order -> ordem dos redirecionamentos de arquivos
-** n_pipes -> numero de pipes "|"
-** n_rredirects -> numero de redirects ">"
-** n_lredirects -> nummero de redirects "<"
-** n_rhere_docs -> numero de here docs ">>"
-** n_lhere_docs -> numero de here docs "<<"
-** is_quotes_closed -> verifica se as aspas estao fechadas
+** input -> line read from terminal (raw, no treats)
+** input_sanitized -> input ready to work with
+** env -> pointer to env structure
 */
 typedef struct s_mini
 {
 	char	*input;
-	char	***input_parsed;
-	char	*red_order;
-	char	**path;
-	int		n_pipes;
-	int		n_rredirects;
-	int		n_lredirects;
-	int		n_rhere_docs;
-	int		n_lhere_docs;
-	int		is_quotes_closed;
+	char	*input_sanitized;
+	int		is_open;
+	t_env	*env;
 }	t_mini;
 
 void	minipwd(void);
 void	miniheader(void);
-void	init(t_mini *mini);
 void	get_input(t_mini *mini);
-void	process_input(t_mini *mini);
+void	input_sanitizer(t_mini *mini);
+void	init(t_mini *mini, char **env);
+void	split(t_mini *mini);
+void	is_quotes_closed(t_mini *mini);
 
 #endif

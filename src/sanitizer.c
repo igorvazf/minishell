@@ -1,51 +1,83 @@
-int	how_many_words(char *str, t_mini *mini)
-{
-	static int	i;
-	int	words;
-	int	s_quotes;
-	int	d_quotes;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sanitizer.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/05 10:41:53 by paugusto          #+#    #+#             */
+/*   Updated: 2021/12/05 11:46:12 by paugusto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-	s_quotes = 0;
-	d_quotes = 0;
-	if(!i)
-		i = 0;
-	else if (str[i] == '\0')
-		return (0);
-	else
-		i++;
-	words = 0;
-	while (((str[i] != '|' && d_quotes = 0 && s_quotes = 0)
-			|| (str[i] == '|' && (d_quotes = 1 || s_quotes = 1)))
-			&& str[i] != '\0')
+#include "../include/minishell.h"
+
+char	*put_spaces(char *str, int len)
+{
+	char	*input;
+	int		i;
+	int		j;
+
+	input = malloc(sizeof(char) * len + 1);
+	i = 0;
+	j = 0;
+	while (str[i])
 	{
-		if(str[i] == 34 && d_quotes == 1)
+		if (str[i] != ' '
+			&& (str[i + 1]  == '|' || str[i + 1] == '>' || str[i + 1] == '<'))
 		{
-			d_quotes = 0;
-			mini->is_quotes_closed = 1;
-			words++;
+			input[j++] = str[i++];
+			input[j++] = ' ';
 		}
-		else if(str[i] == 34 && s_quotes == 0)
+		else if ((str[i]  == '|' || str[i] == '>' || str[i] == '<')
+				&& (str[i + 1] != ' ' && str[i + 1] != '\0'))
 		{
-			d_quotes = 1;
-			mini->is_quotes_closed = 0;
+			input[j++] = str[i++];
+			input[j++] = ' ';
 		}
-		if(str[i] == 39 && s_quotes == 1)
-		{
-			s_quotes = 0;
-			mini->is_quotes_closed = 1;
-			words++;
-		}
-		else if(str[i] == 39 && d_quotes == 0)
-		{
-			s_quotes = 1;
-			mini->is_quotes_closed = 0;
-		}
-		if(str[i] == ' ' && str[i - 1] != ' ' && str[i - 1] != '|'
-			&& s_quotes == 0 && d_quotes == 0)
-			words++;
-		i++;
+		else
+			input[j++] = str[i++];
 	}
-	if (str[i] == '\0' && d_quotes == 0 && s_quotes == 0)
-		words++;
-	return (words);
+	input[j] = '\0';
+	return (input);
+}
+
+int	correct_len(char	*str)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	while (str[i])
+	{
+		if (str[i] != ' '
+			&& (str[i + 1]  == '|' || str[i + 1] == '>' || str[i + 1] == '<'))
+		{
+			len = len + 2;
+			i++;
+		}
+		else if ((str[i]  == '|' || str[i] == '>' || str[i] == '<')
+				&& (str[i + 1] != ' ' && str[i + 1] != '\0'))
+		{
+			len = len + 2;
+			i++;
+		}
+		else
+		{
+			len++;
+			i++;
+		}
+	}
+	return (len);
+}
+
+void	input_sanitizer(t_mini *mini)
+{
+	char	*aux;
+	int		len;
+
+	aux = ft_strtrim(mini->input, " ");
+	len = correct_len(aux);
+	mini->input_sanitized = put_spaces(aux, len);
 }
