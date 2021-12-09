@@ -6,11 +6,11 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:46:20 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/09 14:47:20 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:41:10 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../include/minishell.h"
 
 /*
 ** Function that prints every element in a list

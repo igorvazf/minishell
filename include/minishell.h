@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/06 11:58:59 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/09 14:50:24 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,36 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <unistd.h>
+# include <stdbool.h>
 
 # define MAXCOM 1000
 # define MAXLIST 100
 # define D_QUOTE '\"'
 # define S_QUOTE '\''
 
+/*
+** Linked list structure - Node
+*/
+typedef struct s_node
+{
+	char			**str;
+	struct s_node	*prev;
+	struct s_node	*next;
+}	t_node;
 
+/*
+** Linked list strucute - List
+*/
+typedef struct s_list
+{
+	t_node	*begin;
+	t_node	*end;
+	size_t	size;
+}	t_list;
+
+/*
+** Environment variables strucute
+*/
 typedef struct s_env
 {
 	char	**env;
@@ -54,6 +77,21 @@ typedef struct s_mini
 	t_env	*env;
 }	t_mini;
 
+/*
+** Double linked list functions
+*/
+t_list	*create_list(void);
+t_node	*create_node(char *str);
+void	destroy_list(t_list **list_ref);
+bool	is_list_empty(const t_list *list);
+void	add_first(t_list *list, char *str);
+void	add_last(t_list *list, char *str);
+void	print_elements(t_list *list);
+void	print_inverted_elements(t_list *list);
+
+/*
+** Minishell functions
+*/
 void	minipwd(void);
 void	miniheader(void);
 void	get_input(t_mini *mini);

@@ -6,11 +6,11 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:43:32 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/09 14:45:59 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:41:02 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../include/minishell.h"
 
 /*
 ** Function that check if the list is empty

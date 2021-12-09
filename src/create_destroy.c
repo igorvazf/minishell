@@ -6,11 +6,11 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:40:22 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/09 14:42:57 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:41:07 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../include/minishell.h"
 
 /*
 ** Function that creates a double linked list
