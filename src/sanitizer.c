@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 10:41:53 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/10 19:50:09 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/11 19:23:03 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,5 @@ void	input_sanitizer(t_mini *mini)
 	aux = ft_strtrim(mini->input, " ");
 	len = correct_len(aux);
 	mini->input_sanitized = put_spaces(aux, len);
+	free(aux);
 }
