@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/09 14:50:24 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/11 18:08:33 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define MAXLIST 100
 # define D_QUOTE '\"'
 # define S_QUOTE '\''
+# define DELIM "|<>"
 
 /*
 ** Linked list structure - Node
@@ -67,13 +68,21 @@ typedef struct s_env
 /*
 ** input -> line read from terminal (raw, no treats)
 ** input_sanitized -> input ready to work with
+** is_open -> int value to check quoting
 ** env -> pointer to env structure
+** list -> pointer to a linked lis
 */
 typedef struct s_mini
 {
 	char	*input;
 	char	*input_sanitized;
-	int		is_open;
+	char	*correct_path;
+	char	**io;
+	int		is_open_s;
+	int		is_open_d;
+	int		is_ok;
+	int		init_with_arrow;
+	int		pipe;
 	t_env	*env;
 }	t_mini;
 
@@ -97,7 +106,10 @@ void	miniheader(void);
 void	get_input(t_mini *mini);
 void	input_sanitizer(t_mini *mini);
 void	init(t_mini *mini, char **env);
-void	split(t_mini *mini);
 void	is_quotes_closed(t_mini *mini);
+void	execute(t_mini *mini, t_list *list);
+void	find_path(t_mini *mini, t_list *list);
+void	is_in_quote(char c, t_mini *mini);
+int		split_cmd(t_mini *mini, t_list *list);
 
 #endif

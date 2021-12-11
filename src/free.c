@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/06 00:01:30 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/06 20:02:54 by paugusto         ###   ########.fr       */
+/*   Created: 2021/12/11 18:54:03 by paugusto          #+#    #+#             */
+/*   Updated: 2021/12/11 18:54:25 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	split(t_mini *mini)
+void free_minishell()
 {
-	is_quotes_closed(mini);
+	
 }

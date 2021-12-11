@@ -12,11 +12,12 @@ SRC_FILES =	minishell.c \
 			init.c \
 			input.c \
 			sanitizer.c \
-			split.c \
 			split_utils.c \
 			add_elements.c \
 			create_destroy.c \
-			print_elements.c
+			print_elements.c \
+			execute.c \
+			minisplit.c
 
 
 SRC =		$(addprefix src/, $(SRC_FILES))

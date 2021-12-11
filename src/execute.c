@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/11 19:00:23 by paugusto         ###   ########.fr       */
+/*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
+/*   Updated: 2021/12/11 19:00:21 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+void	execute(t_mini *mini, t_list *list)
 {
-	t_mini	mini;
-	t_list	*list;
+	int	pid;
 
-	(void)argc;
-	(void)argv;
-	init(&mini, envp);
-	while (1)
+	find_path(mini, list);
+	pid = fork();
+	if(pid != -1)
 	{
-		list = create_list();
-		get_input(&mini);
-		if(ft_strlen(mini.input) != 0)
+		if (pid == 0)
 		{
-			if(split_cmd(&mini, list))
-			{
-				execute(&mini, list);
-				//print_elements(list);
-			}
-			free(mini.input);
-			destroy_list(&list);
+			execve(mini->correct_path, list->end->str, NULL);
 		}
 		else
-			free(list);
+		{
+			wait(&pid);
+		}
 	}
-	return (0);
 }
