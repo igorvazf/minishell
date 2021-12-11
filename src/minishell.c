@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/11 19:29:45 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/11 19:42:43 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int	main(int argc, char **argv, char **envp)
 		else
 			free(list);
 	}
+	free_minishell(&mini);
 	return (0);
 }

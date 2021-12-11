@@ -17,7 +17,8 @@ SRC_FILES =	minishell.c \
 			create_destroy.c \
 			print_elements.c \
 			execute.c \
-			minisplit.c
+			minisplit.c \
+			free.c
 
 
 SRC =		$(addprefix src/, $(SRC_FILES))

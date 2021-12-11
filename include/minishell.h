@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/11 18:08:33 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/11 19:42:29 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,8 @@ void	execute(t_mini *mini, t_list *list);
 void	find_path(t_mini *mini, t_list *list);
 void	is_in_quote(char c, t_mini *mini);
 int		split_cmd(t_mini *mini, t_list *list);
+void	free_em_all(t_mini *mini, t_list *list);
+void	free_minishell(t_mini *mini);
+
 
 #endif
