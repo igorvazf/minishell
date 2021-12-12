@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:46:20 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/12 11:49:30 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/12 16:41:45 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,15 @@ void	print_elements(t_list *list)
 	puts("");
 }
 
+void	print_env(t_list_env *list)
+{
+	t_node_env	*node;
+
+	node = list->begin;
+	while (node->next != NULL)
+	{
+		printf("%s=%s\n", node->key, node->content);
+		node = node->next;
+	}
+	printf("%s=%s\n", node->key, node->content);
+}

@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   miniecho.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/12 16:41:35 by paugusto         ###   ########.fr       */
+/*   Created: 2021/12/12 17:45:50 by paugusto          #+#    #+#             */
+/*   Updated: 2021/12/12 16:39:34 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-
-int	main(void)
+void	miniecho(t_node *node)
 {
-	t_mini		mini;
-	t_list		*list;
+	int i;
 
-	mini.env = create_list_env();
-	init(&mini, __environ);
-	while (1)
+	i = 1;
+	if (!ft_strncmp(node->str[1], "-n\0", 3))
+		i++;
+	while (node->str[i])
 	{
-		list = create_list();
-		get_input(&mini);
-		if(ft_strlen(mini.input) != 0)
-		{
-			if(split_cmd(&mini, list))
-			{
-				execute(&mini, list);
-				//print_elements(list);
-			}
-			free_em_all(&mini, list);
-		}
-		else
-			free(list);
+		printf("%s", node->str[i]);
+		if (node->str[i + 1] != NULL)
+			printf(" ");
+		i++;
 	}
-	free_minishell(&mini);
-	return (0);
+	if (ft_strncmp(node->str[1], "-n\0", 3))
+		printf("\n");
 }

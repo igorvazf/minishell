@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:58:10 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/12 11:50:03 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/12 16:41:57 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,11 +161,12 @@ void	find_path(t_mini *mini, t_list *list)
 	int	j;
 	char	*path;
 
+
 	i = -1;
 	j = 0;
-	while (i < 0 && mini->env->path[j])
+	while (i < 0 && mini->path[j])
 	{
-		path = ft_strjoin(mini->env->path[j], list->end->str[0]);
+		path = ft_strjoin(mini->path[j], list->end->str[0]);
 		i = access(path, F_OK);
 		if (i >= 0)
 			mini->correct_path = ft_strdup(path);

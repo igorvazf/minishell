@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 18:54:03 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/12 11:47:49 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/12 16:36:41 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ void	free_em_all(t_mini *mini, t_list *list)
 
 void	free_minishell(t_mini *mini)
 {
-	minifree(mini->env->key);
-	minifree(mini->env->path);
-	minifree(mini->env->content);
+	destroy_list_env(mini->env);
+	minifree(mini->path);
 }
 
 void	minifree(char **ptr)
@@ -66,3 +65,23 @@ void	destroy_list(t_list *list)
 	list = NULL;
 }
 
+void	destroy_list_env(t_list_env *list)
+{
+	t_node_env	*node;
+	t_node_env	*aux;
+
+	node = list->begin;
+	while (node->next != NULL)
+	{
+		free(node->key);
+		free(node->content);
+		aux = node;
+		node = node->next;
+		free(aux);
+	}
+	free(node->key);
+	free(node->content);
+	free(node);
+	free(list);
+	list = NULL;
+}

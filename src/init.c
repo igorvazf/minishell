@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:57:59 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/12 11:48:08 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/12 16:36:54 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,21 @@ int	len_env(char **env)
 	return (len);
 }
 
-void	get_env(t_mini *mini, char **env)
+void	get_env(char **environ, t_list_env *env)
 {
 	char	**aux;
 	int	len;
 	int	i;
 
-	len = len_env(env);
-	mini->env->key = malloc(sizeof(char *) * len + 1);
-	mini->env->content = malloc(sizeof(char *) * len + 1);
+	len = len_env(environ);
 	i = 0;
-	while (env[i])
+	while (environ[i])
 	{
-		aux = ft_split(env[i], '=');
-		mini->env->key[i] = ft_strdup(aux[0]);
-		if (aux[1])
-			mini->env->content[i] = ft_strdup(aux[1]);
-		else
-			mini->env->content[i] = ft_strdup("");
+		aux = ft_split(environ[i], '=');
+		add_last_env(env, aux[0], aux[1]);
 		i++;
 		minifree(aux);
 	}
-	mini->env->key[i] = NULL;
-	mini->env->content[i] = NULL;
 }
 
 void	get_path(t_mini *mini)
@@ -58,21 +50,21 @@ void	get_path(t_mini *mini)
 	aux = ft_strdup(path);
 	if(!aux)
 		return ;
-	mini->env->path = ft_split(aux, ':');
+	mini->path = ft_split(aux, ':');
 	i = 0;
 	free(aux);
-	while (mini->env->path[i])
+	while (mini->path[i])
 	{
-		aux = mini->env->path[i];
-		mini->env->path[i] = ft_strjoin(aux, "/");
+		aux = mini->path[i];
+		mini->path[i] = ft_strjoin(aux, "/");
 		i++;
 		free(aux);
 	}
 }
 
-void	init(t_mini *mini, char **env)
+void	init(t_mini *mini, char **environ)
 {
-	get_env(mini, env);
+	get_env(environ, mini->env);
 	get_path(mini);
 	mini->is_open_s = 0;
 	mini->is_open_d = 0;
