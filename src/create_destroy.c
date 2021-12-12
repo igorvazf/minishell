@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:40:22 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/09 15:41:07 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/12 11:47:27 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,23 @@ t_node	*create_node(char *str)
 	t_node	*node;
 
 	node = (t_node *)malloc(sizeof(t_node));
-	node->prev = NULL;
 	node->next = NULL;
 	node->str = ft_split(str, ' ');
 	return (node);
 }
 
 /*
-** Function that destroy (and free all) a double linked list
+** Function that adds an element at the end of the list
 */
-void	destroy_list(t_list *list)
+void	add_last(t_list *list, char *str)
 {
 	t_node	*node;
-	t_node	*aux;
 
-	node = list->begin;
-	while (node->next != NULL)
-	{
-		minifree(node->str);
-		aux = node;
-		node = node->next;
-		free(aux);
-	}
-	free(list);
-	list = NULL;
+	node = create_node(str);
+	if (list->size == 0)
+		list->begin = node;
+	else
+		list->end->next = node;
+	list->end = node;
+	list->size++;
 }

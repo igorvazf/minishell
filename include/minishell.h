@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/11 19:42:29 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/12 11:45:20 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <unistd.h>
-# include <stdbool.h>
 
 # define MAXCOM 1000
 # define MAXLIST 100
@@ -39,7 +38,6 @@
 typedef struct s_node
 {
 	char			**str;
-	struct s_node	*prev;
 	struct s_node	*next;
 }	t_node;
 
@@ -92,11 +90,8 @@ typedef struct s_mini
 t_list	*create_list(void);
 t_node	*create_node(char *str);
 void	destroy_list(t_list *list);
-bool	is_list_empty(const t_list *list);
-void	add_first(t_list *list, char *str);
 void	add_last(t_list *list, char *str);
 void	print_elements(t_list *list);
-void	print_inverted_elements(t_list *list);
 
 /*
 ** Minishell functions

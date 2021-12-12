@@ -6,18 +6,21 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/11 19:42:43 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/12 11:52:34 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	main(void)
+
+int	main(int argc, char **argv, char **envp)
 {
 	t_mini	mini;
 	t_list	*list;
 
-	init(&mini, __environ);
+	(void)argc;
+	(void)argv;
+	init(&mini, envp);
 	while (1)
 	{
 		list = create_list();
@@ -32,8 +35,7 @@ int	main(void)
 			free_em_all(&mini, list);
 		}
 		else
-			destroy_list(list);
-		break;
+			free(list);
 	}
 	free_minishell(&mini);
 	return (0);

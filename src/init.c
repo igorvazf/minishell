@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:57:59 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/11 17:13:42 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/12 11:48:08 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,24 @@ void	get_env(t_mini *mini, char **env)
 	char	**aux;
 	int	len;
 	int	i;
-	int	j;
 
 	len = len_env(env);
 	mini->env->key = malloc(sizeof(char *) * len + 1);
 	mini->env->content = malloc(sizeof(char *) * len + 1);
 	i = 0;
-	j = 0;
 	while (env[i])
 	{
 		aux = ft_split(env[i], '=');
-		if (aux[0] && aux[1])
-		{
-			mini->env->key[j] = ft_strdup(aux[0]);
-			mini->env->content[j] = ft_strdup(aux[1]);
-			j++;
-		}
+		mini->env->key[i] = ft_strdup(aux[0]);
+		if (aux[1])
+			mini->env->content[i] = ft_strdup(aux[1]);
+		else
+			mini->env->content[i] = ft_strdup("");
 		i++;
 		minifree(aux);
 	}
-	mini->env->key[j] = NULL;
-	mini->env->content[j] = NULL;
+	mini->env->key[i] = NULL;
+	mini->env->content[i] = NULL;
 }
 
 void	get_path(t_mini *mini)
@@ -81,5 +78,7 @@ void	init(t_mini *mini, char **env)
 	mini->is_open_d = 0;
 	mini->is_ok = 1;
 	mini->init_with_arrow = 0;
+	mini->correct_path = NULL;
+	mini->io = NULL;
 }
 

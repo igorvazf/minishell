@@ -13,7 +13,6 @@ SRC_FILES =	minishell.c \
 			input.c \
 			sanitizer.c \
 			split_utils.c \
-			add_elements.c \
 			create_destroy.c \
 			print_elements.c \
 			execute.c \

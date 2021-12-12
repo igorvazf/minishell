@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 18:54:03 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/11 19:27:40 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/12 11:47:49 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ void	free_em_all(t_mini *mini, t_list *list)
 	destroy_list(list);
 	free(mini->input);
 	free(mini->input_sanitized);
-	free(mini->correct_path);
-	if (mini->io)
+	if (mini->correct_path != NULL)
+		free(mini->correct_path);
+	if (mini->io != NULL)
 		minifree(mini->io);
 }
 
@@ -42,3 +43,26 @@ void	minifree(char **ptr)
 	}
 	free(ptr);
 }
+
+/*
+** Function that destroy (and free all) a double linked list
+*/
+void	destroy_list(t_list *list)
+{
+	t_node	*node;
+	t_node	*aux;
+
+	node = list->begin;
+	while (node->next != NULL)
+	{
+		minifree(node->str);
+		aux = node;
+		node = node->next;
+		free(aux);
+	}
+	minifree(node->str);
+	free(node);
+	free(list);
+	list = NULL;
+}
+
