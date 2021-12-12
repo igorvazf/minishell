@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 09:49:01 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/01 18:27:26 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/12 16:43:21 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int		ft_isalnum(int c);
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
+int		ft_strncmp(const char *str1, const char *str2, size_t n)
 
 #endif
