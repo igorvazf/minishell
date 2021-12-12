@@ -3,95 +3,89 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: igvaz-fe <igvaz-fe@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/03 14:17:52 by paugusto          #+#    #+#             */
-/*   Updated: 2021/11/30 14:40:53 by paugusto         ###   ########.fr       */
+/*   Created: 2021/08/03 14:18:42 by igvaz-fe          #+#    #+#             */
+/*   Updated: 2021/08/11 13:36:34 by igvaz-fe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	word_counter(char const *str, char c)
+static int	str_counter(char *str, char c)
 {
-	int		i;
-	int		indicator;
-	int		words;
+	int	i;
+	int	indicator;
+	int	nstr;
 
 	i = 0;
-	words = 0;
-	while (str[i] != '\0')
+	nstr = 0;
+	while (str[i])
 	{
 		indicator = 0;
-		while (str[i] == c && str[i] != '\0')
+		while (str[i] == c && str[i])
 			i++;
-		while (str[i] != c && str[i] != '\0')
+		while (str[i] != c && str[i])
 		{
 			indicator = 1;
 			i++;
 		}
-		while (str[i] == c && str[i] != '\0')
+		while (str[i] == c && str[i])
 			i++;
 		if (indicator == 1)
-			words++;
+			nstr++;
 	}
-	return (words);
+	return (nstr);
 }
 
-static int	str_len(char const *str, char c)
+static int	str_len(char const *s, char c)
 {
-	int		i;
+	int	len;
 
-	i = 0;
-	while (str[i] == c && str[i] != '\0')
-		str++;
-	while (str[i] != c && str[i] != '\0')
-		i++;
-	return (i);
-}
-
-static char	**mk_split(char **ptr, char const *s, char c, int words)
-{
-	char	*new_str;
-	int		i;
-	int		j;
-
-	j = 0;
-	i = 0;
-	while (i < words)
+	len = 0;
+	while (*s != c && *s != '\0')
 	{
-		new_str = (char *)malloc(sizeof(char) * (str_len(s, c) + 1));
-		if (new_str == NULL)
-		{
-			free(new_str);
-			return (NULL);
-		}
-		while (s[0] == c && s[0] != '\0')
-			s++;
-		while (s[0] != c && s[0] != '\0')
-			new_str[j++] = *s++;
-		new_str[j] = '\0';
-		ptr[i++] = new_str;
-		j = 0;
+		len++;
+		s++;
 	}
-	ptr[words] = 0;
-	return (ptr);
+	return (len);
+}
+
+static void	*ptr_free(char **ptr, int i)
+{
+	while (i > 0)
+	{
+		free(ptr[i]);
+		i--;
+	}
+	free(ptr);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		words;
 	char	**ptr;
+	int		nstr;
+	int		i;
 
-	if (s == NULL)
+	if (!s)
 		return (NULL);
-	words = word_counter(s, c);
-	ptr = (char **)malloc(sizeof(char *) * (words + 1));
-	if (ptr == NULL)
+	nstr = str_counter((char *)s, c);
+	ptr = (char **)malloc((nstr + 1) * sizeof(char *));
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	while (nstr > 0)
 	{
-		free(ptr);
-		return (NULL);
+		while (*s && *s == c)
+			s++;
+		ptr[i] = ft_substr(s, 0, str_len(s, c));
+		if (!ptr[i])
+			return (ptr_free(ptr, i));
+		s = s + str_len(s, c);
+		i++;
+		nstr--;
 	}
-	ptr = mk_split(ptr, s, c, words);
+	ptr[i] = 0;
 	return (ptr);
 }

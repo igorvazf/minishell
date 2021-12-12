@@ -28,18 +28,27 @@ void	get_env(t_mini *mini, char **env)
 	char	**aux;
 	int	len;
 	int	i;
+	int	j;
 
 	len = len_env(env);
 	mini->env->key = malloc(sizeof(char *) * len + 1);
 	mini->env->content = malloc(sizeof(char *) * len + 1);
 	i = 0;
+	j = 0;
 	while (env[i])
 	{
 		aux = ft_split(env[i], '=');
-		mini->env->key[i] = aux[0];
-		mini->env->content[i] = aux[1];
+		if (aux[0] && aux[1])
+		{
+			mini->env->key[j] = ft_strdup(aux[0]);
+			mini->env->content[j] = ft_strdup(aux[1]);
+			j++;
+		}
 		i++;
+		minifree(aux);
 	}
+	mini->env->key[j] = NULL;
+	mini->env->content[j] = NULL;
 }
 
 void	get_path(t_mini *mini)
@@ -54,12 +63,14 @@ void	get_path(t_mini *mini)
 		return ;
 	mini->env->path = ft_split(aux, ':');
 	i = 0;
+	free(aux);
 	while (mini->env->path[i])
 	{
-		mini->env->path[i] = ft_strjoin(mini->env->path[i], "/");
+		aux = mini->env->path[i];
+		mini->env->path[i] = ft_strjoin(aux, "/");
 		i++;
+		free(aux);
 	}
-	free(aux);
 }
 
 void	init(t_mini *mini, char **env)

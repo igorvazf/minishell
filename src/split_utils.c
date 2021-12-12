@@ -61,6 +61,7 @@ void	copy_delim(t_mini *mini)
 		i++;
 		j++;
 	}
+	mini->io[j] = NULL;
 }
 
 void	get_redir(t_mini *mini)
@@ -83,10 +84,13 @@ void	get_redir(t_mini *mini)
 				count++;
 		i++;
 	}
-	mini->io = malloc(sizeof(char *) * (mini->pipe + count) + 1);
-	if(!mini->io)
-		return ;
-	copy_delim(mini);
+	if ((mini->pipe + count) > 0)
+	{
+		mini->io = malloc(sizeof(char *) * (mini->pipe + count) + 1);
+		if(!mini->io)
+			return ;
+		copy_delim(mini);
+	}
 }
 
 void	is_in_quote(char c, t_mini *mini)

@@ -15,8 +15,8 @@
 //function that reads terminal input
 void	get_input(t_mini *mini)
 {
-	mini->input = readline(">> ");
-	if (ft_strlen(mini->input) != 0)
-		add_history(mini->input);
+	mini->input = ft_strdup("aaa");//readline(">> ");
+	// if (ft_strlen(mini->input) != 0)
+	// 	add_history(mini->input);
 	input_sanitizer(mini);
 }

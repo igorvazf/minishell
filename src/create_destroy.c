@@ -33,7 +33,7 @@ t_node	*create_node(char *str)
 {
 	t_node	*node;
 
-	node = malloc(sizeof(t_node));
+	node = (t_node *)malloc(sizeof(t_node));
 	node->prev = NULL;
 	node->next = NULL;
 	node->str = ft_split(str, ' ');
@@ -43,27 +43,19 @@ t_node	*create_node(char *str)
 /*
 ** Function that destroy (and free all) a double linked list
 */
-void	destroy_list(t_list **list_ref)
+void	destroy_list(t_list *list)
 {
-	t_list	*list;
 	t_node	*node;
 	t_node	*aux;
-	int		i;
 
-	list = *list_ref;
 	node = list->begin;
-	i = 0;
-	while (node != NULL)
+	while (node->next != NULL)
 	{
+		minifree(node->str);
 		aux = node;
 		node = node->next;
-		while (aux->str[i])
-		{
-			free(aux->str[i]);
-			i++;
-		}
 		free(aux);
 	}
 	free(list);
-	*list_ref = NULL;
+	list = NULL;
 }

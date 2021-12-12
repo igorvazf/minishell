@@ -91,7 +91,7 @@ typedef struct s_mini
 */
 t_list	*create_list(void);
 t_node	*create_node(char *str);
-void	destroy_list(t_list **list_ref);
+void	destroy_list(t_list *list);
 bool	is_list_empty(const t_list *list);
 void	add_first(t_list *list, char *str);
 void	add_last(t_list *list, char *str);
@@ -113,6 +113,6 @@ void	is_in_quote(char c, t_mini *mini);
 int		split_cmd(t_mini *mini, t_list *list);
 void	free_em_all(t_mini *mini, t_list *list);
 void	free_minishell(t_mini *mini);
-
+void	minifree(char **ptr);
 
 #endif

@@ -12,14 +12,12 @@
 
 #include "../include/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+int	main(void)
 {
 	t_mini	mini;
 	t_list	*list;
 
-	(void)argc;
-	(void)argv;
-	init(&mini, envp);
+	init(&mini, __environ);
 	while (1)
 	{
 		list = create_list();
@@ -34,7 +32,8 @@ int	main(int argc, char **argv, char **envp)
 			free_em_all(&mini, list);
 		}
 		else
-			free(list);
+			destroy_list(list);
+		break;
 	}
 	free_minishell(&mini);
 	return (0);
