@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/12 16:40:28 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/13 15:04:02 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <unistd.h>
+# include <signal.h>
 
 # define MAXCOM 1000
 # define MAXLIST 100
@@ -49,7 +50,7 @@ typedef struct s_list
 }	t_list;
 
 /*
-** Linked list structure - variables strucute
+** Linked list structure - Environment ariables strucute
 */
 typedef struct s_node_env
 {
@@ -116,12 +117,20 @@ int		split_cmd(t_mini *mini, t_list *list);
 void	free_em_all(t_mini *mini, t_list *list);
 void	free_minishell(t_mini *mini);
 void	minifree(char **ptr);
+int		ministrcmp(char *s1, char *s2);
+void	signals(int i);
+void	ctrl_c(int sig);
+void	back_slash(int sig);
 
-/* builtins */
+/* Builtins */
 void	miniecho(t_node *node);
 void	minicd(t_node *node);
 void	minipwd(void);
 void	miniexit(t_mini *mini, t_list *list);
 void	minienv(t_list_env *env);
+void	miniexport(t_list_env *env, t_node *node);
+void	miniunset(t_list_env *env, t_node *node);
+
+
 
 #endif

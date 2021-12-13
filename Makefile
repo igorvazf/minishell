@@ -22,7 +22,9 @@ SRC_FILES =	minishell.c \
 			minicd.c \
 			miniexit.c \
 			minienv.c \
-			create_env.c
+			create_env.c \
+			miniexport.c \
+			miniunset.c
 
 SRC =		$(addprefix src/, $(SRC_FILES))
 

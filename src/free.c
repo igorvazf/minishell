@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 18:54:03 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/12 16:36:41 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/13 15:05:43 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	minifree(char **ptr)
 	int	i;
 
 	i = 0;
+
 	while (ptr[i])
 	{
 		free(ptr[i]);
@@ -59,9 +60,9 @@ void	destroy_list(t_list *list)
 		node = node->next;
 		free(aux);
 	}
-	minifree(node->str);
-	free(node);
-	free(list);
+	// minifree(node->str);
+	// free(node);
+	// free(list);
 	list = NULL;
 }
 

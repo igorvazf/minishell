@@ -6,13 +6,46 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/12 16:41:35 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/13 15:07:17 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+void	restore_prompt(int signal)
+{
+	(void)signal;
+	write(1, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+}
 
+void	ctrl_c(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+}
+
+void	back_slash(int sig)
+{
+	(void)sig;
+	printf("Quit (core dumped)\n");
+}
+
+void signals(int i)
+{
+	if (i == 1)
+	{
+		signal(SIGINT, restore_prompt);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else
+	{
+		signal(SIGINT, ctrl_c);
+		signal(SIGQUIT, back_slash);
+	}
+}
 int	main(void)
 {
 	t_mini		mini;

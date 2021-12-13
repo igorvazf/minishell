@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/12 16:36:28 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/13 15:05:31 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ void	execute_builtin(int builtin, t_node *node, t_mini *mini, t_list *list)
 		minicd(node);
 	if (builtin == 3)
 		minipwd();
+	if (builtin == 4)
+		miniexport(mini->env, node);
+	if (builtin == 5)
+		miniunset(mini->env, node);
 	if (builtin == 6)
 		minienv(mini->env);
 	if (builtin == 7)
@@ -56,6 +60,7 @@ void	execute(t_mini *mini, t_list *list)
 		execute_builtin(builtin, list->begin, mini, list);
 	else
 	{
+		signals(2);
 		find_path(mini, list);
 		pid = fork();
 		if(pid != -1)

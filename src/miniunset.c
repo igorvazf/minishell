@@ -1,31 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniecho.c                                         :+:      :+:    :+:   */
+/*   miniunset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 17:45:50 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/13 15:06:30 by paugusto         ###   ########.fr       */
+/*   Created: 2021/12/13 00:26:24 by paugusto          #+#    #+#             */
+/*   Updated: 2021/12/13 15:09:13 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	miniecho(t_node *node)
+void miniunset(t_list_env *env, t_node *node)
 {
-	int i;
+	t_node_env	*aux;
+	t_node_env 	*prev;
 
-	i = 1;
-	if (!ft_strncmp(node->str[1], "-n\0", 3))
-		i++;
-	while (node->str[i])
+	aux = env->begin;
+	prev = env->begin;
+	while (aux != NULL)
 	{
-		printf("%s", node->str[i]);
-		if (node->str[i + 1] != NULL)
-			printf(" ");
-		i++;
+		if (!ministrcmp(aux->key, node->str[1]))
+		{
+			if (aux == env->begin && prev == env->begin)
+				aux = aux->next;
+			else
+			{
+				aux = aux->next;
+				prev = prev->next;
+			}
+		}
+		else
+		{
+			prev->next = aux->next;
+			free(aux->key);
+			free(aux->content);
+			free(aux);
+		}
 	}
-	if (ft_strncmp(node->str[1], "-n\0", 3))
-		printf("\n");
 }
