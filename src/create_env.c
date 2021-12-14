@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   create_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 19:40:27 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/13 15:05:03 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:08:54 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 /*
-** Function that creates a double linked list
+** Function that creates a linked list
 */
 t_list_env	*create_list_env(void)
 {

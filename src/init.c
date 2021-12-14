@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:57:59 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/13 15:05:55 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:10:11 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	len_env(char **env)
 	return (len);
 }
 
-void	get_env(char **environ, t_list_env *env)
+void	get_env(t_list_env *env, char **environ)
 {
 	char	**aux;
 	int	len;
@@ -64,7 +64,7 @@ void	get_path(t_mini *mini)
 
 void	init(t_mini *mini, char **environ)
 {
-	get_env(environ, mini->env);
+	get_env(mini->env, environ);
 	get_path(mini);
 	mini->is_open_s = 0;
 	mini->is_open_d = 0;

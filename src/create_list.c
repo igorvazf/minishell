@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   create_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:40:22 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/13 15:05:13 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:11:16 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 /*
-** Function that creates a double linked list
+** Function that creates a linked list
 */
 t_list	*create_list(void)
 {

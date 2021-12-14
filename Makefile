@@ -26,7 +26,8 @@ SRC_FILES =	minishell.c \
 			miniexport.c \
 			miniunset.c \
 			signals.c \
-			builtin.c
+			builtin.c \
+			get_redir.c
 
 SRC =		$(addprefix src/, $(SRC_FILES))
 

@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 10:09:19 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/14 01:42:03 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/14 15:14:20 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int	is_delim(t_mini *mini, int i)
 {
-	printf("%c\n", mini->input_sanitized[i]);
 	if(mini->input_sanitized[i] == '|')
 		return (1);
 	else if (mini->input_sanitized[i] == '<')

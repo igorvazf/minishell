@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/14 00:20:20 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/14 15:52:42 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void	back_slash(int sig);
 void	execute_builtin(int builtin, t_node *node, t_mini *mini, t_list *list);
 int		is_builtin(t_node *node);
 void	run(t_mini *mini, t_list *list);
+void	get_redir(t_mini *mini);
 
 /* Builtins */
 void	miniecho(t_node *node);

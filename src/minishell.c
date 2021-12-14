@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/14 01:40:50 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/14 17:49:23 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,15 @@ int	main(void)
 		mini.out = STDOUT_FILENO;
 		list = create_list();
 		get_input(&mini);
+		get_redir(&mini);
+		if (mini.io)
+			for(int i = 0; mini.io[i]; i++)
+				printf("%s -> \n", mini.io[i]);
 		if(ft_strlen(mini.input) != 0)
 		{
 			if(split_cmd(&mini, list))
 			{
-				run(&mini, list);
+				//run(&mini, list);
 				//print_elements(list);
 			}
 			free_em_all(&mini, list);
