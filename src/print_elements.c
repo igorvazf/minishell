@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:46:20 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/12 16:41:45 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/14 01:07:37 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	print_elements(t_list *list)
 	while (node != NULL)
 	{
 		for(i = 0; node->str[i]; i++)
-			printf("%s -> ", node->str[i]);
+			printf("%s .. ", node->str[i]);
+		printf("\n");
 		node = node->next;
 	}
 	printf("NULL\n");

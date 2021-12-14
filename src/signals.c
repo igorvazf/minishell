@@ -1,43 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/14 01:40:50 by coder            ###   ########.fr       */
+/*   Created: 2021/12/13 22:35:13 by coder             #+#    #+#             */
+/*   Updated: 2021/12/13 22:52:16 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	main(void)
+void	restore_prompt(int signal)
 {
-	t_mini		mini;
-	t_list		*list;
+	(void)signal;
+	write(1, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+}
+void	ctrl_c(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+}
 
-	mini.env = create_list_env();
-	init(&mini, __environ);
-	while (1)
+void	back_slash(int sig)
+{
+	(void)sig;
+	printf("Quit (core dumped)\n");
+}
+
+void signals(int i)
+{
+	if (i == 1)
 	{
-		mini.in = STDIN_FILENO;
-		mini.out = STDOUT_FILENO;
-		list = create_list();
-		get_input(&mini);
-		if(ft_strlen(mini.input) != 0)
-		{
-			if(split_cmd(&mini, list))
-			{
-				run(&mini, list);
-				//print_elements(list);
-			}
-			free_em_all(&mini, list);
-		}
-		else
-			free(list);
-
+		signal(SIGINT, restore_prompt);
+		signal(SIGQUIT, SIG_IGN);
 	}
-	free_minishell(&mini);
-	return (0);
+	else if (i == 2)
+	{
+		signal(SIGINT, ctrl_c);
+		signal(SIGQUIT, back_slash);
+	}
 }

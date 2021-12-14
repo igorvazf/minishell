@@ -3,76 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/13 15:05:31 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/14 00:21:52 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int		is_builtin(t_node *node)
+
+void	fd_handler(t_mini *mini)
 {
-	if (!ft_strncmp(node->str[0], "echo\0", 5))
-		return (1);
-	if (!ft_strncmp(node->str[0], "cd\0", 3))
-		return (2);
-	if (!ft_strncmp(node->str[0], "pwd\0", 4))
-		return (3);
-	if (!ft_strncmp(node->str[0], "export\0", 7))
-		return (4);
-	if (!ft_strncmp(node->str[0], "unset\0", 6))
-		return (5);
-	if (!ft_strncmp(node->str[0], "env\0", 4))
-		return (6);
-	if (!ft_strncmp(node->str[0], "exit\0", 5))
-		return (7);
-	return (0);
+	if (mini->in != 0)
+	{
+		dup2(mini->in, 0);
+		close(mini->in);
+	}
+	if (mini->out != 1)
+	{
+		dup2(mini->out, 1);
+		close(mini->out);
+	}
 }
 
-void	execute_builtin(int builtin, t_node *node, t_mini *mini, t_list *list)
-{
-	if (builtin == 1)
-		miniecho(node);
-	if (builtin == 2)
-		minicd(node);
-	if (builtin == 3)
-		minipwd();
-	if (builtin == 4)
-		miniexport(mini->env, node);
-	if (builtin == 5)
-		miniunset(mini->env, node);
-	if (builtin == 6)
-		minienv(mini->env);
-	if (builtin == 7)
-		miniexit(mini, list);
-}
-
-void	execute(t_mini *mini, t_list *list)
+void	execute(t_mini *mini, t_list *list, t_node *node)
 {
 	int	pid;
-	int		builtin;
+	int	builtin;
 
-	(void)mini;
-	builtin = is_builtin(list->begin);
+	builtin = is_builtin(node);
 	if (builtin)
-		execute_builtin(builtin, list->begin, mini, list);
+		execute_builtin(builtin, node, mini, list);
 	else
 	{
+		pid = fork();
 		signals(2);
 		find_path(mini, list);
-		pid = fork();
-		if(pid != -1)
+		if (pid < 0)
+			;
+		else if (pid == 0)
 		{
-			if (pid == 0)
-			{
-				execve(mini->correct_path, list->end->str, NULL);
-			}
-			else
-			{
-				wait(&pid);
-			}
+			//child -> executar o comando 
+			fd_handler(mini);
+			execve(mini->correct_path, node->str, NULL);
+			//exit
 		}
+		else
+			wait(&pid);
 	}
+}
+
+void	run(t_mini *mini, t_list *list)
+{
+	t_node *node;
+	int	fd[2];
+	//fd[0] -> read end, entrada de dados
+	//fd[1] -> write end, saida de dados
+	int	i;
+	int	j;
+	
+	i = 0;
+	j = mini->pipe + mini->redir;
+	node = list->begin;
+	while (i < j)
+	{
+		if (pipe(fd) < 0)
+			;
+		mini->out = fd[1]; //mudando a saida padrao para o fd[0]
+		execute(mini, list, node);
+		close(fd[1]);
+		if (mini->in != 0)
+			close(mini->in);
+		mini->in = fd[0]; //mudar a entrada padrao para o 0
+		node = node->next;
+		i++;
+	}
+	execute(mini, list, node);
 }

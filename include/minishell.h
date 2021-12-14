@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/13 15:04:02 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/14 00:20:20 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ typedef struct s_mini
 	int			is_ok;
 	int			init_with_arrow;
 	int			pipe;
+	int			redir;
+	int			in;
+	int			out;
 	t_list_env	*env;
 }	t_mini;
 
@@ -110,7 +113,6 @@ void	get_input(t_mini *mini);
 void	input_sanitizer(t_mini *mini);
 void	init(t_mini *mini, char **environ);
 void	is_quotes_closed(t_mini *mini);
-void	execute(t_mini *mini, t_list *list);
 void	find_path(t_mini *mini, t_list *list);
 void	is_in_quote(char c, t_mini *mini);
 int		split_cmd(t_mini *mini, t_list *list);
@@ -121,6 +123,9 @@ int		ministrcmp(char *s1, char *s2);
 void	signals(int i);
 void	ctrl_c(int sig);
 void	back_slash(int sig);
+void	execute_builtin(int builtin, t_node *node, t_mini *mini, t_list *list);
+int		is_builtin(t_node *node);
+void	run(t_mini *mini, t_list *list);
 
 /* Builtins */
 void	miniecho(t_node *node);

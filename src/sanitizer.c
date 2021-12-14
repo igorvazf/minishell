@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sanitizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 10:41:53 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/11 19:23:03 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/14 01:39:08 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,18 @@ char	*put_spaces(char *str, int len)
 	while (str[i])
 	{
 		if (str[i] != ' '
-			&& (str[i + 1]  == '|' || str[i + 1] == '>' || str[i + 1] == '<'))
+			&& (str[i + 1]  == '|' || (str[i + 1] == '>' && str[i] != '>')|| (str[i + 1] == '<' && str[i - 1] != '<' && str[i] != '<')))
 		{
 			input[j++] = str[i++];
 			input[j++] = ' ';
 		}
-		else if ((str[i]  == '|' || str[i] == '>' || str[i] == '<')
+		else if ((str[i] == '>' && str[i + 1] == '>'))
+		{
+			input[j++] = str[i++];
+			input[j++] = str[i++];
+			input[j++] = ' ';
+		}
+		else if ((str[i]  == '|' || str[i] == '>' || (str[i + 1] == '<' && str[i - 1] != '<' && str[i] != '<'))
 				&& (str[i + 1] != ' ' && str[i + 1] != '\0'))
 		{
 			input[j++] = str[i++];
@@ -49,15 +55,16 @@ int	correct_len(char	*str)
 
 	i = 0;
 	len = 0;
-	while (str[i])
+	while (str[i]) 
 	{
 		if (str[i] != ' '
-			&& (str[i + 1]  == '|' || str[i + 1] == '>' || str[i + 1] == '<'))
+			&& (str[i + 1]  == '|' || (str[i + 1] == '>' && str[i] != '>')
+			|| (str[i + 1] == '<' && str[i - 1] != '<' && str[i] != '<')))
 		{
 			len = len + 2;
 			i++;
 		}
-		else if ((str[i]  == '|' || str[i] == '>' || str[i] == '<')
+		else if ((str[i]  == '|' || (str[i] == '>' && str[i + 1] == '>') || (str[i + 1] == '<' && str[i - 1] != '<' && str[i] != '<'))
 				&& (str[i + 1] != ' ' && str[i + 1] != '\0'))
 		{
 			len = len + 2;

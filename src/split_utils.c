@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:58:10 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/13 15:08:23 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/14 01:00:33 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,23 @@ int		dup_delim(t_mini *mini, int i, int j)
 		{
 			mini->io[j] = ft_strdup(">>");
 			k++;
+			mini->redir++;
 		}
 		else
+		{
 			mini->io[j] = ft_strdup(">");
+			mini->redir++;
+		}
 	}
 	if (mini->input_sanitized[i] == '<')
 	{
-		if (mini->input_sanitized[i + 1] == '<')
-		{
-			mini->io[j] = ft_strdup("<<");
-			k++;
-		}
+		if (mini->input_sanitized[i + 1] == '<' || mini->input_sanitized[i - 1] == '<')
+			;
 		else
+		{
 			mini->io[j] = ft_strdup("<");
+			mini->redir++;
+		}
 	}
 	return (k);
 }
@@ -71,22 +75,23 @@ void	get_redir(t_mini *mini)
 	int		count;
 
 	i = 0;
-	count = 0;
 	str = mini->input_sanitized;
 	while (str[i])
 	{
 		is_in_quote(str[i], mini);
 		if (str[i] == '|' && mini->is_open_d == 0 && mini->is_open_s == 0)
 			mini->pipe++;
-		if (((str[i] == '<') || str[i] == '>' ) && mini->is_open_d == 0
-			&&	mini->is_open_s == 0)
-			if (str[i + 1] != '<' || str[i + 1] != '>')
-				count++;
+		if (str[i] == '<' && (i = 0 || str[i - 1] != '<') && str[i + 1] != '<')
+			mini->redir++;
+		if (str[i] == '>')
+			if (str[i + 1] != '>')
+				mini->redir++;
 		i++;
 	}
-	if ((mini->pipe + count) > 0)
+	count = mini->pipe + mini->redir;
+	if (count > 0)
 	{
-		mini->io = malloc(sizeof(char *) * (mini->pipe + count) + 1);
+		mini->io = malloc(sizeof(char *) * (count) + 1);
 		if(!mini->io)
 			return ;
 		copy_delim(mini);
