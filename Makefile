@@ -1,33 +1,31 @@
 NAME =		minishell
-CC =		clang
+CC =		gcc
 CFLAGS =	-Wall -Werror -Wextra
 RM =		rm -rf
 
 LIBFT_DIR =	./libft
 LIBFT =		$(LIBFT_DIR)/libft.a
 
-SRC_FILES =	minishell.c \
-			minipwd.c \
-			miniheader.c \
-			init.c \
-			input.c \
-			sanitizer.c \
-			split_utils.c \
-			create_list.c \
-			print_elements.c \
-			execute.c \
-			minisplit.c \
+SRC_FILES =	main.c \
+			crud_list.c \
+			crud_env.c \
 			free.c \
-			miniecho.c \
-			minicd.c \
+			init.c \
 			miniexit.c \
-			minienv.c \
-			create_env.c \
-			miniexport.c \
-			miniunset.c \
-			signals.c \
+			split_cmd.c \
+			utilis.c \
 			builtin.c \
-			get_redir.c
+			run.c \
+			sanitizer.c \
+			miniexport.c \
+			minicd.c \
+			miniecho.c \
+			minienv.c \
+			miniunset.c \
+			minipwd.c \
+			redir.c
+
+			
 
 SRC =		$(addprefix src/, $(SRC_FILES))
 

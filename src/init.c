@@ -3,38 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:57:59 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/14 15:10:11 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/16 14:41:27 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-
-int	len_env(char **env)
-{
-	int	len;
-
-	len = 0;
-	while (env[len])
-		len++;
-	return (len);
-}
-
-void	get_env(t_list_env *env, char **environ)
+void	get_env(t_mini *mini, char **environ)
 {
 	char	**aux;
-	int	len;
-	int	i;
+	int		i;
 
-	len = len_env(environ);
+	mini->env = create_env();
 	i = 0;
 	while (environ[i])
 	{
 		aux = ft_split(environ[i], '=');
-		add_last_env(env, aux[0], aux[1]);
+		push_env(mini->env, aux[0], aux[1]);
 		i++;
 		minifree(aux);
 	}
@@ -64,13 +52,13 @@ void	get_path(t_mini *mini)
 
 void	init(t_mini *mini, char **environ)
 {
-	get_env(mini->env, environ);
+	get_env(mini, environ);
 	get_path(mini);
-	mini->is_open_s = 0;
-	mini->is_open_d = 0;
-	mini->is_ok = 1;
-	mini->init_with_arrow = 0;
 	mini->correct_path = NULL;
 	mini->io = NULL;
+	mini->is_open_s = 0;
+	mini->is_open_d = 0;
+	mini->init_with_arrow = 0;
+	mini->pipe = 0;
+	mini->redir = 0;
 }
-

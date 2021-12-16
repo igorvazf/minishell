@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_utils.c                                      :+:      :+:    :+:   */
+/*   utilis.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:58:10 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/14 15:45:59 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/15 03:51:24 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,11 @@ void	is_in_quote(char c, t_mini *mini)
 	}
 }
 
-void	is_quotes_closed(t_mini *mini)
-{
-	int		i;
-
-	i = 0;
-	while(mini->input_sanitized[i])
-	{
-		is_in_quote(mini->input_sanitized[i], mini);
-		i++;
-	}
-}
-
 void	find_path(t_mini *mini, t_list *list)
 {
-	int	i;
-	int	j;
 	char	*path;
-
+	int		i;
+	int		j;
 
 	i = -1;
 	j = 0;
@@ -65,4 +52,21 @@ void	find_path(t_mini *mini, t_list *list)
 	{
 		printf("command not found\n");
 	}
+}
+
+int		ministrcmp(char *s1, char *s2)
+{
+	int i;
+
+	i = 0;
+	while (s2[i])
+	{
+		if (s1[i] == s2[i])
+			i++;
+		else
+			return (0);
+	}
+	if (s1[i] != '\0')
+		return (0);
+	return (1);
 }

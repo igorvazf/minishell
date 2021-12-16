@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_redir.c                                        :+:      :+:    :+:   */
+/*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 15:40:55 by coder             #+#    #+#             */
-/*   Updated: 2021/12/14 17:52:27 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/16 15:53:10 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int		dup_delim(t_mini *mini, int i, int j)
+int	dup_delim(t_mini *mini, int i, int j)
 {
 	int	k;
-
+	
 	k = 0;
 	if (mini->input_sanitized[i] == '>')
 	{
 		if (mini->input_sanitized[i + 1] == '>' && mini)
 		{
 			mini->io[j] = ft_strdup(">>");
-			k++;
 			mini->redir++;
+			k++;
 		}
 		else
 		{
@@ -44,29 +44,39 @@ int		dup_delim(t_mini *mini, int i, int j)
 	return (k);
 }
 
-void	copy_delim(t_mini *mini, int count)
+void	copy_delim(t_mini *mini)
 {
 	char	*str;
 	int		i;
 	int		j;
-	
-	mini->io = malloc(sizeof(char *) * count + 1);
-	if(!mini->io)
+
+	mini->io = malloc(sizeof(char *) * (mini->pipe + mini->redir) + 1);
+	if (!mini->io)
 		return ;
+	mini->pipe = 0;
+	mini->redir = 0;
 	str = mini->input_sanitized;
 	i = 0;
 	j = 0;
 	while (str[i])
 	{
-		is_in_quote(str[i], mini);
-		if (str[i] == '|' && mini->is_open_d == 0 && mini->is_open_s == 0)
+		if (str[i] == '|')
+		{
 			mini->io[j] = ft_strdup("|");
-		else if ((str[i] == '>') && mini->is_open_d == 0 && mini->is_open_s == 0)
+			mini->pipe++;
+			j++;
+		}
+		else if (str[i] == '>')
+		{
 			i += dup_delim(mini, i, j);
-		else if ((str[i] == '<') && mini->is_open_d == 0 && mini->is_open_s == 0)
+			j++;
+		}
+		else if (str[i] == '<')
+		{
 			i += dup_delim(mini, i, j);
+			j++;
+		}
 		i++;
-		j++;
 	}
 	mini->io[j] = NULL;
 }
@@ -74,33 +84,33 @@ void	copy_delim(t_mini *mini, int count)
 void	get_redir(t_mini *mini)
 {
 	char	*str;
-	int		count;
 	int		i;
 
-	i = 0;
-	count = 0;
 	str = mini->input_sanitized;
+	i = 0;
 	while (str[i])
 	{
-		is_in_quote(str[i], mini);
-		if (str[i] == '|' && mini->is_open_d == 0 && mini->is_open_s == 0)
-		{
+		if (str[i] == '|')
 			mini->pipe++;
-			count++;
-		}
-		if (str[i] == '<' && (i = 0 || str[i - 1] != '<') && str[i + 1] != '<')
+		else if (str[i] == '>')
 		{
-			mini->redir++;
-			count++;
-		}
-		if (str[i] == '>')
-			if (str[i + 1] != '>')
+			if (mini->input_sanitized[i + 1] == '>' && mini)
 			{
-				count++;
+				i++;
 				mini->redir++;
 			}
+			else
+				mini->redir++;
+		}
+		else if (str[i] == '<')
+		{
+			if (mini->input_sanitized[i + 1] == '<')
+				i++;
+			else
+				mini->redir++;
+		}
 		i++;
 	}
-	if (count > 0)
-		copy_delim(mini, count);
+	if (mini->pipe + mini->redir > 0)
+		copy_delim(mini);
 }

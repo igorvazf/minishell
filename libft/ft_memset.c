@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniexit.c                                         :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 18:35:22 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/14 20:42:35 by paugusto         ###   ########.fr       */
+/*   Created: 2021/07/29 10:34:41 by paugusto          #+#    #+#             */
+/*   Updated: 2021/12/14 19:25:15 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-void	miniexit(t_mini *mini, t_list *list)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	free_reset(mini, list);
-	free_em_all(mini);
-	exit(0);
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+		((unsigned char *)s)[i++] = c;
+	return (s);
 }

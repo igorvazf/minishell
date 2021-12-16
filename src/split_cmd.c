@@ -1,15 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minisplit.c                                        :+:      :+:    :+:   */
+/*   split_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 10:09:19 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/14 15:14:20 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/15 03:22:59 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/minishell.h"
 
@@ -27,14 +26,14 @@ int	is_delim(t_mini *mini, int i)
 	return (0);
 }	
 
-
 int	validate(t_mini *mini, int i)
 {
 	char	*str;
 	str = mini->input_sanitized;
 	if (str[i] == '>')
 	{
-		mini->init_with_arrow = 1;
+		if(i == 0)
+			mini->init_with_arrow = 1;
 		if (str[i + 1] == '>')
 			return (i + 2);
 		else
@@ -42,7 +41,8 @@ int	validate(t_mini *mini, int i)
 	}
 	else if (str[i] == '<' && str[i + 1] != '<' && str[i - 1] != '<')
 	{
-		mini->init_with_arrow = 1;
+		if(i == 0)
+			mini->init_with_arrow = 1;
 		return (i + 1);
 	}
 	else if (str[i] == '|')
@@ -74,7 +74,7 @@ int	split_cmd(t_mini *mini, t_list *list)
 			str = ft_substr(mini->input_sanitized, start, end - start);
 			i = validate(mini, i);
 			start = i;
-			add_last(list, str);
+			push_node(list, str);
 			free(str);
 		}
 		if (mini->input_sanitized[i + 1] == '\0' && mini->is_open_s == 0
@@ -82,7 +82,7 @@ int	split_cmd(t_mini *mini, t_list *list)
 		{
 			end = i;
 			str = ft_substr(mini->input_sanitized, start, end - start + 1);
-			add_last(list, str);
+			push_node(list, str);
 			free(str);
 		}
 		i++;

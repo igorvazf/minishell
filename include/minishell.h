@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/14 15:52:42 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/16 14:41:33 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,12 @@
 # include <unistd.h>
 # include <signal.h>
 
-# define MAXCOM 1000
-# define MAXLIST 100
 # define D_QUOTE '\"'
 # define S_QUOTE '\''
 # define DELIM "|<>"
 
 /*
-** Linked list structure - Node and List
+** Linked list structure - Commands
 */
 typedef struct s_node
 {
@@ -46,25 +44,26 @@ typedef struct s_list
 {
 	t_node	*begin;
 	t_node	*end;
+	t_node	*node;
 	size_t	size;
 }	t_list;
 
 /*
-** Linked list structure - Environment ariables strucute
+** Linked list structure - Environment Variables
 */
-typedef struct s_node_env
+typedef struct s_nodenv
 {
-	char				*key;
-	char				*content;
-	struct s_node_env	*next;
-}	t_node_env;
+	char			*key;
+	char			*content;
+	struct s_nodenv	*next;
+}	t_nodenv;
 
-typedef struct s_list_env
+typedef struct s_env
 {
-	t_node_env	*begin;
-	t_node_env	*end;
+	t_nodenv	*begin;
+	t_nodenv	*end;
 	size_t		size;
-}	t_list_env;
+}	t_env;
 
 /*
 ** input -> line read from terminal (raw, no treats)
@@ -75,67 +74,64 @@ typedef struct s_list_env
 */
 typedef struct s_mini
 {
-	char		*input;
-	char		*input_sanitized;
-	char		*correct_path;
-	char		**io;
-	char		**path;
-	int			is_open_s;
-	int			is_open_d;
-	int			is_ok;
-	int			init_with_arrow;
-	int			pipe;
-	int			redir;
-	int			in;
-	int			out;
-	t_list_env	*env;
+	char	**path;
+	char	**io;
+	char	*input;
+	char	*input_sanitized;
+	char	*correct_path;
+	int		init_with_arrow;
+	int		is_open_s;
+	int		is_open_d;
+	int		pipe;
+	int		redir;
+	t_env	*env;
 }	t_mini;
 
 /*
 ** Double linked list functions
 */
-t_list		*create_list(void);
-t_node		*create_node(char *str);
-void		destroy_list(t_list *list);
-void		add_last(t_list *list, char *str);
-void		print_elements(t_list *list);
-t_list_env	*create_list_env(void);
-t_node_env	*create_node_env(char *key, char *content);
-void		add_last_env(t_list_env *list, char *key, char *content);
-void		destroy_list_env(t_list_env *list);
-void		print_env(t_list_env *list);
+t_list	*create_list(void);
+void	push_node(t_list *list, char *str);
+void	free_list(t_list **list_ref);
+t_env	*create_env(void);
+void	push_env(t_env *env, char *key, char *content);
+void	free_env(t_env **env_ref);
+void	print_elements(t_list *list);
+void	print_env(t_env *env);
+
 
 /*
 ** Minishell functions
 */
-void	miniheader(void);
-void	get_input(t_mini *mini);
-void	input_sanitizer(t_mini *mini);
+void	minifree(char **ptr);
+void	free_em_all(t_mini *mini);
 void	init(t_mini *mini, char **environ);
-void	is_quotes_closed(t_mini *mini);
-void	find_path(t_mini *mini, t_list *list);
+void	free_reset(t_mini *mini, t_list *list);
 void	is_in_quote(char c, t_mini *mini);
 int		split_cmd(t_mini *mini, t_list *list);
-void	free_em_all(t_mini *mini, t_list *list);
-void	free_minishell(t_mini *mini);
-void	minifree(char **ptr);
-int		ministrcmp(char *s1, char *s2);
-void	signals(int i);
-void	ctrl_c(int sig);
-void	back_slash(int sig);
-void	execute_builtin(int builtin, t_node *node, t_mini *mini, t_list *list);
+void	input_sanitizer(t_mini *mini);
 int		is_builtin(t_node *node);
-void	run(t_mini *mini, t_list *list);
+void	execute_builtin(int builtin, t_node *node, t_mini *mini, t_list *list);
+void	find_path(t_mini *mini, t_list *list);
+int		ministrcmp(char *s1, char *s2);
 void	get_redir(t_mini *mini);
 
+
+void	execute(t_mini *mini, t_list *list, t_node *node);
+
+
+
+
 /* Builtins */
-void	miniecho(t_node *node);
-void	minicd(t_node *node);
-void	minipwd(void);
 void	miniexit(t_mini *mini, t_list *list);
-void	minienv(t_list_env *env);
-void	miniexport(t_list_env *env, t_node *node);
-void	miniunset(t_list_env *env, t_node *node);
+void	miniunset(t_env *env, t_node *node);
+void	minipwd(void);
+void	minicd(t_node *node);
+void	miniecho(t_node *node);
+void	minienv(t_env *env);
+void	miniexport(t_env *env, t_node *node);
+
+
 
 
 

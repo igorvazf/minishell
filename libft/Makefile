@@ -15,7 +15,11 @@ SRC =	ft_strlen.c \
 		ft_isdigit.c \
 		ft_isalpha.c \
 		ft_isascii.c \
-		ft_strncmp.c
+		ft_strncmp.c \
+		ft_calloc.c \
+		ft_bzero.c \
+		ft_memset.c \
+		ft_strcmp.c
 
 OBJECTS = $(SRC:.c=.o)
 

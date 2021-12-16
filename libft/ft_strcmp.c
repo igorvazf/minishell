@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniexit.c                                         :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 18:35:22 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/14 20:42:35 by paugusto         ###   ########.fr       */
+/*   Created: 2021/12/14 20:43:51 by paugusto          #+#    #+#             */
+/*   Updated: 2021/12/14 20:43:53 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-
-void	miniexit(t_mini *mini, t_list *list)
+int	ft_strcmp(char *s1, char *s2)
 {
-	free_reset(mini, list);
-	free_em_all(mini);
-	exit(0);
+	int i;
+
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
+		i++;
+	return (s1[i] - s2[i]);
 }

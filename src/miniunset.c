@@ -6,16 +6,16 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 00:26:24 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/13 15:09:13 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/15 03:31:24 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void miniunset(t_list_env *env, t_node *node)
+void miniunset(t_env *env, t_node *node)
 {
-	t_node_env	*aux;
-	t_node_env 	*prev;
+	t_nodenv	*aux;
+	t_nodenv 	*prev;
 
 	aux = env->begin;
 	prev = env->begin;

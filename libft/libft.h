@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 09:49:01 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/13 19:30:22 by coder            ###   ########.fr       */
+/*   Updated: 2021/12/14 20:44:07 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@ int		ft_isdigit(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
+void	*ft_calloc(size_t nbr, size_t size);
+void	ft_bzero(void *s, size_t n);
+void	*ft_memset(void *s, int c, size_t n);
+int		ft_strcmp(char *s1, char *s2);
 
 #endif

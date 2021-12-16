@@ -1,24 +1,19 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/30 17:58:06 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/13 15:06:06 by paugusto         ###   ########.fr       */
+/*   Created: 2021/07/29 13:36:06 by paugusto          #+#    #+#             */
+/*   Updated: 2021/10/05 09:18:31 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-//function that reads terminal input
-void	get_input(t_mini *mini)
+void	ft_bzero(void *s, size_t n)
 {
-	signals(1);
-	mini->input = readline(">> ");
-	if (ft_strlen(mini->input) != 0)
-		add_history(mini->input);
-	input_sanitizer(mini);
+	ft_memset(s, '\0', n);
 }
-
