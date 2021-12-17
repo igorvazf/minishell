@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:57:59 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/16 14:41:27 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/17 00:24:47 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	init(t_mini *mini, char **environ)
 	get_env(mini, environ);
 	get_path(mini);
 	mini->correct_path = NULL;
-	mini->io = NULL;
 	mini->is_open_s = 0;
 	mini->is_open_d = 0;
 	mini->init_with_arrow = 0;

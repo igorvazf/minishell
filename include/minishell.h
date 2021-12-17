@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/16 14:41:33 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/17 00:41:28 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ typedef struct s_env
 typedef struct s_mini
 {
 	char	**path;
-	char	**io;
 	char	*input;
 	char	*input_sanitized;
 	char	*correct_path;
@@ -114,12 +113,8 @@ int		is_builtin(t_node *node);
 void	execute_builtin(int builtin, t_node *node, t_mini *mini, t_list *list);
 void	find_path(t_mini *mini, t_list *list);
 int		ministrcmp(char *s1, char *s2);
-void	get_redir(t_mini *mini);
-
 
 void	execute(t_mini *mini, t_list *list, t_node *node);
-
-
 
 
 /* Builtins */

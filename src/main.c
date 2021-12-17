@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/16 23:30:29 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/17 00:52:51 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,16 @@ int	main(void)
 	// // 	mini.out = STDOUT_FILENO;
 		list = create_list();
 		get_input(&mini);
-		get_redir(&mini);
-		// if (mini.io)
-		// 	for(int i = 0; mini.io[i]; i++)
-		// 		printf("%s -> \n", mini.io[i]);
-		if(ft_strlen(mini.input) != 0)
+		if(ft_strlen(mini.input) != 0 && mini.input[0] != '|')
 		{
-			if (!ft_strcmp(mini.input, "exit"))
-				miniexit(&mini, list);
-			push_node(list, mini.input);
 			if(split_cmd(&mini, list))
 			{
-				execute(&mini, list, list->begin);
-				//print_elements(list);
+				print_elements(list);
+				
 			}
-			free_reset(&mini, list);
 		}
-		else
-			free_list(&list);
+		free_reset(&mini, list);
 	}
 	free_em_all(&mini);
-
-	
-
-	// list = create_list();
-
-	// push_node(list, "Pedro Augusto Dias");
-	// push_node(list, "igor Fernandes Vaz");
-	// push_node(list, "Nathalia Ritter Rosa");
-	// print_elements(list);
-	// free_list(&list);
 	return (0);
 }
