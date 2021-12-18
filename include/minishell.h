@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/17 17:20:12 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/18 18:03:15 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_mini
 	int		in;
 	t_env	*env;
 }	t_mini;
+
 
 /*
 ** Double linked list functions

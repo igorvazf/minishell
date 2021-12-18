@@ -15,7 +15,6 @@ SRC_FILES =	main.c \
 			split_cmd.c \
 			utilis.c \
 			builtin.c \
-			run.c \
 			sanitizer.c \
 			miniexport.c \
 			minicd.c \

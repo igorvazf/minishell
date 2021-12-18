@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/17 00:52:51 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/18 17:59:49 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	main(void)
 
 	init(&mini, __environ);
 	//print_env(mini.env);
-	
 	while (1)
 	{
 	// // 	mini.in = STDIN_FILENO;
@@ -40,7 +39,6 @@ int	main(void)
 			if(split_cmd(&mini, list))
 			{
 				print_elements(list);
-				
 			}
 		}
 		free_reset(&mini, list);

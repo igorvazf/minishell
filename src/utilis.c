@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:58:10 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/15 03:51:24 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/18 18:03:01 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,11 @@ int		ministrcmp(char *s1, char *s2)
 	if (s1[i] != '\0')
 		return (0);
 	return (1);
+}
+
+int	is_redirect(char c)
+{
+	if(c == '|' || c == '<' || c == '>')
+		return (1);
+	return (0);
 }
