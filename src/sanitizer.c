@@ -34,10 +34,12 @@
 char	*put_spaces(char *str, int len, int i, int j)
 {
 	char	*input;
-	
+
 	input = malloc(sizeof(char) * len + 1);
 	while (str[i])
 	{
+		while (str[i] == '<' || str[i] == '>')
+			input[j++] = str[i++];
 		if (str[i] != ' ' && (str[i + 1] == '|' || str[i + 1] == '<' || str[i + 1] == '>'))
 		{
 			input[j++] = str[i++];
@@ -70,6 +72,11 @@ int	correct_len(char	*str)
 	len = 0;
 	while (str[i])
 	{
+		while (str[i] == '<' || str[i] == '>')
+		{
+			len++;
+			i++;
+		}
 		if (str[i] != ' ' && (str[i + 1] == '|' || str[i + 1] == '<' || str[i + 1] == '>'))
 		{
 			len += 3;
