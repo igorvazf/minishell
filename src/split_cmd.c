@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 10:09:19 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/18 16:39:28 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/19 13:25:50 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ int	split_cmd(t_mini *mini, t_list *list)
 			mini->pipe++;
 			end = i - 1;
 			str = ft_substr(mini->input_sanitized, start, end - start);
-			while (mini->input_sanitized[i] 
-					&& (mini->input_sanitized[i] == '|' || mini->input_sanitized[i] == ' '))
-				i++;
+			i++;
 			start = i;
 			push_node(list, str);
 			free(str);

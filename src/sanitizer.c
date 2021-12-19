@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 10:41:53 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/18 17:59:31 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/19 13:15:56 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,26 @@ char	*put_spaces(char *str, int len, int i, int j)
 	input = malloc(sizeof(char) * len + 1);
 	while (str[i])
 	{
-		while (str[i] == '<' || str[i] == '>')
-			input[j++] = str[i++];
-		if (str[i] != ' ' && (str[i + 1] == '|' || str[i + 1] == '<' || str[i + 1] == '>'))
+		if (str[i] == '|')
 		{
+			if (i > 0)
+				input[j++] = ' ';	
 			input[j++] = str[i++];
-			input[j++] = ' ';
-			input[j++] = str[i++];
+			if (str[i + 1] != '\0')
+				input[j++] = ' ';
 		}
-		while (str[i] == '<' || str[i] == '>')
-			input[j++] = str[i++];
-		if (str[i] == '|' && str[i + 1] != ' ' && str[i + 1] != '\0')
+		if (str[i] == '>' || str[i] == '<')
 		{
-			input[j++] = '|';
-			input[j++] = ' ';
-			i++;
+			if (i > 0)
+				input[j++] = ' ';
+			input[j++] = str[i++]; 
+			while (str[i] == '<' || str[i] == '>')
+				input[j++] = str[i++];
+			if (str[i + 1] != '\0')
+				input[j++] = ' ';	
 		}
-		if (str[i] != '|' && str[i] != '<' && str[i] != '>' && str[i] != '\0')
+		if (str[i] != '|' && str[i] != '>' && str[i] != '<')
 			input[j++] = str[i++];
-		else
-			i++;
 	}
 	input[j] = '\0';
 	return (input);
@@ -72,33 +72,34 @@ int	correct_len(char	*str)
 	len = 0;
 	while (str[i])
 	{
-		while (str[i] == '<' || str[i] == '>')
+		if (str[i] == '|')
+		{
+			if (i > 0)
+				len++;	
+			len++;
+			i++;
+			if (str[i + 1] != '\0')
+				len++;
+		}
+		if (str[i] == '>' || str[i] == '<')
+		{
+			if (i > 0)
+				len++;
+			len++;
+			i++;
+			while (str[i] == '<' || str[i] == '>')
+			{
+				len++;
+				i++;
+			}
+			if (str[i + 1] != '\0')
+				len++;	
+		}
+		if (str[i] != '|' && str[i] != '>' && str[i] != '<')
 		{
 			len++;
 			i++;
 		}
-		if (str[i] != ' ' && (str[i + 1] == '|' || str[i + 1] == '<' || str[i + 1] == '>'))
-		{
-			len += 3;
-			i++;
-		}
-		while (str[i] == '<' || str[i] == '>')
-		{
-			len++;
-			i++;
-		}
-		if (str[i] == '|' && str[i + 1] != ' ' && str[i + 1] != '\0')
-		{
-			len += 2;
-			i++;
-		}
-		if (str[i] != '|' && str[i] != '<' && str[i] != '>' && str[i] != '\0')
-		{
-			len++;
-			i++;
-		}
-		else
-			i++;
 	}
 	return (len);
 }

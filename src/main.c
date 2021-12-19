@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/18 17:59:49 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/19 13:31:41 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(void)
 	// // 	mini.out = STDOUT_FILENO;
 		list = create_list();
 		get_input(&mini);
+		// printf("%s\n", mini.input_sanitized);
 		if(ft_strlen(mini.input) != 0 && mini.input[0] != '|')
 		{
 			if(split_cmd(&mini, list))
