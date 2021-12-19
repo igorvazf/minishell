@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/19 18:37:38 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/19 20:09:21 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	get_input(t_mini *mini, t_sani *sani)
 {
-	//signals(1);
 	mini->input = readline(">> ");
 	if (ft_strlen(mini->input) != 0)
 		add_history(mini->input);

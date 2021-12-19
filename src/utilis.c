@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:58:10 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/19 17:25:56 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/19 20:09:03 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	is_in_quote(char c, t_mini *mini)
 {
-
 	if (c == S_QUOTE)
 	{
 		if (mini->is_open_s == 0 && mini->is_open_d == 0)
@@ -31,7 +30,7 @@ void	is_in_quote(char c, t_mini *mini)
 	}
 }
 
-int	find_path(t_mini *mini, t_list *list)
+int	find_path(t_mini *mini, t_node *node)
 {
 	char	*path;
 	int		i;
@@ -41,7 +40,7 @@ int	find_path(t_mini *mini, t_list *list)
 	j = 0;
 	while (i < 0 && mini->path[j])
 	{
-		path = ft_strjoin(mini->path[j], list->end->str[0]);
+		path = ft_strjoin(mini->path[j], node->str[0]);
 		i = access(path, F_OK);
 		if (i >= 0)
 			mini->correct_path = ft_strdup(path);

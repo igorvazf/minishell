@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/19 19:34:43 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/19 20:06:55 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 		else if (pid == 0)
 		{
 			//child -> executar o comando
-			find_path(mini, list);
+			find_path(mini, node);
 			execve(mini->correct_path, node->str, NULL);
 			exit(0);
 		}
