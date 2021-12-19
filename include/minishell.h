@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/18 18:03:15 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/19 19:30:47 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,14 @@ typedef struct s_env
 	size_t		size;
 }	t_env;
 
+typedef struct s_sani
+{
+	int		i;
+	int		j;
+	int		s;
+	int		d;
+}	t_sani;
+
 /*
 ** input -> line read from terminal (raw, no treats)
 ** input_sanitized -> input ready to work with
@@ -85,6 +93,8 @@ typedef struct s_mini
 	int		redir;
 	int		out;
 	int		in;
+	int		st_out;
+	int		st_in;
 	t_env	*env;
 }	t_mini;
 
@@ -111,14 +121,16 @@ void	init(t_mini *mini, char **environ);
 void	free_reset(t_mini *mini, t_list *list);
 void	is_in_quote(char c, t_mini *mini);
 int		split_cmd(t_mini *mini, t_list *list);
-void	input_sanitizer(t_mini *mini);
+void	input_sanitizer(t_mini *mini, t_sani *sani);
 int		is_builtin(t_node *node);
 void	execute_builtin(int builtin, t_node *node, t_mini *mini, t_list *list);
-void	find_path(t_mini *mini, t_list *list);
+int		find_path(t_mini *mini, t_list *list);
 int		ministrcmp(char *s1, char *s2);
 int		is_redirect(char c);
-
-void	execute(t_mini *mini, t_list *list, t_node *node);
+int		redirect_out(t_mini *mini, t_node *node, int i);
+int		redirect_in(t_mini *mini, t_node *node);
+void	run(t_mini *mini, t_list *list);
+void	fd_handler(t_mini *mini);
 
 
 /* Builtins */
@@ -129,10 +141,5 @@ void	minicd(t_node *node);
 void	miniecho(t_node *node);
 void	minienv(t_env *env);
 void	miniexport(t_env *env, t_node *node);
-
-
-
-
-
 
 #endif

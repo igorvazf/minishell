@@ -6,70 +6,96 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/17 01:34:16 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/19 19:34:43 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	exec_cmd(t_node *current, t_node *next)
+void	fd_handler(t_mini *mini)
 {
-	if (!ft_strcmp(next->str[0], "|"))
-		//pipe
-	else if (!ft_strcmp(next->str[0], "<<"))
-		//here doc
-	else if (!ft_strcmp(next->str[0], ">>"))
-		//append
-	else if (!ft_strcmp(next->str[0], ">"))
-		//redirect output
-	else if (!ft_strcmp(next->str[0], "<"))
-		//redirect input
-}
-
-int	is_redirect(char c)
-{
-	if(c == '|' || c == '<' || c == '>')
-		return (1);
-	return (0);
-}	
-
-void	run(t_mini *mini, t_list *list)
-{
-	t_node	*node;
-
-	node = list->begin;
-	if (is_delim(node->str[0]))
-		exec_cmd(NULL, node);
-	while (node != NULL)
+	if (mini->in != 0)
 	{
-		
-		node = node->next;
+		dup2(mini->in, 0);
+		close(mini->in);
+	}
+	if (mini->out != 1)
+	{
+		dup2(mini->out, 1);
+		close(mini->out);
 	}
 }
 
 void	execute(t_mini *mini, t_list *list, t_node *node)
 {
 	int	pid;
-	int	builtin;
 
-	builtin = is_builtin(node);
-	if (builtin)
-		execute_builtin(builtin, node, mini, list);
+	mini->st_out = dup(STDOUT_FILENO);
+	mini->st_in = dup(STDIN_FILENO);
+	fd_handler(mini);
+	if (is_builtin(node))
+		execute_builtin(is_builtin(node), node, mini, list);
 	else
 	{
 		pid = fork();
 		//signals(2);
-		find_path(mini, list);
 		if (pid < 0)
-			;
+			printf("error\n");
 		else if (pid == 0)
 		{
-			//child -> executar o comando 
-			//fd_handler(mini);
+			//child -> executar o comando
+			find_path(mini, list);
 			execve(mini->correct_path, node->str, NULL);
-			//exit
+			exit(0);
 		}
 		else
 			wait(&pid);
 	}
+	dup2(mini->st_out, STDOUT_FILENO);
+	dup2(mini->st_in, STDIN_FILENO);
 }
+
+void	run_cmd(t_mini *mini, t_list *list, t_node *node)
+{
+	int	i;
+	int	result;
+
+	i = 0;
+	result = 1;
+	while (node->str[i] && result)
+	{
+		if (!ft_strcmp(node->str[i], ">") || !ft_strcmp(node->str[i], ">>"))
+			result = redirect_out(mini, node, i);
+		i++;
+	}
+	if (!result)
+		printf("error\n");
+	else
+		execute(mini, list, node);
+}
+
+void	run(t_mini *mini, t_list *list)
+{
+	t_node *node;
+	int	i;
+	int	fd[2];
+
+	node = list->begin;
+	i = 0;
+	while (i < mini->pipe)
+	{
+		if (pipe(fd) < 0)
+			printf("error\n");
+		mini->out = dup(fd[1]);
+		run_cmd(mini, list, node);
+		close(mini->out);
+		if (mini->in != 0)
+			close(mini->in);
+		mini->in = dup(fd[0]);
+		close(fd[0]);
+		close(fd[1]);
+		i++;
+	}
+	run_cmd(mini, list, node);
+}
+

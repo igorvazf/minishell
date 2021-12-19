@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:58:10 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/18 18:03:01 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/19 17:25:56 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	is_in_quote(char c, t_mini *mini)
 	}
 }
 
-void	find_path(t_mini *mini, t_list *list)
+int	find_path(t_mini *mini, t_list *list)
 {
 	char	*path;
 	int		i;
@@ -51,7 +51,9 @@ void	find_path(t_mini *mini, t_list *list)
 	if (i == -1)
 	{
 		printf("command not found\n");
+		return (0);
 	}
+	return (1);
 }
 
 int		ministrcmp(char *s1, char *s2)

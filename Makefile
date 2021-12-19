@@ -22,8 +22,10 @@ SRC_FILES =	main.c \
 			minienv.c \
 			miniunset.c \
 			minipwd.c \
+			redir.c \
+			run.c \
 
-			
+
 
 SRC =		$(addprefix src/, $(SRC_FILES))
 

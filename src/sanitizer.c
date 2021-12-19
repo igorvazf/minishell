@@ -6,111 +6,94 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 10:41:53 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/19 13:15:56 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/19 15:24:29 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// int	is_in_quote(char c)
-// {
-
-// 	if (c == S_QUOTE)
-// 	{
-// 		if (mini->is_open_s == 0 && mini->is_open_d == 0)
-// 			mini->is_open_s = 1;
-// 		else if (mini->is_open_s == 1)
-// 			mini->is_open_s = 0;
-// 	}
-// 	if (c == D_QUOTE)
-// 	{
-// 		if (mini->is_open_d == 0 && mini->is_open_s == 0)
-// 			mini->is_open_d = 1;
-// 		else if (mini->is_open_d == 1)
-// 			mini->is_open_d = 0;
-// 	}
-// }
-
-char	*put_spaces(char *str, int len, int i, int j)
+void	is_quote(char c, t_sani *s)
 {
-	char	*input;
 
-	input = malloc(sizeof(char) * len + 1);
-	while (str[i])
+	if (c == S_QUOTE)
 	{
-		if (str[i] == '|')
-		{
-			if (i > 0)
-				input[j++] = ' ';	
-			input[j++] = str[i++];
-			if (str[i + 1] != '\0')
-				input[j++] = ' ';
-		}
-		if (str[i] == '>' || str[i] == '<')
-		{
-			if (i > 0)
-				input[j++] = ' ';
-			input[j++] = str[i++]; 
-			while (str[i] == '<' || str[i] == '>')
-				input[j++] = str[i++];
-			if (str[i + 1] != '\0')
-				input[j++] = ' ';	
-		}
-		if (str[i] != '|' && str[i] != '>' && str[i] != '<')
-			input[j++] = str[i++];
+		if (s->s == 0 && s->d == 0)
+			s->s = 1;
+		else if (s->s == 1)
+			s->s = 0;
 	}
-	input[j] = '\0';
-	return (input);
+	if (c == D_QUOTE)
+	{
+		if (s->d == 0 && s->s == 0)
+			s->d = 1;
+		else if (s->d == 1)
+			s->d = 0;
+	}
 }
 
-int	correct_len(char	*str)
+void	put_spaces(char *str, int len, t_sani *s, t_mini *m)
 {
-	int	i;
-	int	len;
+	m->input_sanitized = malloc(sizeof(char) * len + 1);
+	while (str[s->i])
+	{
+		is_quote(str[s->i], s);
+		if (str[s->i] == '|' && !s->s && !s->d)
+		{
+			m->input_sanitized[s->j++] = ' ';
+			m->input_sanitized[s->j++] = str[s->i++];
+			m->input_sanitized[s->j++] = ' ';
+		}
+		if ((str[s->i] == '>' || str[s->i] == '<') && !s->s && !s->d)
+		{
+			m->input_sanitized[s->j++] = ' ';
+			m->input_sanitized[s->j++] = str[s->i++];
+			while (str[s->i] == '<' || str[s->i] == '>')
+				m->input_sanitized[s->j++] = str[s->i++];
+			m->input_sanitized[s->j++] = ' ';
+		}
+		if ((str[s->i] != '|' && str[s->i] != '>' && str[s->i] != '<')
+			|| (s->s == 1 || s->d == 1))
+			m->input_sanitized[s->j++] = str[s->i++];
+	}
+	m->input_sanitized[s->j] = '\0';
+}
 
-	i = 0;
-	len = 0;
+int	correct_len(char *str, int len, int i, t_sani *s)
+{
 	while (str[i])
 	{
-		if (str[i] == '|')
+		is_quote(str[i], s);
+		if (str[i] == '|' && !s->s && !s->d)
+			len += 3;
+		if ((str[i] == '>' || str[i] == '<') && !s->s && !s->d)
 		{
-			if (i > 0)
-				len++;	
-			len++;
+			len += 3;
 			i++;
-			if (str[i + 1] != '\0')
-				len++;
 		}
-		if (str[i] == '>' || str[i] == '<')
-		{
-			if (i > 0)
-				len++;
-			len++;
-			i++;
-			while (str[i] == '<' || str[i] == '>')
-			{
-				len++;
-				i++;
-			}
-			if (str[i + 1] != '\0')
-				len++;	
-		}
-		if (str[i] != '|' && str[i] != '>' && str[i] != '<')
+		while ((str[i] == '<' || str[i] == '>') && !s->s && !s->d)
 		{
 			len++;
 			i++;
 		}
+		if ((str[i] != '|' && str[i] != '>' && str[i] != '<')
+			|| (s->s == 1 || s->d == 1))
+			len++;
+		i++;
 	}
 	return (len);
 }
 
-void	input_sanitizer(t_mini *mini)
+void	input_sanitizer(t_mini *mini, t_sani *sani)
 {
 	char	*aux;
 	int		len;
 
+	sani->s = 0;
+	sani->d = 0;
+	sani->i = 0;
+	sani->j = 0;
 	aux = ft_strtrim(mini->input, " ");
-	len = correct_len(aux);
-	mini->input_sanitized = put_spaces(aux, len, 0, 0);
+	len = correct_len(aux, 0, 0, sani);
+	put_spaces(aux, len, sani, mini);
 	free(aux);
 }
