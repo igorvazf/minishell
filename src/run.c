@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/19 20:06:55 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/19 20:54:03 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	run(t_mini *mini, t_list *list)
 		mini->in = dup(fd[0]);
 		close(fd[0]);
 		close(fd[1]);
+		node = node->next;
 		i++;
 	}
 	run_cmd(mini, list, node);

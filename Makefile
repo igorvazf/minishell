@@ -25,8 +25,6 @@ SRC_FILES =	main.c \
 			redir.c \
 			run.c \
 
-
-
 SRC =		$(addprefix src/, $(SRC_FILES))
 
 OBJECTS =	$(SRC:.c=.o)
