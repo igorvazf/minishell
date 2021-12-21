@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/20 21:34:36 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/21 15:17:34 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 	mini->st_in = dup(STDIN_FILENO);
 	fd_handler(mini);
 	if (is_builtin(node))
+	{
+		get_cmd(node);
 		execute_builtin(is_builtin(node), node, mini, list);
+	}
 	else
 	{
 		pid = fork();
@@ -72,11 +75,13 @@ void	run_cmd(t_mini *mini, t_list *list, t_node *node)
 		{
 			if (!ft_strcmp(node->str[i], ">") || !ft_strcmp(node->str[i], ">>"))
 				result = redirect_out(mini, node, i);
+			if (!ft_strcmp(node->str[i], "<") || !ft_strcmp(node->str[i], "<<"))
+				result = redirect_in(mini, node, i);
 			i++;
 		}
 		if (!result)
-			printf("error\n");
-		else
+			printf("error bla\n");
+		else if(result)
 			execute(mini, list, node);
 	}
 }
@@ -89,7 +94,7 @@ void	run(t_mini *mini, t_list *list)
 
 	node = list->begin;
 	i = 0;
-	while (i < mini->pipe && node->str[0] == NULL) //ls | wc -l
+	while (i < mini->pipe && node->str[0] == NULL)
 	{
 		if (pipe(fd) < 0)
 			printf("error\n");

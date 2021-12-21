@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/20 21:34:02 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/21 11:16:53 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int		find_path(t_mini *mini, char *cmd);
 int		ministrcmp(char *s1, char *s2);
 int		is_redirect(char c);
 int		redirect_out(t_mini *mini, t_node *node, int i);
-int		redirect_in(t_mini *mini, t_node *node);
+int		redirect_in(t_mini *mini, t_node *node, int i);
 void	run(t_mini *mini, t_list *list);
 void	fd_handler(t_mini *mini);
 void	get_cmd(t_node *node);

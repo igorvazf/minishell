@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:58:10 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/20 19:54:34 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/21 15:20:28 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	find_path(t_mini *mini, char *cmd)
 		mini->correct_path = ft_strdup(cmd);
 		return (1);
 	}
-	printf("error command not found\n");
+	if (ft_strlen(cmd) > 0)
+		printf("error command not found\n");
 	return (0);
 }
 
