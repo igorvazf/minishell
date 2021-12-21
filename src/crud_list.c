@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:29:55 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/14 19:59:48 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/20 19:20:52 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_list	*create_list(void)
 {
 	t_list *list;
-	
+
 	list = (t_list *)ft_calloc(1, sizeof(t_list));
 	list->begin = NULL;
 	list->end = NULL;
@@ -26,7 +26,7 @@ t_list	*create_list(void)
 t_node	*create_node(char *str)
 {
 	t_node *node;
-	
+
 	node = (t_node *)ft_calloc(1, sizeof(t_node));
 	node->str = ft_split(str, ' ');
 	node->next = NULL;
@@ -36,7 +36,7 @@ t_node	*create_node(char *str)
 void	push_node(t_list *list, char *str)
 {
 	t_node	*node;
-	
+
 	node = create_node(str);
 	if (list->begin == NULL)
 	{

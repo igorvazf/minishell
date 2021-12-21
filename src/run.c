@@ -6,11 +6,12 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/19 20:54:03 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:34:36 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
 
 void	fd_handler(t_mini *mini)
 {
@@ -43,9 +44,12 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 			printf("error\n");
 		else if (pid == 0)
 		{
-			//child -> executar o comando
-			find_path(mini, node);
-			execve(mini->correct_path, node->str, NULL);
+			get_cmd(node);
+			if (find_path(mini, node->str[0]))
+			{
+				execve(mini->correct_path, node->str, NULL);
+				exit(0);
+			}
 			exit(0);
 		}
 		else
@@ -62,16 +66,19 @@ void	run_cmd(t_mini *mini, t_list *list, t_node *node)
 
 	i = 0;
 	result = 1;
-	while (node->str[i] && result)
+	if (node != NULL)
 	{
-		if (!ft_strcmp(node->str[i], ">") || !ft_strcmp(node->str[i], ">>"))
-			result = redirect_out(mini, node, i);
-		i++;
+		while (node->str[i] && result)
+		{
+			if (!ft_strcmp(node->str[i], ">") || !ft_strcmp(node->str[i], ">>"))
+				result = redirect_out(mini, node, i);
+			i++;
+		}
+		if (!result)
+			printf("error\n");
+		else
+			execute(mini, list, node);
 	}
-	if (!result)
-		printf("error\n");
-	else
-		execute(mini, list, node);
 }
 
 void	run(t_mini *mini, t_list *list)
@@ -82,7 +89,7 @@ void	run(t_mini *mini, t_list *list)
 
 	node = list->begin;
 	i = 0;
-	while (i < mini->pipe)
+	while (i < mini->pipe && node->str[0] == NULL) //ls | wc -l
 	{
 		if (pipe(fd) < 0)
 			printf("error\n");
@@ -97,6 +104,9 @@ void	run(t_mini *mini, t_list *list)
 		node = node->next;
 		i++;
 	}
-	run_cmd(mini, list, node);
+	if (node->str[0] != NULL)
+		run_cmd(mini, list, node);
+	else
+		printf("error\n");
 }
 

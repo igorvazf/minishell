@@ -1,6 +1,6 @@
 NAME =		minishell
 CC =		gcc
-CFLAGS =	-Wall -Werror -Wextra
+CFLAGS =	-g -Wall -Werror -Wextra
 RM =		rm -rf
 
 LIBFT_DIR =	./libft
@@ -24,6 +24,7 @@ SRC_FILES =	main.c \
 			minipwd.c \
 			redir.c \
 			run.c \
+			utilis2.c
 
 SRC =		$(addprefix src/, $(SRC_FILES))
 
