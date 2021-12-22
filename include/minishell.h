@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/21 11:16:53 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/22 11:34:45 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct s_mini
 
 
 /*
-** Double linked list functions
+** linked list functions
 */
 t_list	*create_list(void);
 void	push_node(t_list *list, char *str);
@@ -131,7 +131,7 @@ int		redirect_out(t_mini *mini, t_node *node, int i);
 int		redirect_in(t_mini *mini, t_node *node, int i);
 void	run(t_mini *mini, t_list *list);
 void	fd_handler(t_mini *mini);
-void	get_cmd(t_node *node);
+void	get_cmd(t_mini *mini, t_node *node);
 
 
 /* Builtins */

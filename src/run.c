@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/21 15:17:34 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/22 11:38:38 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 	fd_handler(mini);
 	if (is_builtin(node))
 	{
-		get_cmd(node);
+		get_cmd(mini, node);
 		execute_builtin(is_builtin(node), node, mini, list);
 	}
 	else
@@ -47,7 +47,7 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 			printf("error\n");
 		else if (pid == 0)
 		{
-			get_cmd(node);
+			get_cmd(mini, node);
 			if (find_path(mini, node->str[0]))
 			{
 				execve(mini->correct_path, node->str, NULL);
@@ -94,7 +94,7 @@ void	run(t_mini *mini, t_list *list)
 
 	node = list->begin;
 	i = 0;
-	while (i < mini->pipe && node->str[0] == NULL)
+	while (i < mini->pipe)
 	{
 		if (pipe(fd) < 0)
 			printf("error\n");
