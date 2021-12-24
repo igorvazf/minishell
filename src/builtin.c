@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 23:27:17 by coder             #+#    #+#             */
-/*   Updated: 2021/12/15 03:08:46 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/23 21:28:32 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		is_builtin(t_node *node)
 void	execute_builtin(int builtin, t_node *node, t_mini *mini, t_list *list)
 {
 	if (builtin == 1)
-		miniecho(node);
+		miniecho(mini, node);
 	if (builtin == 2)
 		minicd(node);
 	if (builtin == 3)

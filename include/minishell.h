@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/22 11:34:45 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/23 21:45:47 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef struct s_mini
 	int		init_with_arrow;
 	int		is_open_s;
 	int		is_open_d;
+	int		final_s;
+	int		final_d;
 	int		pipe;
 	int		redir;
 	int		out;
@@ -139,7 +141,7 @@ void	miniexit(t_mini *mini, t_list *list);
 void	miniunset(t_env *env, t_node *node);
 void	minipwd(void);
 void	minicd(t_node *node);
-void	miniecho(t_node *node);
+void	miniecho(t_mini *mini, t_node *node);
 void	minienv(t_env *env);
 void	miniexport(t_env *env, t_node *node);
 

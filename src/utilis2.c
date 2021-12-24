@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 21:32:01 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/22 11:41:16 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/23 21:24:28 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,65 +32,123 @@ int	len_node(char **str)
 	return (len);
 }
 
-
-char	*get_var_name(char *str)
+char	*get_var_content(t_mini *mini, char *key)
 {
-	char	*aux;
-	int		i;
-	int		len;
-	int		j;
+	t_nodenv *node_env;
 
-
-	i = 0;
-	len = 0;
-	j = 0;
-	if (str[i] == '$')
+	node_env = mini->env->begin;
+	while (node_env != NULL)
 	{
-		i++;
-		while(str[i])
-		{
-			len++;
-			i++;
-		}
-		aux = malloc(sizeof(char) * len + 1);
-		i = 1;
-		while (str[i])
-			aux[j++] = str[i++];
-		aux[j] = '\0';
-		return (aux);
+		if(!ft_strcmp(node_env->key, key))
+			return (ft_strdup(node_env->content));
+		node_env = node_env->next;
 	}
 	return (NULL);
 }
 
-void	expand_var(t_mini *mini, t_node *node)
+char	*get_var(t_mini *mini, char *str, int i)
 {
-	char		*var;
-	t_nodenv	*node_env;
-	int			i;
+	char	*var;
+	char	*content;
+	int		len;
+	int		j;
 
-	i = 0;
-	node_env = mini->env->begin;
-	while (node->str[i])
+	len = 0;
+	j = i;
+	while(str[i] && str[i] != '$')
 	{
-		if (node->str[i][0] == '$')
-		{
-			var = get_var_name(node->str[i]);
-			break;
-		}
+		len++;
 		i++;
 	}
-	if (node->str[i] == NULL)
-		return ;
-	while (node_env != NULL)
+	if (len > 0)
 	{
-		if(!ft_strcmp(node_env->key, var))
-			break;
-		node_env = node_env->next;
+		var = malloc (sizeof(char) * len + 1);
+		i = 0;
+		while (str[j] && str[j] != '$' && str[j] != D_QUOTE)
+			var[i++] = str[j++];
+		content = get_var_content(mini, var);
+		free(var);
+		return (content);
 	}
-	if(node_env != NULL)
+	return (NULL);
+}
+
+char	*get_join(char *str)
+{
+	int		i;
+	char	*aux;
+
+	i = 0;
+	if (str[i] == '$')
+		return (NULL);
+	while(str[i] && str[i] != '$')
+		i++;
+	aux = ft_substr(str, 0, i - 1);
+	return (aux);
+}
+
+void	expand_var(t_mini *mini, t_node *node, int i)
+{
+	char		*content;
+	char		*holder;
+	char		*aux;
+	int			j;
+
+	j = 0;
+	content = NULL;
+	holder = get_join(node->str[i]);
+	while (node->str[i][j])
+	{
+
+		if (node->str[i][j] == '$')
+		{
+			content = get_var(mini, node->str[i], j + 1);
+			if (content != NULL)
+			{
+				aux = holder;
+				if (holder == NULL)
+					aux = ft_strdup("");
+				holder = ft_strjoin(aux, content);
+				free(aux);
+				free(content);
+			}
+		}
+		j++;
+	}
+	if (holder != NULL)
 	{
 		free(node->str[i]);
-		node->str[i] = ft_strdup(node_env->content);
+		node->str[i] = ft_strdup(holder);
+		free(holder);
+	}
+	else
+	{
+		free(node->str[i]);
+		node->str[i] = ft_strdup(" ");
+	}
+}
+
+void check_dollar(t_mini *mini, t_node *node)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (node->str[i])
+	{
+		j = 0;
+		while (node->str[i][j])
+		{
+			is_in_quote(node->str[i][j], mini);
+			if (mini->is_open_s == 0 && node->str[i][j] == '$')
+			{
+				expand_var(mini, node, i);
+				break;
+			}
+			j++;
+		}
+		i++;
 	}
 }
 
@@ -115,5 +173,5 @@ void	get_cmd(t_mini *mini, t_node *node)
 	aux[j] = NULL;
 	minifree(node->str);
 	node->str = aux;
-	expand_var(mini, node);
+	check_dollar(mini, node);
 }

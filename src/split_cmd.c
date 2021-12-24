@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 10:09:19 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/19 15:05:13 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/23 18:58:26 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ int	split_cmd(t_mini *mini, t_list *list)
 		}
 		i++;
 	}
+	if (mini->is_open_s == 1 || mini->is_open_d == 1)
+		return (0);
 	return (1);
 }

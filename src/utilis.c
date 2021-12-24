@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:58:10 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/21 15:20:28 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/23 21:48:21 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,20 @@ void	is_in_quote(char c, t_mini *mini)
 		if (mini->is_open_s == 0 && mini->is_open_d == 0)
 			mini->is_open_s = 1;
 		else if (mini->is_open_s == 1)
+		{
 			mini->is_open_s = 0;
+			mini->final_s = 1;
+		}
 	}
 	if (c == D_QUOTE)
 	{
 		if (mini->is_open_d == 0 && mini->is_open_s == 0)
 			mini->is_open_d = 1;
 		else if (mini->is_open_d == 1)
+		{
 			mini->is_open_d = 0;
+			mini->final_d = 1;
+		}
 	}
 }
 

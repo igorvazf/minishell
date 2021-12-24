@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/20 21:10:55 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/23 21:22:53 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	validade(t_list *list)
 
 void	get_input(t_mini *mini, t_sani *sani)
 {
+	mini->is_open_s = 0;
+	mini->is_open_d = 0;
 	mini->input = readline(">> ");
 	if (ft_strlen(mini->input) != 0)
 		add_history(mini->input);
