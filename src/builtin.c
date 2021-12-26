@@ -6,14 +6,13 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 23:27:17 by coder             #+#    #+#             */
-/*   Updated: 2021/12/23 21:28:32 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:36:43 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../include/minishell.h"
 
-int		is_builtin(t_node *node)
+int	is_builtin(t_node *node)
 {
 	if (!ft_strncmp(node->str[0], "echo\0", 5))
 		return (1);

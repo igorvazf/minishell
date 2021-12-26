@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:15:00 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/21 15:30:28 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:42:59 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,12 @@ void	here_doc(char *file, char *eof)
 	{
 		free (line);
 		line = readline("> ");
-		if(ft_strcmp(line, eof))
+		if (ft_strcmp(line, eof))
 			ft_putstrendl_fd(line, fd);
 	}
 	close(fd);
 	free(line);
 }
-
 
 int	redirect_in(t_mini *mini, t_node *node, int i)
 {
@@ -89,7 +88,6 @@ int	redirect_in(t_mini *mini, t_node *node, int i)
 	}
 	else if (!ft_strcmp(node->str[i], "<<"))
 	{
-		//mini->in = open(file, O_RDONLY, 0777);
 		eof = ft_strdup(node->str[i + 1]);
 		file = ft_strdup("temp");
 		here_doc(file, eof);

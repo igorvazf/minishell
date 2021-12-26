@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 10:41:53 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/19 15:24:29 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:43:34 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	is_quote(char c, t_sani *s)
 {
-
 	if (c == S_QUOTE)
 	{
 		if (s->s == 0 && s->d == 0)

@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 19:40:27 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/14 20:34:40 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:39:41 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_env	*create_env(void)
 {
-	t_env *env;
-	
+	t_env	*env;
+
 	env = (t_env *)ft_calloc(1, sizeof(t_env));
 	env->begin = NULL;
 	env->end = NULL;
@@ -23,9 +23,9 @@ t_env	*create_env(void)
 	return (env);
 }
 
-t_nodenv *create_nodenv(char *key, char *content)
+t_nodenv	*create_nodenv(char *key, char *content)
 {
-	t_nodenv *node;
+	t_nodenv	*node;
 
 	node = (t_nodenv *)ft_calloc(1, sizeof(t_nodenv));
 	node->key = ft_strdup(key);
@@ -39,7 +39,7 @@ t_nodenv *create_nodenv(char *key, char *content)
 
 void	push_env(t_env *env, char *key, char *content)
 {
-	t_nodenv *node;
+	t_nodenv	*node;
 
 	node = create_nodenv(key, content);
 	if (env->begin == NULL)
@@ -60,7 +60,7 @@ void	free_env(t_env **env_ref)
 	t_env		*env;
 	t_nodenv	*node;
 	t_nodenv	*aux;
-	
+
 	env = *env_ref;
 	node = env->begin;
 	aux = NULL;

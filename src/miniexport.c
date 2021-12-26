@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 23:15:30 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/15 03:53:00 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:41:16 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	copy_var(t_env *env, char *str)
 
 	var = ft_split(str, '=');
 	aux = env->begin;
-
 	while (aux != NULL)
 	{
 		if (!ministrcmp(aux->key, var[0]))
@@ -27,7 +26,7 @@ void	copy_var(t_env *env, char *str)
 		else
 		{
 			free(aux->content);
-			if(var[1])
+			if (var[1])
 				aux->content = ft_strdup(var[1]);
 			else
 				aux->content = ft_strdup("");

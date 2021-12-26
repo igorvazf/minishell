@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 21:32:01 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/23 21:24:28 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:45:41 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	len_node(char **str)
 {
 	int	i;
-	int len;
+	int	len;
 
 	i = 0;
 	len = 0;
@@ -34,12 +34,12 @@ int	len_node(char **str)
 
 char	*get_var_content(t_mini *mini, char *key)
 {
-	t_nodenv *node_env;
+	t_nodenv	*node_env;
 
 	node_env = mini->env->begin;
 	while (node_env != NULL)
 	{
-		if(!ft_strcmp(node_env->key, key))
+		if (!ft_strcmp(node_env->key, key))
 			return (ft_strdup(node_env->content));
 		node_env = node_env->next;
 	}
@@ -55,7 +55,7 @@ char	*get_var(t_mini *mini, char *str, int i)
 
 	len = 0;
 	j = i;
-	while(str[i] && str[i] != '$')
+	while (str[i] && str[i] != '$')
 	{
 		len++;
 		i++;
@@ -81,7 +81,7 @@ char	*get_join(char *str)
 	i = 0;
 	if (str[i] == '$')
 		return (NULL);
-	while(str[i] && str[i] != '$')
+	while (str[i] && str[i] != '$')
 		i++;
 	aux = ft_substr(str, 0, i - 1);
 	return (aux);
@@ -99,7 +99,6 @@ void	expand_var(t_mini *mini, t_node *node, int i)
 	holder = get_join(node->str[i]);
 	while (node->str[i][j])
 	{
-
 		if (node->str[i][j] == '$')
 		{
 			content = get_var(mini, node->str[i], j + 1);

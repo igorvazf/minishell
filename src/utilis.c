@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:58:10 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/23 21:48:21 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:44:40 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int	find_path(t_mini *mini, char *cmd)
 	return (0);
 }
 
-int		ministrcmp(char *s1, char *s2)
+int	ministrcmp(char *s1, char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s2[i])
@@ -87,7 +87,7 @@ int		ministrcmp(char *s1, char *s2)
 
 int	is_redirect(char c)
 {
-	if(c == '|' || c == '<' || c == '>')
+	if (c == '|' || c == '<' || c == '>')
 		return (1);
 	return (0);
 }

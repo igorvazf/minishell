@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:57:59 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/19 15:25:24 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:37:44 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	get_path(t_mini *mini)
 
 	path = getenv("PATH");
 	aux = ft_strdup(path);
-	if(!aux)
+	if (!aux)
 		return ;
 	mini->path = ft_split(aux, ':');
 	i = 0;

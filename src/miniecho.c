@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 17:45:50 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/23 21:52:48 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:38:52 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	miniecho(t_mini *mini, t_node *node)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = 1;

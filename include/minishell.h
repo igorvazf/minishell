@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/23 21:45:47 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:39:35 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void	free_list(t_list **list_ref);
 t_env	*create_env(void);
 void	push_env(t_env *env, char *key, char *content);
 void	free_env(t_env **env_ref);
-void	print_elements(t_list *list);
 void	print_env(t_env *env);
 
 
@@ -134,6 +133,8 @@ int		redirect_in(t_mini *mini, t_node *node, int i);
 void	run(t_mini *mini, t_list *list);
 void	fd_handler(t_mini *mini);
 void	get_cmd(t_mini *mini, t_node *node);
+void	get_input(t_mini *mini, t_sani *sani);
+int		validade(t_list *list);
 
 
 /* Builtins */

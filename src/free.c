@@ -6,16 +6,16 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 18:54:03 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/19 13:44:44 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/25 22:37:23 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void minifree(char **ptr)
+void	minifree(char **ptr)
 {
 	int	i;
-	
+
 	i = 0;
 	while (ptr[i])
 	{
@@ -29,7 +29,7 @@ void minifree(char **ptr)
 void	free_reset(t_mini *mini, t_list *list)
 {
 	free_list(&list);
-	if(ft_strlen(mini->input) > 0)
+	if (ft_strlen(mini->input) > 0)
 	{
 		if (mini->input[0] == '|')
 			printf("minishell: syntax error. Unexpected token \'|\'");
@@ -38,12 +38,11 @@ void	free_reset(t_mini *mini, t_list *list)
 	}
 	if (mini->correct_path != NULL)
 		free(mini->correct_path);
-	
 }
 
 void	free_em_all(t_mini *mini)
 {
-	t_env *env;
+	t_env	*env;
 
 	env = mini->env;
 	free_env(&env);

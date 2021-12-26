@@ -24,7 +24,8 @@ SRC_FILES =	main.c \
 			minipwd.c \
 			redir.c \
 			run.c \
-			utilis2.c
+			utilis2.c \
+			input.c
 
 SRC =		$(addprefix src/, $(SRC_FILES))
 
