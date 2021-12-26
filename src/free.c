@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 18:54:03 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/25 22:37:23 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/26 14:34:09 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ void	free_em_all(t_mini *mini)
 	env = mini->env;
 	free_env(&env);
 	minifree(mini->path);
+	free(mini->home);
 }

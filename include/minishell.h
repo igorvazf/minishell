@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/26 11:58:53 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/26 13:05:21 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_mini
 	char	*input;
 	char	*input_sanitized;
 	char	*correct_path;
+	char	*home;
 	int		init_with_arrow;
 	int		is_open_s;
 	int		is_open_d;
@@ -126,7 +127,6 @@ void	input_sanitizer(t_mini *mini, t_sani *sani);
 int		is_builtin(t_node *node);
 void	execute_builtin(int builtin, t_node *node, t_mini *mini, t_list *list);
 int		find_path(t_mini *mini, char *cmd);
-int		ministrcmp(char *s1, char *s2);
 int		is_redirect(char c);
 int		redirect_out(t_mini *mini, t_node *node, int i);
 int		redirect_in(t_mini *mini, t_node *node, int i);

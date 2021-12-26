@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 23:15:30 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/25 22:41:16 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/26 13:10:01 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	copy_var(t_env *env, char *str)
 	aux = env->begin;
 	while (aux != NULL)
 	{
-		if (!ministrcmp(aux->key, var[0]))
+		if (ft_strcmp(aux->key, var[0]))
 			aux = aux->next;
 		else
 		{

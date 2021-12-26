@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:57:59 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/25 22:37:44 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/26 14:35:13 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	init(t_mini *mini, char **environ)
 {
 	get_env(mini, environ);
 	get_path(mini);
+	mini->home = ft_strdup(getenv("HOME"));
 	mini->correct_path = NULL;
 	mini->is_open_s = 0;
 	mini->is_open_d = 0;
