@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 00:26:24 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/25 22:41:50 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/26 12:28:36 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	miniunset(t_env *env, t_node *node)
 	prev = env->begin;
 	while (aux != NULL)
 	{
-		if (!ministrcmp(aux->key, node->str[1]))
+		if (ft_strcmp(aux->key, node->str[1]))
 		{
 			if (aux == env->begin && prev == env->begin)
 				aux = aux->next;
@@ -37,6 +37,7 @@ void	miniunset(t_env *env, t_node *node)
 			free(aux->key);
 			free(aux->content);
 			free(aux);
+			aux = NULL;
 		}
 	}
 }

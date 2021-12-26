@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/25 22:39:35 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/26 11:58:53 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int		validade(t_list *list);
 void	miniexit(t_mini *mini, t_list *list);
 void	miniunset(t_env *env, t_node *node);
 void	minipwd(void);
-void	minicd(t_node *node);
+void	minicd(t_mini *mini, t_node *node);
 void	miniecho(t_mini *mini, t_node *node);
 void	minienv(t_env *env);
 void	miniexport(t_env *env, t_node *node);

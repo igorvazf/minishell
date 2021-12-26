@@ -6,13 +6,33 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 18:35:22 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/15 03:27:00 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/26 12:00:46 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	minicd(t_node *node)
+void	minicd(t_mini *mini, t_node *node)
 {
-	chdir(node->str[1]);
+	t_nodenv	*env;
+	char		*home;
+
+	env = mini->env->begin;
+	home = NULL;
+	if (node->str[1])
+		chdir(node->str[1]);
+	else
+	{
+		while (env != NULL)
+		{
+			if (!ft_strcmp(env->key, "HOME"))
+				home = ft_strdup(env->content);
+			env = env->next;
+		}
+		if (home != NULL)
+		{
+			chdir(home);
+			free(home);
+		}
+	}
 }
