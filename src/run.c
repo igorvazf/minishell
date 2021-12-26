@@ -50,7 +50,7 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 			get_cmd(mini, node);
 			if (find_path(mini, node->str[0]))
 			{
-				execve(mini->correct_path, node->str, NULL);
+				execve(mini->correct_path, node->str, __environ);
 				exit(0);
 			}
 			exit(0);

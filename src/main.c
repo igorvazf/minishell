@@ -12,15 +12,13 @@
 
 #include "../include/minishell.h"
 
-extern char	**environ;
-
 int	main(void)
 {
 	t_mini	mini;
 	t_list	*list;
 	t_sani	sani;
 
-	init(&mini, environ);
+	init(&mini, __environ);
 	while (1)
 	{
 		mini.in = STDIN_FILENO;
