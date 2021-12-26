@@ -13,7 +13,7 @@ SRC_FILES =	main.c \
 			init.c \
 			miniexit.c \
 			split_cmd.c \
-			utilis.c \
+			utils.c \
 			builtin.c \
 			sanitizer.c \
 			miniexport.c \
@@ -24,7 +24,7 @@ SRC_FILES =	main.c \
 			minipwd.c \
 			redir.c \
 			run.c \
-			utilis2.c \
+			utils2.c \
 			input.c
 
 SRC =		$(addprefix src/, $(SRC_FILES))
