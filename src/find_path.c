@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/06 11:58:10 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/27 12:26:34 by paugusto         ###   ########.fr       */
+/*   Created: 2021/12/27 12:57:46 by paugusto          #+#    #+#             */
+/*   Updated: 2021/12/27 13:00:38 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	get_home(t_mini *mini)
-{
-	t_nodenv	*env;
-
-	env = mini->env->begin;
-	while (env != NULL)
-	{
-		if (!ft_strcmp(env->key, "HOME"))
-			break ;
-		env = env->next;
-	}
-	if (env->content)
-	{
-		free(mini->home);
-		mini->home = ft_strdup(env->content);
-	}
-}
 
 int	check_tilda(char *cmd)
 {
@@ -46,73 +28,49 @@ int	check_tilda(char *cmd)
 	return (j);
 }
 
-char	*copy_path(t_mini *mini, char *cmd, int tilda, int k)
-{
-	char	*aux;
-	int		len_home;
-	int		i;
-	int		j;
-
-	len_home = ft_strlen(mini->home);
-	i = 0;
-	j = 0;
-	if (cmd[i] == '~')
-		len_home++;
-	aux = malloc(sizeof(char) * len_home + ft_strlen(cmd) + 1 - tilda);
-	while (cmd[i])
-	{
-		if (cmd[i] != '~')
-			aux[j++] = cmd[i++];
-		else
-		{
-			if (i != 0)
-				k++;
-			while (mini->home[k])
-				aux[j++] = mini->home[k++];
-			k = 0;
-			i++;
-		}
-	}
-	aux[j] = '\0';
-	return (aux);
-}
-
 char	*check_home(t_mini *mini, char *cmd)
 {
 	int		tilda;
 
 	tilda = check_tilda(cmd);
 	get_home(mini);
-	return (copy_path(mini, cmd, tilda, 0));
+	return (copy_path(mini, cmd, tilda));
 }
 
-int	find_path(t_mini *mini, char *cmd)
+int	verify_path(t_mini *mini, char *cmd)
 {
 	char	*path;
 	int		i;
-	int		j;
-	int		tilda;
 
-	i = -1;
-	j = 0;
-	while (i < 0 && mini->path[j])
+	i = 0;
+	while (mini->path[i])
 	{
-		path = ft_strjoin(mini->path[j], cmd);
-		i = access(path, F_OK);
-		if (i >= 0)
+		path = ft_strjoin(mini->path[i], cmd);
+		if (!access(path, F_OK))
 		{
 			mini->correct_path = ft_strdup(path);
 			free(path);
 			return (1);
 		}
 		free(path);
-		j++;
+		i++;
 	}
+	return (0);
+}
+
+/*
+** function that searches the right executable in every path available
+*/
+int	find_path(t_mini *mini, char *cmd)
+{
+	int		tilda;
+
+	if (verify_path(mini, cmd))
+		return (1);
 	tilda = check_tilda(cmd);
 	if (tilda)
 		cmd = check_home(mini, cmd);
-	i = access(cmd, F_OK);
-	if (i >= 0)
+	if (!access(cmd, F_OK))
 	{
 		mini->correct_path = ft_strdup(cmd);
 		return (1);

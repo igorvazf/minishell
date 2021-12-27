@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/26 13:05:21 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/27 14:32:42 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,13 @@ void	fd_handler(t_mini *mini);
 void	get_cmd(t_mini *mini, t_node *node);
 void	get_input(t_mini *mini, t_sani *sani);
 int		validade(t_list *list);
+int		check_tilda(char *cmd);
+void	get_home(t_mini *mini);
+char	*copy_path(t_mini *mini, char *cmd, int tilda);
+void	get_home(t_mini *mini);
+int		len_node(char **str);
+void	expand_var(t_mini *mini, t_node *node, int i);
+
 
 
 /* Builtins */
