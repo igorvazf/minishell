@@ -23,7 +23,7 @@ SRC_FILES =	main.c \
 			minipwd.c \
 			redir.c \
 			run.c \
-			utils2.c \
+			get_cmd.c \
 			input.c \
 			verify.c \
 			find_path_utils.c \
