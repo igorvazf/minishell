@@ -25,7 +25,8 @@ SRC_FILES =	main.c \
 			redir.c \
 			run.c \
 			utils2.c \
-			input.c
+			input.c \
+			verify.c
 
 SRC =		$(addprefix src/, $(SRC_FILES))
 

@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/22 11:38:38 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/27 12:17:58 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 			get_cmd(mini, node);
 			if (find_path(mini, node->str[0]))
 			{
-				execve(mini->correct_path, node->str, __environ);
+				execve(mini->correct_path, node->str, NULL);
 				exit(0);
 			}
 			exit(0);

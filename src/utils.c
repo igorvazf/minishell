@@ -1,47 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilis.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:58:10 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/26 14:35:08 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/27 12:26:34 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	is_in_quote(char c, t_mini *mini)
-{
-	if (c == S_QUOTE)
-	{
-		if (mini->is_open_s == 0 && mini->is_open_d == 0)
-			mini->is_open_s = 1;
-		else if (mini->is_open_s == 1)
-		{
-			mini->is_open_s = 0;
-			mini->final_s = 1;
-		}
-	}
-	if (c == D_QUOTE)
-	{
-		if (mini->is_open_d == 0 && mini->is_open_s == 0)
-			mini->is_open_d = 1;
-		else if (mini->is_open_d == 1)
-		{
-			mini->is_open_d = 0;
-			mini->final_d = 1;
-		}
-	}
-}
-
-int	is_redirect(char c)
-{
-	if (c == '|' || c == '<' || c == '>')
-		return (1);
-	return (0);
-}
 
 void	get_home(t_mini *mini)
 {
@@ -51,10 +20,10 @@ void	get_home(t_mini *mini)
 	while (env != NULL)
 	{
 		if (!ft_strcmp(env->key, "HOME"))
-			break;
+			break ;
 		env = env->next;
 	}
-	if(env->content)
+	if (env->content)
 	{
 		free(mini->home);
 		mini->home = ft_strdup(env->content);
@@ -154,4 +123,3 @@ int	find_path(t_mini *mini, char *cmd)
 		free(cmd);
 	return (0);
 }
-
