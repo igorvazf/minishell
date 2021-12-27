@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/27 14:32:42 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/27 15:19:04 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ typedef struct s_mini
 	t_env	*env;
 }	t_mini;
 
-
 /*
 ** linked list functions
 */
@@ -112,7 +111,6 @@ t_env	*create_env(void);
 void	push_env(t_env *env, char *key, char *content);
 void	free_env(t_env **env_ref);
 void	print_env(t_env *env);
-
 
 /*
 ** Minishell functions
@@ -141,8 +139,6 @@ char	*copy_path(t_mini *mini, char *cmd, int tilda);
 void	get_home(t_mini *mini);
 int		len_node(char **str);
 void	expand_var(t_mini *mini, t_node *node, int i);
-
-
 
 /* Builtins */
 void	miniexit(t_mini *mini, t_list *list);

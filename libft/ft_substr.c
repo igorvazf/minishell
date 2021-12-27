@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 23:34:37 by paugusto          #+#    #+#             */
-/*   Updated: 2021/11/30 17:52:05 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/27 15:20:29 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	else
 		sub = malloc(((slen - start) * sizeof(char) + 1));
 	if (!sub)
-		 return (NULL);
+		return (NULL);
 	if ((start < slen))
 	{
 		while ((i < len) && s[j])

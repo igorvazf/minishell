@@ -6,12 +6,11 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/27 12:17:58 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/27 15:30:44 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
 
 void	fd_handler(t_mini *mini)
 {
@@ -27,6 +26,17 @@ void	fd_handler(t_mini *mini)
 	}
 }
 
+void	execute_child(t_mini *mini, t_node *node)
+{
+	get_cmd(mini, node);
+	if (find_path(mini, node->str[0]))
+	{
+		execve(mini->correct_path, node->str, NULL);
+		exit(0);
+	}
+	exit(0);
+}
+
 void	execute(t_mini *mini, t_list *list, t_node *node)
 {
 	int	pid;
@@ -35,10 +45,7 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 	mini->st_in = dup(STDIN_FILENO);
 	fd_handler(mini);
 	if (is_builtin(node))
-	{
-		get_cmd(mini, node);
 		execute_builtin(is_builtin(node), node, mini, list);
-	}
 	else
 	{
 		pid = fork();
@@ -46,15 +53,7 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 		if (pid < 0)
 			printf("error\n");
 		else if (pid == 0)
-		{
-			get_cmd(mini, node);
-			if (find_path(mini, node->str[0]))
-			{
-				execve(mini->correct_path, node->str, NULL);
-				exit(0);
-			}
-			exit(0);
-		}
+			execute_child(mini, node);
 		else
 			wait(&pid);
 	}
@@ -81,16 +80,16 @@ void	run_cmd(t_mini *mini, t_list *list, t_node *node)
 		}
 		if (!result)
 			printf("error bla\n");
-		else if(result)
+		else if (result)
 			execute(mini, list, node);
 	}
 }
 
 void	run(t_mini *mini, t_list *list)
 {
-	t_node *node;
-	int	i;
-	int	fd[2];
+	t_node	*node;
+	int		i;
+	int		fd[2];
 
 	node = list->begin;
 	i = 0;
@@ -114,4 +113,3 @@ void	run(t_mini *mini, t_list *list)
 	else
 		printf("error\n");
 }
-
