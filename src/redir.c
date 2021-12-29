@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:15:00 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/25 22:42:59 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/29 15:47:48 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,11 @@ int	redirect_in(t_mini *mini, t_node *node, int i)
 	{
 		file = ft_strdup(node->str[i + 1]);
 		mini->in = open(file, O_RDONLY, 0777);
+		if (mini->in == -1)
+		{
+			free(file);
+			return (0);
+		}
 		free(file);
 		return (1);
 	}
