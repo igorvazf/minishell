@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   get_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 21:32:01 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/27 14:34:11 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/28 21:05:43 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	get_cmd(t_mini *mini, t_node *node)
 
 	i = 0;
 	len = len_node(node->str);
-	aux = malloc (sizeof(char *) * len + 1);
+	aux = malloc(sizeof(char *) * len + 1);
 	j = 0;
 	while (node->str[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/27 15:19:04 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/28 20:26:59 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <fcntl.h>
 # include <dirent.h>
+# include <sys/wait.h>
 # include <sys/wait.h>
 # include <limits.h>
 # include <errno.h>
@@ -100,6 +101,8 @@ typedef struct s_mini
 	int		st_in;
 	t_env	*env;
 }	t_mini;
+
+int	g_return;
 
 /*
 ** linked list functions

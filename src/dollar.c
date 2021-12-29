@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 14:19:02 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/27 14:29:50 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/28 21:14:00 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ char	*transform(t_mini *mini, t_node *node, int i, int j)
 	{
 		if (node->str[i][j] == '$')
 		{
-			content = get_var(mini, node->str[i], j + 1);
+			if (node->str[i][j + 1] == '?')
+				content = ft_itoa(g_return);
+			else
+				content = get_var(mini, node->str[i], j + 1);
 			if (content != NULL)
 			{
 				aux = holder;

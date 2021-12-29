@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 09:49:01 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/14 20:44:07 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/28 21:17:32 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void	*ft_calloc(size_t nbr, size_t size);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
 int		ft_strcmp(char *s1, char *s2);
+char	*ft_itoa(int n);
 
 #endif

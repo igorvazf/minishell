@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/27 15:30:44 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/28 20:43:33 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	execute_child(t_mini *mini, t_node *node)
 	if (find_path(mini, node->str[0]))
 	{
 		execve(mini->correct_path, node->str, NULL);
-		exit(0);
+		printf("error\n");
+		exit(EXIT_FAILURE);
 	}
 	exit(0);
 }
@@ -40,6 +41,7 @@ void	execute_child(t_mini *mini, t_node *node)
 void	execute(t_mini *mini, t_list *list, t_node *node)
 {
 	int	pid;
+	int	status;
 
 	mini->st_out = dup(STDOUT_FILENO);
 	mini->st_in = dup(STDIN_FILENO);
@@ -55,7 +57,11 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 		else if (pid == 0)
 			execute_child(mini, node);
 		else
-			wait(&pid);
+			waitpid(pid, &status, 0);
+		if(WIFEXITED(status))
+			g_return = WEXITSTATUS(status);
+		else
+			g_return = 0;
 	}
 	dup2(mini->st_out, STDOUT_FILENO);
 	dup2(mini->st_in, STDIN_FILENO);

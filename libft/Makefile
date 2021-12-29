@@ -19,7 +19,8 @@ SRC =	ft_strlen.c \
 		ft_calloc.c \
 		ft_bzero.c \
 		ft_memset.c \
-		ft_strcmp.c
+		ft_strcmp.c \
+		ft_itoa.c
 
 OBJECTS = $(SRC:.c=.o)
 
