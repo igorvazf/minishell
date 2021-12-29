@@ -6,13 +6,14 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/28 22:37:51 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/29 02:47:08 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 extern char	**environ;
+int	g_return;
 
 int	main(void)
 {

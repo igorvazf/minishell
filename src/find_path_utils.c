@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 13:01:38 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/27 13:06:09 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/29 02:44:35 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,9 @@ char	*copy_path(t_mini *mini, char *cmd, int tilda)
 	char	*aux;
 	int		len_home;
 	int		i;
-	int		j;
 
 	len_home = ft_strlen(mini->home);
 	i = 0;
-	j = 0;
 	if (cmd[i] == '~')
 		len_home++;
 	aux = copy_string(mini, cmd, len_home, tilda);
