@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/28 22:24:13 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/29 11:19:43 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ void	run(t_mini *mini, t_list *list)
 		node = node->next;
 		i++;
 	}
-	if (node->str[0] != NULL)
+	if (list->size > 0)
 		run_cmd(mini, list, node);
-	else
-		printf("error\n");
+	// else
+	// 	printf("error\n");
 }
