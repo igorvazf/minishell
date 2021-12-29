@@ -46,6 +46,7 @@ char	*get_var(t_mini *mini, char *str, int i)
 		i = 0;
 		while (str[j] && str[j] != '$' && str[j] != D_QUOTE)
 			var[i++] = str[j++];
+		var[i] = '\0';
 		content = get_var_content(mini, var);
 		free(var);
 		return (content);

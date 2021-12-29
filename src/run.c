@@ -116,6 +116,4 @@ void	run(t_mini *mini, t_list *list)
 	}
 	if (list->size > 0)
 		run_cmd(mini, list, node);
-	// else
-	// 	printf("error\n");
 }
