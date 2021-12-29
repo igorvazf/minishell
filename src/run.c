@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/28 20:43:33 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/28 22:24:13 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 		execute_builtin(is_builtin(node), node, mini, list);
 	else
 	{
+		signals(2);
 		pid = fork();
-		//signals(2);
 		if (pid < 0)
 			printf("error\n");
 		else if (pid == 0)

@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/28 20:26:59 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/28 22:41:49 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ char	*copy_path(t_mini *mini, char *cmd, int tilda);
 void	get_home(t_mini *mini);
 int		len_node(char **str);
 void	expand_var(t_mini *mini, t_node *node, int i);
+void	signals(int signum);
 
 /* Builtins */
 void	miniexit(t_mini *mini, t_list *list);

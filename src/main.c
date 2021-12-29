@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/28 21:03:37 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/28 22:37:51 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(void)
 	init(&mini, environ);
 	while (1)
 	{
+		signals(1);
 		mini.in = STDIN_FILENO;
 		mini.out = STDOUT_FILENO;
 		list = create_list();
