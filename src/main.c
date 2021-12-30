@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/29 11:20:32 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/30 23:33:05 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ int	main(void)
 			if (!ft_strcmp(mini.input, "exit"))
 				miniexit(&mini, list);
 			if (split_cmd(&mini, list) && validade(list))
+			{
+				print_elements(list);
 				run(&mini, list);
+			}
 		}
 		free_reset(&mini, list);
 		mini.pipe = 0;

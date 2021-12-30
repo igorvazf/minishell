@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 22:10:51 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/29 10:49:08 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/30 23:30:40 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,19 @@ void	handler(int signum)
 	if (signum == SIGQUIT)
 	{
 		g_return = 131;
+		write(1, "\n", 1);
 		printf("Quit (core dumped)\n");
 	}
 }
 
 void	handler_main(int signum)
 {
-	if (isatty(STDIN_FILENO) && signum == SIGINT)
-	{
-		// write(1, "\n", 1);
-		// rl_replace_line("", 0);
-		// rl_on_new_line();
-		// rl_redisplay();
-		g_return = 130;
-	}
-	else
-		return ;
+	(void)signum;
+	g_return = 130;
+	write(1, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
 void signals(int signum)
