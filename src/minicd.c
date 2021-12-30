@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 18:35:22 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/26 12:00:46 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/29 21:40:26 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	minicd(t_mini *mini, t_node *node)
 
 	env = mini->env->begin;
 	home = NULL;
+	is_error = 0;
 	if (node->str[1])
 		is_error = chdir(node->str[1]);
 	else

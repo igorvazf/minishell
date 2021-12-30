@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/29 15:31:52 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/29 21:40:43 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	execute_child(t_mini *mini, t_node *node)
 	get_cmd(mini, node);
 	if (find_path(mini, node->str[0]))
 	{
-		execve(mini->correct_path, node->str, __environ);
+		execve(mini->correct_path, node->str, NULL);
 		printf("error\n");
 		exit(EXIT_FAILURE);
 	}
