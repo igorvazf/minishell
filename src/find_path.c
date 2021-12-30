@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 12:57:46 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/27 13:00:38 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/30 02:27:31 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,55 @@ char	*check_home(t_mini *mini, char *cmd)
 	return (copy_path(mini, cmd, tilda));
 }
 
+char	**blabla(t_mini *mini)
+{
+	char		**path;
+	char		*aux;
+	t_nodenv	*node;
+
+	node = mini->env->begin;
+	while (node != NULL)
+	{
+		if (!ft_strcmp(node->key, "PATH"))
+		{
+			aux = ft_strdup(node->content);
+			path = ft_split(aux, ':');
+			free(aux);
+			return(path);
+		}
+		node = node->next;
+	}
+	path = NULL;
+	return(path);
+}
+
 int	verify_path(t_mini *mini, char *cmd)
 {
+	char	**holder;
 	char	*path;
+	char	*aux;
 	int		i;
 
 	i = 0;
-	while (mini->path[i])
+	holder = blabla(mini);
+	if (holder != NULL)
 	{
-		path = ft_strjoin(mini->path[i], cmd);
-		if (!access(path, F_OK))
+		while (holder[i])
 		{
-			mini->correct_path = ft_strdup(path);
+			aux = holder[i];
+			holder[i] = ft_strjoin(aux, "/");
+			path = ft_strjoin(holder[i], cmd);
+			free(aux);
+			if (!access(path, F_OK))
+			{
+				mini->correct_path = ft_strdup(path);
+				free(path);
+				minifree(holder);
+				return (1);
+			}
 			free(path);
-			return (1);
+			i++;
 		}
-		free(path);
-		i++;
 	}
 	return (0);
 }
