@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/31 15:34:50 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/31 20:56:02 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,21 @@ int	main(void)
 		mini.out = STDOUT_FILENO;
 		list = create_list();
 		get_input(&mini, &sani);
-		if (ft_strlen(mini.input) != 0 && mini.input[0] != '|')
+		if (mini.input)
 		{
-			if (!ft_strcmp(mini.input, "exit"))
-				miniexit(&mini, list);
-			if (split_cmd(&mini, list) && validade(list))
+			if (ft_strlen(mini.input) != 0 && mini.input[0] != '|')
 			{
-				//print_elements(list);
-				run(&mini, list);
+				if (!ft_strcmp(mini.input, "exit"))
+					miniexit(&mini, list);
+				if (split_cmd(&mini, list) && validade(list))
+				{
+					//print_elements(list);
+					run(&mini, list);
+				}
 			}
+			free_reset(&mini, list);
+			mini.pipe = 0;
 		}
-		free_reset(&mini, list);
-		mini.pipe = 0;
 	}
 	free_em_all(&mini);
 	return (0);
