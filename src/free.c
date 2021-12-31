@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 18:54:03 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/26 14:34:09 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/31 16:51:04 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	free_reset(t_mini *mini, t_list *list)
 	if (ft_strlen(mini->input) > 0)
 	{
 		if (mini->input[0] == '|')
-			printf("minishell: syntax error. Unexpected token \'|\'");
+			printf("minishell: syntax error. Unexpected token \'|\'\n");
 		free(mini->input);
 		free(mini->input_sanitized);
 	}

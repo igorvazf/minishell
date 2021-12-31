@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 22:20:20 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/25 22:32:34 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/31 16:50:37 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	validade(t_list *list)
 		{
 			if (!check_validate(node->str[i]))
 			{
-				printf("parse error\n");
+				printf("error\n");
 				return (0);
 			}
 			i++;

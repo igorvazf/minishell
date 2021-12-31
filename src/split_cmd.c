@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 10:09:19 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/31 12:26:32 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/31 16:49:26 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	dirty_job(t_mini *mini, t_list *list, int i, int start)
 {
 	char	*str;
 
-	while (mini->input_sanitized[i])//ls  |  |  grep Makefile
+	while (mini->input_sanitized[i])
 	{
 		is_in_quote(mini->input_sanitized[i], mini);
 		if (mini->input_sanitized[i] == '|' && mini->is_open_s == 0
