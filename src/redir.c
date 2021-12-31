@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:15:00 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/29 15:47:48 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/31 12:34:14 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	redirect_out(t_mini *mini, t_node *node, int i)
 	char	*file;
 
 	flags = O_WRONLY | O_CREAT;
-	if (node->str[i + 1][0] == '>' || node->str[i + 1][0] == '<'
-		|| node->str[i + 1][0] == '\0')
+	if (node->str[i + 1] == NULL || node->str[i + 1][0] == '>'
+		|| node->str[i + 1][0] == '<' || node->str[i + 1][0] == '\0')
 		return (0);
 	file = ft_strdup(node->str[i + 1]);
 	if (!ft_strcmp(node->str[i], ">>"))
@@ -79,6 +79,8 @@ int	redirect_in(t_mini *mini, t_node *node, int i)
 	char	*file;
 	char	*eof;
 
+	if (node->str[i + 1] == NULL)
+		return (0);
 	if (!ft_strcmp(node->str[i], "<"))
 	{
 		file = ft_strdup(node->str[i + 1]);
