@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/31 20:58:12 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/01 01:20:35 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ void	execute_child(t_mini *mini, t_node *node)
 		printf("error\n");
 		exit(EXIT_FAILURE);
 	}
-	exit(0);
+	if (mini->command_fail == 0)
+		exit(g_return);
+	else
+		exit(0);
 }
 
 void	execute(t_mini *mini, t_list *list, t_node *node)

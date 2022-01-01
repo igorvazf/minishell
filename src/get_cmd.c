@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 21:32:01 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/31 16:33:21 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/01 01:00:58 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,39 @@ int	len_quote(char **str)
 	return (len);
 }
 
+char	**removeq(char **str, int len, int i, int k)
+{
+	char	**aux;
+	char	*holder;
+	int		j;
+	int		start;
+	int		end;
+
+	aux = malloc(sizeof(char *) * len + 1);
+	while (str[i])
+	{
+		if (is_just_quote(str[i]))
+		{
+			j = 0;
+			holder = ft_strdup(str[i]);
+			while (holder[j] && holder[j] == ' ')
+				j++;
+			while (holder[j] && (holder[j] == D_QUOTE || holder[j] == S_QUOTE))
+				j++;
+			start = j;
+			while (holder[j] && holder[j] != D_QUOTE && holder[j] != S_QUOTE)
+				j++;
+			end = j - 1;
+			aux[k] = ft_substr(holder, start, end - start + 1);
+			k++;
+			free(holder);
+		}
+		i++;
+	}
+	aux[k] = NULL;
+	return (aux);
+}
+
 /*
 ** function that prepares the right command and cleans it
 */
@@ -96,13 +129,9 @@ void	get_cmd(t_mini *mini, t_node *node)
 {
 	char	**aux;
 	char	**holder;
-	char	*str;
 	int		i;
-	int		len;
 	int		j;
-	int		start;
-	int		end;
-	int		k;
+	int		len;
 
 	i = 0;
 	len = len_node(node->str);
@@ -116,33 +145,34 @@ void	get_cmd(t_mini *mini, t_node *node)
 			aux[j++] = ft_strdup(node->str[i++]);
 	}
 	aux[j] = NULL;
-	len = len_quote(aux);
-	holder = malloc(sizeof(char *) * len + 1);
-	i = 0;
-	k = 0;
-	while (aux[i])
-	{
-		if (is_just_quote(aux[i]))
-		{
-			j =  0;
-			str = ft_strdup(aux[i]);
-			while (str[j] && str[j] == ' ')
-				j++;
-			while ((str[j] == D_QUOTE || str[j] == S_QUOTE) && str[j])
-				j++;
-			start = j;
-			while (str[j] && str[j] != D_QUOTE)
-				j++;
-			end = j - 1;
-			holder[k] = ft_substr(str, start, end - start + 1);
-			free(str);
-			k++;
-		}
-		i++;
-	}
-	holder[k] = NULL;
-	minifree(aux);
+	len = len_node(aux);
+	holder = removeq(aux, len, 0, 0);
 	minifree(node->str);
+	minifree(aux);
 	node->str = holder;
+	check_dollar(mini, node);
+}
+
+void	get_cmd_builtin(t_mini *mini, t_node *node)
+{
+	char	**aux;
+	int		i;
+	int		j;
+	int		len;
+
+	i = 0;
+	len = len_node(node->str);
+	aux = malloc(sizeof(char *) * len + 1);
+	j = 0;
+	while (node->str[i])
+	{
+		if (node->str[i][0] == '<' || (node->str[i][0] == '>'))
+			i += 2;
+		else
+			aux[j++] = ft_strdup(node->str[i++]);
+	}
+	aux[j] = NULL;
+	minifree(node->str);
+	node->str = aux;
 	check_dollar(mini, node);
 }

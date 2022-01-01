@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2021/12/30 23:42:26 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/01 01:13:52 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_mini
 	int		in;
 	int		st_out;
 	int		st_in;
+	int		command_fail;
 	t_env	*env;
 }	t_mini;
 
@@ -143,6 +144,7 @@ void	get_home(t_mini *mini);
 int		len_node(char **str);
 void	expand_var(t_mini *mini, t_node *node, int i);
 void	signals(int signum);
+void	get_cmd_builtin(t_mini *mini, t_node *node);
 
 /* Builtins */
 void	miniexit(t_mini *mini, t_list *list);

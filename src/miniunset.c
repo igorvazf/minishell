@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 00:26:24 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/30 02:36:43 by paugusto         ###   ########.fr       */
+/*   Updated: 2021/12/31 21:19:07 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	miniunset(t_env *env, t_node *node)
 	prev = env->begin;
 	while (aux != NULL)
 	{
-		printf("%s\n", aux->key);
 		if (ft_strcmp(aux->key, node->str[1]))
 		{
 			if (aux == env->begin && prev == env->begin)

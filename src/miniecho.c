@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 17:45:50 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/30 23:42:12 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/01 01:23:11 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	miniecho(t_mini *mini, t_node *node)
 	i = 1;
 	mini->final_d = 0;
 	mini->final_s = 0;
-	if (node->str[1] && !ft_strncmp(node->str[1], "-n\0", 3))
+	while (node->str[i] && !ft_strcmp(node->str[i], "-n"))
 		i++;
 	if (node->str[i])
 	{

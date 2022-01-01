@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:57:59 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/27 19:25:50 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/01 01:14:06 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ void	init(t_mini *mini, char **environ)
 	mini->init_with_arrow = 0;
 	mini->pipe = 0;
 	mini->redir = 0;
+	mini->command_fail = 1;
 	g_return = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:15:00 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/31 12:34:14 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/01 01:19:48 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,10 @@ void	here_doc(char *file, char *eof)
 	{
 		free (line);
 		line = readline("> ");
-		if (ft_strcmp(line, eof))
+		if (line && ft_strcmp(line, eof))
 			ft_putstrendl_fd(line, fd);
+		else
+			break;
 	}
 	close(fd);
 	free(line);
