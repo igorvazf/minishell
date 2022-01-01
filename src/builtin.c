@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 23:27:17 by coder             #+#    #+#             */
-/*   Updated: 2022/01/01 01:28:39 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/01 10:38:38 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	is_builtin(t_node *node)
 {
+	if (!node->str[0])
+		return (0);
 	if (!ft_strncmp(node->str[0], "echo\0", 5))
 		return (1);
 	if (!ft_strncmp(node->str[0], "cd\0", 3))

@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 21:32:01 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/01 01:00:58 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/01 10:29:30 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	len_node(char **str)
 	len = 0;
 	while (str[i])
 	{
-		if (str[i][0] == '<' || (str[i][0] == '>'))
+		if (!ft_strcmp(str[i], "<") || !ft_strcmp(str[i], "<")
+			|| !ft_strcmp(str[i], ">>") || !ft_strcmp(str[i], "<<"))
 			i += 2;
 		else
 		{
@@ -89,7 +90,7 @@ int	len_quote(char **str)
 	return (len);
 }
 
-char	**removeq(char **str, int len, int i, int k)
+char	**remove_quotes(char **str, int len, int i, int k)
 {
 	char	**aux;
 	char	*holder;
@@ -139,14 +140,14 @@ void	get_cmd(t_mini *mini, t_node *node)
 	j = 0;
 	while (node->str[i])
 	{
-		if (node->str[i][0] == '<' || (node->str[i][0] == '>'))
+		if (node->str[i][0] == '<' || node->str[i][0] == '>')
 			i += 2;
 		else
 			aux[j++] = ft_strdup(node->str[i++]);
 	}
 	aux[j] = NULL;
 	len = len_node(aux);
-	holder = removeq(aux, len, 0, 0);
+	holder = remove_quotes(aux, len, 0, 0);
 	minifree(node->str);
 	minifree(aux);
 	node->str = holder;
@@ -166,7 +167,8 @@ void	get_cmd_builtin(t_mini *mini, t_node *node)
 	j = 0;
 	while (node->str[i])
 	{
-		if (node->str[i][0] == '<' || (node->str[i][0] == '>'))
+		if (!ft_strcmp(node->str[i], "<") || !ft_strcmp(node->str[i], ">")
+			|| !ft_strcmp(node->str[i], "<<") || !ft_strcmp(node->str[i], ">>"))
 			i += 2;
 		else
 			aux[j++] = ft_strdup(node->str[i++]);

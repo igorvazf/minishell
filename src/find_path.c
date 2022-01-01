@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 12:57:46 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/01 01:36:50 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/01 10:23:01 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char	**blabla(t_mini *mini)
 		if (!ft_strcmp(node->key, "PATH"))
 		{
 			aux = ft_strdup(node->content);
-			printf("entrei\n");
 			path = ft_split(aux, ':');
 			free(aux);
 			return(path);

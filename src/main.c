@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2022/01/01 01:29:35 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/01 10:59:42 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_elements(t_list *list)
 	while (node != NULL)
 	{
 		for(i = 0; node->str[i]; i++)
-			printf("%s .. ", node->str[i]);
+				printf("%s .. ", node->str[i]);
 		printf("\n");
 		node = node->next;
 	}
@@ -57,7 +57,7 @@ int	main(void)
 			{
 				if (split_cmd(&mini, list) && validade(list))
 				{
-					//print_elements(list);
+					print_elements(list);
 					run(&mini, list);
 				}
 			}

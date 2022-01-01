@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 22:10:51 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/31 20:54:44 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/01 10:06:11 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	handler_main(int signum)
 {
 	g_return = 130;
 	write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	// rl_replace_line("", 0);
+	// rl_on_new_line();
+	// rl_redisplay();
 	(void)signum;
 }
 
