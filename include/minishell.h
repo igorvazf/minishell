@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2022/01/01 01:13:52 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/01 01:28:25 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void	signals(int signum);
 void	get_cmd_builtin(t_mini *mini, t_node *node);
 
 /* Builtins */
-void	miniexit(t_mini *mini, t_list *list);
+void	miniexit(t_mini *mini, t_node *node, t_list *list);
 void	miniunset(t_env *env, t_node *node);
 void	minipwd(void);
 void	minicd(t_mini *mini, t_node *node);

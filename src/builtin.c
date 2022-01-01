@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 23:27:17 by coder             #+#    #+#             */
-/*   Updated: 2022/01/01 00:25:24 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/01 01:28:39 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ void	execute_builtin(int builtin, t_node *node, t_mini *mini, t_list *list)
 	if (builtin == 6)
 		minienv(mini->env);
 	if (builtin == 7)
-		miniexit(mini, list);
+		miniexit(mini, node, list);
 }
