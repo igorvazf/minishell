@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 22:20:20 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/01 10:41:38 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/04 21:14:14 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_validate(char	*str)
 	int	count;
 
 	i = 0;
-	while (str[i])
+	while (is_space(str) && str[i])
 	{
 		count = 0;
 		while (str[i] == '<' || str[i] == '>')
@@ -47,6 +47,7 @@ int	validade(t_list *list)
 	{
 		while (node->str[i])
 		{
+
 			if (!check_validate(node->str[i]))
 			{
 				printf("error\n");

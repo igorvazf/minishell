@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2022/01/01 01:28:25 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/04 19:35:30 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ int		len_node(char **str);
 void	expand_var(t_mini *mini, t_node *node, int i);
 void	signals(int signum);
 void	get_cmd_builtin(t_mini *mini, t_node *node);
+int		is_space(char *str);
 
 /* Builtins */
 void	miniexit(t_mini *mini, t_node *node, t_list *list);

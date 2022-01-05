@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2022/01/01 10:59:42 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/04 21:22:10 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,13 @@ int	main(void)
 		{
 			if (ft_strlen(mini.input) != 0 && mini.input[0] != '|')
 			{
-				if (split_cmd(&mini, list) && validade(list))
+				if (split_cmd(&mini, list))
 				{
-					print_elements(list);
-					run(&mini, list);
+					//print_elements(list);
+					if (validade(list))
+					{
+						run(&mini, list);
+					}
 				}
 			}
 			free_reset(&mini, list);
