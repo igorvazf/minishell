@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 22:20:20 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/07 12:25:10 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:42:14 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	check_validate(char	*str)
 
 	i = 0;
 	open = 0;
-	while (!is_space(str) && str[i])
+	while (str[i])
 	{
 		count = 0;
 		if (open == 0 && (str[i] == D_QUOTE || str[i] == S_QUOTE))
@@ -90,9 +90,10 @@ int	redir_validate(t_list *list)
 	int		i;
 
 	node = list->begin;
-	i = 0;
+
 	while (node != NULL)
 	{
+		i = 0;
 		while (node->str[i])
 		{
 			if (!check_validate(node->str[i]))
