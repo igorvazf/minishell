@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/07 19:14:07 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 19:59:21 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 	mini->st_in = dup(STDIN_FILENO);
 	in = mini->in;
 	out = mini->out;
+	fd_handler(mini, in, out);
 	if (is_builtin(node))
 		execute_builtin(is_builtin(node), node, mini, list);
 	else
@@ -64,10 +65,7 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 			g_return = 127;
 		}
 		else if (pid == 0)
-		{
-			fd_handler(mini, in, out);
 			execute_child(mini, node);
-		}
 		else
 			waitpid(pid, &g_return, WUNTRACED);
 		if(WIFEXITED(g_return))
@@ -149,8 +147,8 @@ void	run(t_mini *mini, t_list *list)
 		if (mini->in != 0)
 			close(mini->in);
 		mini->in = fd[0];
-		close(fd[0]);
-		close(fd[1]);
+		// close(fd[0]);
+		// close(fd[1]);
 		node = node->next;
 		i++;
 	}
