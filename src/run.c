@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/07 17:59:09 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 19:14:07 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	execute_child(t_mini *mini, t_node *node)
 	if (find_path(mini, node->str[0]))
 	{
 		execve(mini->correct_path, node->str, NULL);
-		printf("error\n");
+		perror("error");
 		exit(EXIT_FAILURE);
 	}
 	if (mini->command_fail == 0)
@@ -48,8 +48,8 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 	int in;
 	int out;
 
-	// mini->st_out = dup(STDOUT_FILENO);
-	// mini->st_in = dup(STDIN_FILENO);
+	mini->st_out = dup(STDOUT_FILENO);
+	mini->st_in = dup(STDIN_FILENO);
 	in = mini->in;
 	out = mini->out;
 	if (is_builtin(node))
@@ -75,8 +75,8 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 		else
 			g_return = 0;
 	}
-	// dup2(mini->st_out, STDOUT_FILENO);
-	// dup2(mini->st_in, STDIN_FILENO);
+	dup2(mini->st_out, STDOUT_FILENO);
+	dup2(mini->st_in, STDIN_FILENO);
 }
 
 int	is_str_quote(char *str, int open)
@@ -149,8 +149,8 @@ void	run(t_mini *mini, t_list *list)
 		if (mini->in != 0)
 			close(mini->in);
 		mini->in = fd[0];
-		// close(fd[0]);
-		// close(fd[1]);
+		close(fd[0]);
+		close(fd[1]);
 		node = node->next;
 		i++;
 	}
