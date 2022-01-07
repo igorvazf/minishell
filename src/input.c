@@ -6,11 +6,53 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 22:20:20 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/04 21:14:14 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 11:03:23 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	quotes_closed(t_mini *mini)
+{
+	int	i;
+
+	i = 0;
+	mini->is_open_d = 0;
+	mini->is_open_s = 0;
+	while (mini->input[i])
+	{
+		is_in_quote(mini->input[i], mini);
+		i++;
+	}
+	if (mini->is_open_d == 1 || mini->is_open_s == 1)
+		return (0);
+	return (1);
+}
+
+int	input_validate(t_mini *mini)
+{
+	int	i;
+
+	i = 0;
+	while (mini->input[i])
+	{
+		is_in_quote(mini->input[i], mini);
+		if (mini->input[i] == '<' && mini->input[i + 1] == '|'
+			&& mini->is_open_s == 0 && mini->is_open_d == 0)
+			return (0);
+		else if (mini->input[i] == '>' && mini->input[i + 1] == '|'
+				&& mini->is_open_s == 0 && mini->is_open_d == 0)
+			return (0);
+		else if (mini->input[i] == '>' && mini->input[i + 1] == '<'
+				&& mini->is_open_s == 0 && mini->is_open_d == 0)
+			return (0);
+		else if (mini->input[i] == '<' && mini->input[i + 1] == '>'
+				&& mini->is_open_s == 0 && mini->is_open_d == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 /*
 ** function that check sequences of '<' and '>'
@@ -19,12 +61,18 @@ int	check_validate(char	*str)
 {
 	int	i;
 	int	count;
+	int open;
 
 	i = 0;
-	while (is_space(str) && str[i])
+	open = 0;
+	while (!is_space(str) && str[i])
 	{
 		count = 0;
-		while (str[i] == '<' || str[i] == '>')
+		if (open == 0 && (str[i] == D_QUOTE || str[i] == S_QUOTE))
+			open = 1;
+		else if (open == 1 && (str[i] == D_QUOTE || str[i] == S_QUOTE) )
+			open = 0;
+		while (open == 0 && (str[i] == '<' || str[i] == '>'))
 		{
 			i++;
 			count++;
@@ -36,7 +84,7 @@ int	check_validate(char	*str)
 	return (1);
 }
 
-int	validade(t_list *list)
+int	redir_validate(t_list *list)
 {
 	t_node	*node;
 	int		i;
@@ -47,10 +95,9 @@ int	validade(t_list *list)
 	{
 		while (node->str[i])
 		{
-
 			if (!check_validate(node->str[i]))
 			{
-				printf("error\n");
+				printf("redir error\n");
 				return (0);
 			}
 			i++;

@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 17:45:50 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/01 01:46:48 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 12:18:45 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,24 @@ void	print(t_mini *mini, t_node *node, int i, int j)
 	}
 }
 
+void	is_in_quote_str(char *str, t_mini *mini)
+{
+	if (str[0] == S_QUOTE && str[1] == '\0')
+	{
+		if (mini->is_open_s_str == 0 && mini->is_open_d_str == 0)
+			mini->is_open_s_str = 1;
+		else if (mini->is_open_s_str == 1)
+			mini->is_open_s_str = 0;
+	}
+	if (str[0] == D_QUOTE && str[1] == '\0')
+	{
+		if (mini->is_open_d_str == 0 && mini->is_open_s_str == 0)
+			mini->is_open_d_str = 1;
+		else if (mini->is_open_d_str == 1)
+			mini->is_open_d_str = 0;
+	}
+}
+
 void	miniecho(t_mini *mini, t_node *node)
 {
 	int	i;
@@ -46,12 +64,18 @@ void	miniecho(t_mini *mini, t_node *node)
 	i = 1;
 	mini->final_d = 0;
 	mini->final_s = 0;
+	mini->is_open_s_str = 0;
+	mini->is_open_d_str = 0;
 	while (node->str[i] && !ft_strcmp(node->str[i], "-n"))
 		i++;
 	if (node->str[i])
 	{
-		while (node->str[i] && node->str[i][0] != '<' && node->str[i][0] != '>')
+		while (node->str[i])
 		{
+			is_in_quote_str(node->str[i], mini);
+			if ((node->str[i][0] == '>' || node->str[i][0] == '<')
+				&& mini->is_open_s_str == 0 && mini->is_open_d_str == 0)
+				break;
 			print(mini, node, i, 0);
 			if (node->str[i + 1] != NULL)
 				printf(" ");

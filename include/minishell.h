@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2022/01/04 19:35:30 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 12:15:33 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ typedef struct s_mini
 	int		is_open_d;
 	int		final_s;
 	int		final_d;
+	int		is_open_s_str;
+	int		is_open_d_str;
 	int		pipe;
 	int		redir;
 	int		out;
@@ -136,7 +138,7 @@ void	run(t_mini *mini, t_list *list);
 void	fd_handler(t_mini *mini);
 void	get_cmd(t_mini *mini, t_node *node);
 void	get_input(t_mini *mini, t_sani *sani);
-int		validade(t_list *list);
+int		redir_validate(t_list *list);
 int		check_tilda(char *cmd);
 void	get_home(t_mini *mini);
 char	*copy_path(t_mini *mini, char *cmd, int tilda);
@@ -146,6 +148,9 @@ void	expand_var(t_mini *mini, t_node *node, int i);
 void	signals(int signum);
 void	get_cmd_builtin(t_mini *mini, t_node *node);
 int		is_space(char *str);
+int		input_validate(t_mini *mini);
+int		quotes_closed(t_mini *mini);
+void	is_in_quote_str(char *str, t_mini *mini);
 
 /* Builtins */
 void	miniexit(t_mini *mini, t_node *node, t_list *list);

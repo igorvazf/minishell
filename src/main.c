@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2022/01/04 21:22:10 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 12:19:22 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,20 @@ int	main(void)
 		mini.out = STDOUT_FILENO;
 		list = create_list();
 		get_input(&mini, &sani);
-		if (mini.input)
+		if (ft_strlen(mini.input) != 0 && mini.input[0] != '|')
 		{
-			if (ft_strlen(mini.input) != 0 && mini.input[0] != '|')
+			if (!input_validate(&mini))
+				printf("syntax error\n");
+			if (!quotes_closed(&mini))
+				printf("quotes unclosed\n");
+			else if (split_cmd(&mini, list) && redir_validate(list))
 			{
-				if (split_cmd(&mini, list))
-				{
-					//print_elements(list);
-					if (validade(list))
-					{
-						run(&mini, list);
-					}
-				}
+				//print_elements(list);
+				run(&mini, list);
 			}
-			free_reset(&mini, list);
-			mini.pipe = 0;
 		}
+		free_reset(&mini, list);
+		mini.pipe = 0;
 	}
 	free_em_all(&mini);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 21:32:01 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/01 10:29:30 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 12:17:26 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,8 +167,10 @@ void	get_cmd_builtin(t_mini *mini, t_node *node)
 	j = 0;
 	while (node->str[i])
 	{
-		if (!ft_strcmp(node->str[i], "<") || !ft_strcmp(node->str[i], ">")
+		is_in_quote_str(node->str[i], mini);
+		if ((!ft_strcmp(node->str[i], "<") || !ft_strcmp(node->str[i], ">")
 			|| !ft_strcmp(node->str[i], "<<") || !ft_strcmp(node->str[i], ">>"))
+			&& mini->is_open_s_str == 0 && mini->is_open_d_str == 0)
 			i += 2;
 		else
 			aux[j++] = ft_strdup(node->str[i++]);

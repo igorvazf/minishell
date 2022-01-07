@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 10:09:19 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/04 21:21:18 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/06 12:44:14 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void	dirty_job(t_mini *mini, t_list *list, int i, int start)
 			str = ft_substr(mini->input_sanitized, start, (i - 1) - start);
 			i++;
 			start = i;
-			if (!is_space(str) || ft_strcmp(str, "<") || ft_strcmp(str, ">")
-				|| ft_strcmp(str, "<<") || ft_strcmp(str, ">>"))
+			if (!is_space(str))
 			{
 				mini->pipe--;
 				free(str);
@@ -54,11 +53,11 @@ void	dirty_job(t_mini *mini, t_list *list, int i, int start)
 			&& mini->is_open_d == 0)
 		{
 			str = ft_substr(mini->input_sanitized, start, i - start + 1);
-			if (!is_space(str))
-			{
-				free(str);
-				return ;
-			}
+			// if (!is_space(str))
+			// {
+			// 	free(str);
+			// 	return ;
+			// }
 			push_node(list, str);
 			free(str);
 		}

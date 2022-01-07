@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/01 10:06:19 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/06 21:55:15 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,44 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 	dup2(mini->st_in, STDIN_FILENO);
 }
 
+int	is_str_quote(char *str, int open)
+{
+	if (open == 0 && str[0] == D_QUOTE && str[1] == '\0')
+		return (1);
+	else if (open == 1 && str[0] == D_QUOTE && str[1] == '\0')
+		return (0);
+	else if (open == 0 && str[0] == S_QUOTE && str[1] == '\0')
+		return (1);
+	else if (open == 1 && str[0] == S_QUOTE && str[1] == '\0')
+		return (0);
+	return (0);
+}
+
+int	is_this_quote(char *str)
+{
+	if ((str[0] == D_QUOTE || str[0] == S_QUOTE) && str[1] == '\0')
+		return (1);
+	return (0);
+}
+
 void	run_cmd(t_mini *mini, t_list *list, t_node *node)
 {
 	int	i;
 	int	result;
+	int	open;
 
 	i = 0;
 	result = 1;
+	open = 0;
 	if (node != NULL)
 	{
 		while (node->str[i] && result)
 		{
-			if (!ft_strcmp(node->str[i], ">") || !ft_strcmp(node->str[i], ">>"))
+			if (is_this_quote(node->str[i]))
+				open = is_str_quote(node->str[i], open);
+			if (open == 0 && (!ft_strcmp(node->str[i], ">") || !ft_strcmp(node->str[i], ">>")))
 				result = redirect_out(mini, node, i);
-			if (!ft_strcmp(node->str[i], "<") || !ft_strcmp(node->str[i], "<<"))
+			if (open == 0 && (!ft_strcmp(node->str[i], "<") || !ft_strcmp(node->str[i], "<<")))
 				result = redirect_in(mini, node, i);
 			i++;
 		}
