@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 23:15:30 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/01 01:42:07 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 12:32:57 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,18 @@ void	miniexport(t_env *env, t_node *node)
 	int			j;
 
 	j = 0;
-	while (node->str[1][j] != '=' && node->str[1][j])
-		j++;
-	if (node->str[1][j] != '=' || j <= 0
-		|| (!ft_isalpha(node->str[1][0]) && node->str[1][0] != '_'))
+	if (node->str[1])
 	{
-		printf("error\n");
-		return ;
+		while (node->str[1][j] != '=' && node->str[1][j])
+			j++;
+		if (node->str[1][j] != '=' || j <= 0
+			|| (!ft_isalpha(node->str[1][0]) && node->str[1][0] != '_'))
+		{
+			printf("error\n");
+			return ;
+		}
+		copy_var(env, node->str[1]);
 	}
-	copy_var(env, node->str[1]);
+	else
+		print_env(env);
 }

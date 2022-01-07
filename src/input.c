@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 22:20:20 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/07 11:03:23 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 12:25:10 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,6 @@ void	get_input(t_mini *mini, t_sani *sani)
 	else
 	{
 		printf("exit\n");
-		exit(0);
+		exit(130);
 	}
 }
