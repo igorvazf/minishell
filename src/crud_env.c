@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 19:40:27 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/25 22:39:41 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 17:29:00 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	print_env(t_env *env)
 	node = env->begin;
 	while (node->next != NULL)
 	{
+
 		printf("%s=%s\n", node->key, node->content);
 		node = node->next;
 	}

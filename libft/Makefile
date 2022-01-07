@@ -21,7 +21,9 @@ SRC =	ft_strlen.c \
 		ft_memset.c \
 		ft_strcmp.c \
 		ft_itoa.c \
-		ft_atoi.c
+		ft_atoi.c \
+		ft_putstr_fd.c \
+		ft_putchar_fd.c
 
 OBJECTS = $(SRC:.c=.o)
 

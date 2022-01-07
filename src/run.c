@@ -6,23 +6,24 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/06 21:55:15 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 17:59:09 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	fd_handler(t_mini *mini)
+void	fd_handler(t_mini *mini, int in, int out)
 {
-	if (mini->in != 0)
+	(void)mini;
+	if (in != 0)
 	{
-		dup2(mini->in, 0);
-		close(mini->in);
+		dup2(in, 0);
+		close(in);
 	}
-	if (mini->out != 1)
+	if (out != 1)
 	{
-		dup2(mini->out, 1);
-		close(mini->out);
+		dup2(out, 1);
+		close(out);
 	}
 }
 
@@ -44,30 +45,38 @@ void	execute_child(t_mini *mini, t_node *node)
 void	execute(t_mini *mini, t_list *list, t_node *node)
 {
 	int	pid;
-	int	status;
+	int in;
+	int out;
 
-	mini->st_out = dup(STDOUT_FILENO);
-	mini->st_in = dup(STDIN_FILENO);
-	fd_handler(mini);
+	// mini->st_out = dup(STDOUT_FILENO);
+	// mini->st_in = dup(STDIN_FILENO);
+	in = mini->in;
+	out = mini->out;
 	if (is_builtin(node))
 		execute_builtin(is_builtin(node), node, mini, list);
 	else
 	{
-		signals(2);
 		pid = fork();
+		signals(2);
 		if (pid < 0)
+		{
 			printf("error\n");
+			g_return = 127;
+		}
 		else if (pid == 0)
+		{
+			fd_handler(mini, in, out);
 			execute_child(mini, node);
+		}
 		else
-			waitpid(pid, &status, 0);
-		if(WIFEXITED(status))
-			g_return = WEXITSTATUS(status);
+			waitpid(pid, &g_return, WUNTRACED);
+		if(WIFEXITED(g_return))
+			g_return = WEXITSTATUS(g_return);
 		else
 			g_return = 0;
 	}
-	dup2(mini->st_out, STDOUT_FILENO);
-	dup2(mini->st_in, STDIN_FILENO);
+	// dup2(mini->st_out, STDOUT_FILENO);
+	// dup2(mini->st_in, STDIN_FILENO);
 }
 
 int	is_str_quote(char *str, int open)
@@ -114,7 +123,10 @@ void	run_cmd(t_mini *mini, t_list *list, t_node *node)
 		if (!result)
 			printf("error\n");
 		else if (result)
-			execute(mini, list, node);
+		{
+			if (mini->in != -1)
+				execute(mini, list, node);
+		}
 	}
 }
 
@@ -126,18 +138,19 @@ void	run(t_mini *mini, t_list *list)
 
 	node = list->begin;
 	i = 0;
+	mini->last_redir = 0;
 	while (i < mini->pipe)
 	{
 		if (pipe(fd) < 0)
 			printf("error\n");
-		mini->out = dup(fd[1]);
+		mini->out = fd[1];
 		run_cmd(mini, list, node);
 		close(mini->out);
 		if (mini->in != 0)
 			close(mini->in);
-		mini->in = dup(fd[0]);
-		close(fd[0]);
-		close(fd[1]);
+		mini->in = fd[0];
+		// close(fd[0]);
+		// close(fd[1]);
 		node = node->next;
 		i++;
 	}

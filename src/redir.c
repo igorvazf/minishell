@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:15:00 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/06 21:58:23 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 17:39:10 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	redirect_out(t_mini *mini, t_node *node, int i)
 		free(file);
 		return (1);
 	}
+	mini->last_redir = 1;
 	free(file);
 	return (0);
 }
@@ -105,5 +106,6 @@ int	redirect_in(t_mini *mini, t_node *node, int i)
 		free(file);
 		return (1);
 	}
+	mini->last_redir = 0;
 	return (0);
 }

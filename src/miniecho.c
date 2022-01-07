@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 17:45:50 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/07 12:18:45 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 17:26:34 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ void	print(t_mini *mini, t_node *node, int i, int j)
 		if (mini->is_open_s == 1 || mini->final_s == 1)
 		{
 			if (node->str[i][j] != S_QUOTE)
-				printf("%c", node->str[i][j]);
+				ft_putchar_fd(node->str[i][j], mini->out);
 		}
 		if (mini->is_open_d == 1 || mini->final_d == 1)
 		{
 			if (node->str[i][j] != D_QUOTE)
-				printf("%c", node->str[i][j]);
+				ft_putchar_fd(node->str[i][j], mini->out);
 		}
 		if (mini->is_open_s == 0 && mini->is_open_d == 0
 			&& mini->final_s == 0 && mini->final_d == 0)
-			printf("%c", node->str[i][j]);
+			ft_putchar_fd(node->str[i][j], mini->out);
 		else if (mini->final_s == 1 || mini->final_d == 1)
 		{
 			mini->final_s = 0;
@@ -78,10 +78,10 @@ void	miniecho(t_mini *mini, t_node *node)
 				break;
 			print(mini, node, i, 0);
 			if (node->str[i + 1] != NULL)
-				printf(" ");
+				ft_putchar_fd(' ', mini->out);
 			i++;
 		}
 		if (ft_strncmp(node->str[1], "-n\0", 3))
-			printf("\n");
+			ft_putchar_fd('\n', mini->out);
 	}
 }

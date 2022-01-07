@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2022/01/07 12:15:33 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 17:47:30 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_mini
 	int		in;
 	int		st_out;
 	int		st_in;
+	int		last_redir;
 	int		command_fail;
 	t_env	*env;
 }	t_mini;
@@ -135,7 +136,7 @@ int		is_redirect(char c);
 int		redirect_out(t_mini *mini, t_node *node, int i);
 int		redirect_in(t_mini *mini, t_node *node, int i);
 void	run(t_mini *mini, t_list *list);
-void	fd_handler(t_mini *mini);
+void	fd_handler(t_mini *mini, int in, int out);
 void	get_cmd(t_mini *mini, t_node *node);
 void	get_input(t_mini *mini, t_sani *sani);
 int		redir_validate(t_list *list);
