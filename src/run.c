@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/07 19:59:21 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/07 20:57:47 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 	}
 	dup2(mini->st_out, STDOUT_FILENO);
 	dup2(mini->st_in, STDIN_FILENO);
+	close(mini->st_out);
+	close(mini->st_in);
 }
 
 int	is_str_quote(char *str, int open)
@@ -143,7 +145,7 @@ void	run(t_mini *mini, t_list *list)
 			printf("error\n");
 		mini->out = fd[1];
 		run_cmd(mini, list, node);
-		close(mini->out);
+		close(fd[1]);
 		if (mini->in != 0)
 			close(mini->in);
 		mini->in = fd[0];
