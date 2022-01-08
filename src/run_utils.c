@@ -1,0 +1,49 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   run_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/08 15:18:49 by paugusto          #+#    #+#             */
+/*   Updated: 2022/01/08 15:19:49 by paugusto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/minishell.h"
+
+int	is_this_quote(char *str)
+{
+	if ((str[0] == D_QUOTE || str[0] == S_QUOTE) && str[1] == '\0')
+		return (1);
+	return (0);
+}
+
+int	get_result(t_mini *mini, t_node *node, int open, int i)
+{
+	int	result;
+
+	result = 1;
+	if (open == 0 && (!ft_strcmp(node->str[i], ">")
+			|| !ft_strcmp(node->str[i], ">>")))
+		result = redirect_out(mini, node, i);
+	if (open == 0 && (!ft_strcmp(node->str[i], "<")
+			|| !ft_strcmp(node->str[i], "<<")))
+		result = redirect_in(mini, node, i);
+	return (result);
+}
+
+void	fd_handler(t_mini *mini)
+{
+	(void)mini;
+	if (mini->in != 0)
+	{
+		dup2(mini->in, STDIN_FILENO);
+		close(mini->in);
+	}
+	if (mini->out != 1)
+	{
+		dup2(mini->out, STDOUT_FILENO);
+		close(mini->out);
+	}
+}

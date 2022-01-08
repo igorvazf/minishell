@@ -6,26 +6,11 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/07 21:14:59 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/08 15:48:46 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	fd_handler(t_mini *mini)
-{
-	(void)mini;
-	if (mini->in != 0)
-	{
-		dup2(mini->in, STDIN_FILENO);
-		close(mini->in);
-	}
-	if (mini->out != 1)
-	{
-		dup2(mini->out, STDOUT_FILENO);
-		close(mini->out);
-	}
-}
 
 void	execute_child(t_mini *mini, t_node *node)
 {
@@ -40,7 +25,7 @@ void	execute_child(t_mini *mini, t_node *node)
 	get_cmd(mini, node);
 	if (find_path(mini, node->str[0]))
 	{
-		execve(mini->correct_path, node->str, NULL);
+		execve(mini->correct_path, node->str, __environ);
 		perror("error");
 		exit(EXIT_FAILURE);
 	}
@@ -92,13 +77,6 @@ int	is_str_quote(char *str, int open)
 	return (0);
 }
 
-int	is_this_quote(char *str)
-{
-	if ((str[0] == D_QUOTE || str[0] == S_QUOTE) && str[1] == '\0')
-		return (1);
-	return (0);
-}
-
 void	run_cmd(t_mini *mini, t_list *list, t_node *node)
 {
 	int	i;
@@ -114,10 +92,7 @@ void	run_cmd(t_mini *mini, t_list *list, t_node *node)
 		{
 			if (is_this_quote(node->str[i]))
 				open = is_str_quote(node->str[i], open);
-			if (open == 0 && (!ft_strcmp(node->str[i], ">") || !ft_strcmp(node->str[i], ">>")))
-				result = redirect_out(mini, node, i);
-			if (open == 0 && (!ft_strcmp(node->str[i], "<") || !ft_strcmp(node->str[i], "<<")))
-				result = redirect_in(mini, node, i);
+			result = get_result(mini, node, open, i);
 			i++;
 		}
 		if (!result)
@@ -130,14 +105,12 @@ void	run_cmd(t_mini *mini, t_list *list, t_node *node)
 	}
 }
 
-void	run(t_mini *mini, t_list *list)
+void	run(t_mini *mini, t_list *list, int i)
 {
 	t_node	*node;
-	int		i;
 	int		fd[2];
 
 	node = list->begin;
-	i = 0;
 	mini->st_out = dup(STDOUT_FILENO);
 	mini->st_in = dup(STDIN_FILENO);
 	while (i < mini->pipe)

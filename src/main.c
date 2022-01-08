@@ -6,13 +6,12 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2022/01/07 16:43:18 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/08 15:48:59 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern char	**environ;
 int			g_return;
 
 int	main(void)
@@ -21,7 +20,7 @@ int	main(void)
 	t_list	*list;
 	t_sani	sani;
 
-	init(&mini, environ);
+	init(&mini, __environ);
 	while (1)
 	{
 		signals(1);
@@ -34,7 +33,7 @@ int	main(void)
 			if (!input_validate(&mini) || !quotes_closed(&mini))
 				printf("error\n");
 			else if (split_cmd(&mini, list) && redir_validate(list))
-				run(&mini, list);
+				run(&mini, list, 0);
 		}
 		free_reset(&mini, list);
 		mini.pipe = 0;

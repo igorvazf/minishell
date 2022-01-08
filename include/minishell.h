@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2022/01/07 17:47:30 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/08 15:43:08 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ typedef struct s_sani
 	int		d;
 }	t_sani;
 
+typedef struct s_hand
+{
+	int	open;
+}	t_hand;
+
 /*
 ** input -> line read from terminal (raw, no treats)
 ** input_sanitized -> input ready to work with
@@ -103,6 +108,7 @@ typedef struct s_mini
 	int		st_out;
 	int		st_in;
 	int		command_fail;
+	int		i;
 	t_env	*env;
 }	t_mini;
 
@@ -135,7 +141,7 @@ int		find_path(t_mini *mini, char *cmd);
 int		is_redirect(char c);
 int		redirect_out(t_mini *mini, t_node *node, int i);
 int		redirect_in(t_mini *mini, t_node *node, int i);
-void	run(t_mini *mini, t_list *list);
+void	run(t_mini *mini, t_list *list, int i);
 void	fd_handler(t_mini *mini);
 void	get_cmd(t_mini *mini, t_node *node);
 void	get_input(t_mini *mini, t_sani *sani);
@@ -154,6 +160,10 @@ int		quotes_closed(t_mini *mini);
 void	is_in_quote_str(char *str, t_mini *mini);
 int		is_just_quote(char *str);
 int		len_quote(char **str);
+char	*transform(t_mini *mini, t_node *node, int i, int j);
+int		is_this_quote(char *str);
+int		get_result(t_mini *mini, t_node *node, int open, int i);
+void	fd_handler(t_mini *mini);
 
 /* Builtins */
 void	miniexit(t_mini *mini, t_node *node, t_list *list);

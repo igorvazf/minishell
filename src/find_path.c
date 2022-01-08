@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 12:57:46 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/01 10:23:01 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/08 14:59:44 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,12 @@ char	**blabla(t_mini *mini)
 	return (path);
 }
 
-int	verify_path(t_mini *mini, char *cmd)
+int	verify_path(t_mini *mini, char *cmd, int i)
 {
 	char	**holder;
 	char	*path;
 	char	*aux;
-	int		i;
 
-	i = 0;
 	holder = blabla(mini);
 	if (holder != NULL)
 	{
@@ -97,7 +95,7 @@ int	find_path(t_mini *mini, char *cmd)
 {
 	int		tilda;
 
-	if (verify_path(mini, cmd))
+	if (verify_path(mini, cmd, 0))
 		return (1);
 	tilda = check_tilda(cmd);
 	if (tilda)

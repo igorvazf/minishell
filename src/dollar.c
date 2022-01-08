@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 14:19:02 by paugusto          #+#    #+#             */
-/*   Updated: 2021/12/28 21:14:00 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/08 15:07:58 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,18 @@ char	*get_join(char *str)
 	return (aux);
 }
 
+char	*get_content(t_mini *mini, t_node *node, int i, int j)
+{
+	char	*content;
+
+	content = NULL;
+	if (node->str[i][j + 1] == '?')
+		content = ft_itoa(g_return);
+	else
+		content = get_var(mini, node->str[i], j + 1);
+	return (content);
+}
+
 char	*transform(t_mini *mini, t_node *node, int i, int j)
 {
 	char	*content;
@@ -80,10 +92,7 @@ char	*transform(t_mini *mini, t_node *node, int i, int j)
 	{
 		if (node->str[i][j] == '$')
 		{
-			if (node->str[i][j + 1] == '?')
-				content = ft_itoa(g_return);
-			else
-				content = get_var(mini, node->str[i], j + 1);
+			content = get_content(mini, node, i, j);
 			if (content != NULL)
 			{
 				aux = holder;
@@ -97,22 +106,4 @@ char	*transform(t_mini *mini, t_node *node, int i, int j)
 		j++;
 	}
 	return (holder);
-}
-
-void	expand_var(t_mini *mini, t_node *node, int i)
-{
-	char		*holder;
-
-	holder = transform(mini, node, i, 0);
-	if (holder != NULL)
-	{
-		free(node->str[i]);
-		node->str[i] = ft_strdup(holder);
-		free(holder);
-	}
-	else
-	{
-		free(node->str[i]);
-		node->str[i] = ft_strdup(" ");
-	}
 }

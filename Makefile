@@ -30,7 +30,9 @@ SRC_FILES =	main.c \
 			find_path.c \
 			dollar.c \
 			signals.c \
-			get_cmd_utils.c
+			get_cmd_utils.c \
+			dollar_utils.c \
+			run_utils.c
 
 SRC =		$(addprefix src/, $(SRC_FILES))
 

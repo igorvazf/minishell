@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 22:20:20 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/07 21:06:48 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/08 15:46:42 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,20 @@ int	input_validate(t_mini *mini)
 /*
 ** function that check sequences of '<' and '>'
 */
-int	check_validate(char	*str)
+int	check_validate(t_hand *hand, char	*str)
 {
 	int	i;
 	int	count;
-	int	open;
 
 	i = 0;
-	open = 0;
 	while (str[i])
 	{
 		count = 0;
-		if (open == 0 && (str[i] == D_QUOTE || str[i] == S_QUOTE))
-			open = 1;
-		else if (open == 1 && (str[i] == D_QUOTE || str[i] == S_QUOTE))
-			open = 0;
-		while (open == 0 && (str[i] == '<' || str[i] == '>'))
+		if (hand->open == 0 && (str[i] == D_QUOTE || str[i] == S_QUOTE))
+			hand->open = 1;
+		else if (hand->open == 1 && (str[i] == D_QUOTE || str[i] == S_QUOTE))
+			hand->open = 0;
+		while (hand->open == 0 && (str[i] == '<' || str[i] == '>'))
 		{
 			i++;
 			count++;
@@ -87,15 +85,17 @@ int	check_validate(char	*str)
 int	redir_validate(t_list *list)
 {
 	t_node	*node;
+	t_hand	hand;
 	int		i;
 
 	node = list->begin;
+	hand.open = 0;
 	while (node != NULL)
 	{
 		i = 0;
 		while (node->str[i])
 		{
-			if (!check_validate(node->str[i]))
+			if (!check_validate(&hand, node->str[i]))
 			{
 				printf("redir error\n");
 				return (0);

@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 10:09:19 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/08 17:07:02 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/08 15:33:55 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,53 +26,59 @@ int	is_space(char *str)
 	return (0);
 }
 
-void	dirty_job(t_mini *mini, t_list *list, int i, int start)
+int	dirty_job_handler(t_mini *mini, t_list *list, char *str, int start)
+{
+	if (mini->input_sanitized[mini->i + 1] == '\0' && mini->is_open_s == 0
+		&& mini->is_open_d == 0)
+	{
+		str = ft_substr(mini->input_sanitized, start, mini->i - start + 1);
+		if (!is_space(str))
+		{
+			free(str);
+			return (0);
+		}
+		push_node(list, str);
+		free(str);
+	}
+	return (1);
+}
+
+void	dirty_job(t_mini *m, t_list *list, int start)
 {
 	char	*str;
 
-	while (mini->input_sanitized[i])
+	while (m->input_sanitized[m->i])
 	{
-		is_in_quote(mini->input_sanitized[i], mini);
-		if (mini->input_sanitized[i] == '|' && mini->is_open_s == 0
-			&& mini->is_open_d == 0)
+		is_in_quote(m->input_sanitized[m->i], m);
+		if (m->input_sanitized[m->i] == '|' && m->is_open_s == 0
+			&& m->is_open_d == 0)
 		{
-			str = ft_substr(mini->input_sanitized, start, (i - 1) - start);
-			i++;
-			start = i;
+			str = ft_substr(m->input_sanitized, start, (m->i - 1) - start);
+			m->i++;
+			start = m->i;
 			if (!is_space(str))
 			{
-				mini->pipe--;
+				m->pipe--;
 				free(str);
 				return ;
 			}
 			push_node(list, str);
 			free(str);
-			mini->pipe++;
+			m->pipe++;
 		}
-		if (mini->input_sanitized[i + 1] == '\0' && mini->is_open_s == 0
-			&& mini->is_open_d == 0)
-		{
-			str = ft_substr(mini->input_sanitized, start, i - start + 1);
-			if (!is_space(str))
-			{
-				free(str);
-				return ;
-			}
-			push_node(list, str);
-			free(str);
-		}
-		i++;
+		if (dirty_job_handler(m, list, str, start) == 0)
+			return ;
+		m->i++;
 	}
 }
 
 int	split_cmd(t_mini *mini, t_list *list)
 {
-	int		i;
 	int		start;
 
-	i = 0;
-	start = i;
-	dirty_job(mini, list, i, start);
+	mini->i = 0;
+	start = mini->i;
+	dirty_job(mini, list, start);
 	if (mini->is_open_s == 1 || mini->is_open_d == 1)
 		return (0);
 	return (1);
