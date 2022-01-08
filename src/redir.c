@@ -96,7 +96,7 @@ int	redirect_in(t_mini *mini, t_node *node, int i)
 	else if (node->str[i + 1] && !ft_strcmp(node->str[i], "<<"))
 	{
 		eof = ft_strdup(node->str[i + 1]);
-		here_doc(file, eof);
+		here_doc(TMP_FILE, eof);
 		mini->in = open(TMP_FILE, O_RDONLY, 0777);
 		free(eof);
 		return (1);

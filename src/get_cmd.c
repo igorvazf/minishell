@@ -28,7 +28,8 @@ void	check_dollar(t_mini *mini, t_node *node)
 		while (node->str[i][j])
 		{
 			is_in_quote(node->str[i][j], mini);
-			if (mini->is_open_s == 0 && node->str[i][j] == '$')
+			if (mini->is_open_s == 0 && node->str[i][j] == '$'
+				&& node->str[i][j + 1] != ' ' && node->str[i][j + 1] != '\0')
 			{
 				expand_var(mini, node, i);
 				break ;
@@ -39,82 +40,40 @@ void	check_dollar(t_mini *mini, t_node *node)
 	}
 }
 
-int	len_node(char **str)
+char	*dirty_jobs(char **str, int i)
 {
-	int	i;
-	int	len;
+	char	*holder;
+	char	*aux;
+	int		start;
+	int		end;
+	int		j;
 
-	i = 0;
-	len = 0;
-	while (str[i])
-	{
-		if (str[i][0] == '<' || str[i][0] == '>')
-			i += 2;
-		else
-		{
-			i++;
-			len++;
-		}
-	}
-	return (len + 1);
-}
-
-int	is_just_quote(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != D_QUOTE || str[i] != S_QUOTE)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	len_quote(char **str)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	len = 0;
-	while (str[i])
-	{
-		if (is_just_quote(str[i]))
-			len++;
-		i++;
-	}
-	return (len);
+	j = 0;
+	holder = ft_strdup(str[i]);
+	while (holder[j] && holder[j] == ' ')
+		j++;
+	while (holder[j] && (holder[j] == D_QUOTE || holder[j] == S_QUOTE))
+		j++;
+	start = j;
+	while (holder[j] && holder[j] != D_QUOTE && holder[j] != S_QUOTE)
+		j++;
+	end = j - 1;
+	aux = ft_substr(holder, start, end - start + 1);
+	free(holder);
+	return (aux);
 }
 
 char	**remove_quotes(char **str, int len, int i, int k)
 {
 	char	**aux;
-	char	*holder;
-	int		j;
-	int		start;
-	int		end;
 
 	aux = malloc(sizeof(char *) * len + 1);
 	while (str[i])
 	{
 		if (is_just_quote(str[i]))
 		{
-			j = 0;
-			holder = ft_strdup(str[i]);
-			while (holder[j] && holder[j] == ' ')
-				j++;
-			while (holder[j] && (holder[j] == D_QUOTE || holder[j] == S_QUOTE))
-				j++;
-			start = j;
-			while (holder[j] && holder[j] != D_QUOTE && holder[j] != S_QUOTE)
-				j++;
-			end = j - 1;
-			aux[k] = ft_substr(holder, start, end - start + 1);
+			aux[k] = dirty_jobs(str, i);
 			k++;
-			free(holder);
 		}
 		i++;
 	}
@@ -168,7 +127,8 @@ void	get_cmd_builtin(t_mini *mini, t_node *node)
 	{
 		is_in_quote_str(node->str[i], mini);
 		if ((!ft_strcmp(node->str[i], "<") || !ft_strcmp(node->str[i], ">")
-			|| !ft_strcmp(node->str[i], "<<") || !ft_strcmp(node->str[i], ">>"))
+				|| !ft_strcmp(node->str[i], "<<")
+				|| !ft_strcmp(node->str[i], ">>"))
 			&& mini->is_open_s_str == 0 && mini->is_open_d_str == 0)
 			i += 2;
 		else

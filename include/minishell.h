@@ -152,6 +152,8 @@ int		is_space(char *str);
 int		input_validate(t_mini *mini);
 int		quotes_closed(t_mini *mini);
 void	is_in_quote_str(char *str, t_mini *mini);
+int		is_just_quote(char *str);
+int		len_quote(char **str);
 
 /* Builtins */
 void	miniexit(t_mini *mini, t_node *node, t_list *list);
