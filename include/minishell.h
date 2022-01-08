@@ -31,6 +31,7 @@
 # define D_QUOTE '\"'
 # define S_QUOTE '\''
 # define DELIM "|<>"
+# define TMP_FILE "/tmp/here_doc_tmp_file"
 
 /*
 ** Linked list structure - Commands
@@ -101,7 +102,6 @@ typedef struct s_mini
 	int		in;
 	int		st_out;
 	int		st_in;
-	int		last_redir;
 	int		command_fail;
 	t_env	*env;
 }	t_mini;

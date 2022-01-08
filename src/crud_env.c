@@ -83,7 +83,6 @@ void	print_env(t_env *env)
 	node = env->begin;
 	while (node->next != NULL)
 	{
-
 		printf("%s=%s\n", node->key, node->content);
 		node = node->next;
 	}

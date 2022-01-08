@@ -18,8 +18,8 @@ int	redirect_out(t_mini *mini, t_node *node, int i)
 	char	*file;
 
 	flags = O_WRONLY | O_CREAT;
-	if (node->str[i + 1] == NULL || node->str[i + 1][0] == '>' || node->str[i + 1][0] == '<'
-		|| node->str[i + 1][0] == '\0')
+	if (node->str[i + 1] == NULL || node->str[i + 1][0] == '>'
+		|| node->str[i + 1][0] == '<' || node->str[i + 1][0] == '\0')
 		return (0);
 	file = ft_strdup(node->str[i + 1]);
 	if (!ft_strcmp(node->str[i], ">>"))
@@ -34,7 +34,6 @@ int	redirect_out(t_mini *mini, t_node *node, int i)
 		free(file);
 		return (1);
 	}
-	mini->last_redir = 1;
 	free(file);
 	return (0);
 }
@@ -71,7 +70,7 @@ void	here_doc(char *file, char *eof)
 		if (line && ft_strcmp(line, eof))
 			ft_putstrendl_fd(line, fd);
 		else
-			break;
+			break ;
 	}
 	close(fd);
 	free(line);
@@ -82,9 +81,7 @@ int	redirect_in(t_mini *mini, t_node *node, int i)
 	char	*file;
 	char	*eof;
 
-	if (node->str[i + 1] == NULL)
-		return (0);
-	if (!ft_strcmp(node->str[i], "<"))
+	if (node->str[i + 1] && !ft_strcmp(node->str[i], "<"))
 	{
 		file = ft_strdup(node->str[i + 1]);
 		mini->in = open(file, O_RDONLY, 0777);
@@ -96,16 +93,13 @@ int	redirect_in(t_mini *mini, t_node *node, int i)
 		free(file);
 		return (1);
 	}
-	else if (!ft_strcmp(node->str[i], "<<"))
+	else if (node->str[i + 1] && !ft_strcmp(node->str[i], "<<"))
 	{
 		eof = ft_strdup(node->str[i + 1]);
-		file = ft_strdup("temp");
 		here_doc(file, eof);
-		mini->in = open(file, O_RDONLY, 0777);
+		mini->in = open(TMP_FILE, O_RDONLY, 0777);
 		free(eof);
-		free(file);
 		return (1);
 	}
-	mini->last_redir = 0;
 	return (0);
 }

@@ -41,13 +41,13 @@ int	input_validate(t_mini *mini)
 			&& mini->is_open_s == 0 && mini->is_open_d == 0)
 			return (0);
 		else if (mini->input[i] == '>' && mini->input[i + 1] == '|'
-				&& mini->is_open_s == 0 && mini->is_open_d == 0)
+			&& mini->is_open_s == 0 && mini->is_open_d == 0)
 			return (0);
 		else if (mini->input[i] == '>' && mini->input[i + 1] == '<'
-				&& mini->is_open_s == 0 && mini->is_open_d == 0)
+			&& mini->is_open_s == 0 && mini->is_open_d == 0)
 			return (0);
 		else if (mini->input[i] == '<' && mini->input[i + 1] == '>'
-				&& mini->is_open_s == 0 && mini->is_open_d == 0)
+			&& mini->is_open_s == 0 && mini->is_open_d == 0)
 			return (0);
 		i++;
 	}
@@ -61,7 +61,7 @@ int	check_validate(char	*str)
 {
 	int	i;
 	int	count;
-	int open;
+	int	open;
 
 	i = 0;
 	open = 0;
@@ -70,7 +70,7 @@ int	check_validate(char	*str)
 		count = 0;
 		if (open == 0 && (str[i] == D_QUOTE || str[i] == S_QUOTE))
 			open = 1;
-		else if (open == 1 && (str[i] == D_QUOTE || str[i] == S_QUOTE) )
+		else if (open == 1 && (str[i] == D_QUOTE || str[i] == S_QUOTE))
 			open = 0;
 		while (open == 0 && (str[i] == '<' || str[i] == '>'))
 		{
@@ -90,7 +90,6 @@ int	redir_validate(t_list *list)
 	int		i;
 
 	node = list->begin;
-
 	while (node != NULL)
 	{
 		i = 0;

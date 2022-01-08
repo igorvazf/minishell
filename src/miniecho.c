@@ -75,7 +75,7 @@ void	miniecho(t_mini *mini, t_node *node)
 			is_in_quote_str(node->str[i], mini);
 			if ((node->str[i][0] == '>' || node->str[i][0] == '<')
 				&& mini->is_open_s_str == 0 && mini->is_open_d_str == 0)
-				break;
+				break ;
 			print(mini, node, i, 0);
 			if (node->str[i + 1] != NULL)
 				ft_putchar_fd(' ', STDOUT_FILENO);

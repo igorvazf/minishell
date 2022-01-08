@@ -51,12 +51,12 @@ char	**blabla(t_mini *mini)
 			aux = ft_strdup(node->content);
 			path = ft_split(aux, ':');
 			free(aux);
-			return(path);
+			return (path);
 		}
 		node = node->next;
 	}
 	path = NULL;
-	return(path);
+	return (path);
 }
 
 int	verify_path(t_mini *mini, char *cmd)

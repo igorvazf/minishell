@@ -70,7 +70,7 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 			execute_child(mini, node);
 		else
 			waitpid(pid, &g_return, WUNTRACED);
-		if(WIFEXITED(g_return))
+		if (WIFEXITED(g_return))
 			g_return = WEXITSTATUS(g_return);
 		else
 			g_return = 0;
@@ -138,7 +138,6 @@ void	run(t_mini *mini, t_list *list)
 
 	node = list->begin;
 	i = 0;
-	mini->last_redir = 0;
 	mini->st_out = dup(STDOUT_FILENO);
 	mini->st_in = dup(STDIN_FILENO);
 	while (i < mini->pipe)

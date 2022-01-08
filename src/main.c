@@ -13,7 +13,7 @@
 #include "../include/minishell.h"
 
 extern char	**environ;
-int	g_return;
+int			g_return;
 
 void	print_elements(t_list *list)
 {
@@ -55,15 +55,13 @@ int	main(void)
 		{
 			if (!input_validate(&mini))
 				printf("syntax error\n");
-			if (!quotes_closed(&mini))
+			else if (!quotes_closed(&mini))
 				printf("quotes unclosed\n");
 			else if (split_cmd(&mini, list) && redir_validate(list))
 			{
 				//print_elements(list);
 				run(&mini, list);
 			}
-			// close (mini.st_in);
-			// close (mini.st_out);
 		}
 		free_reset(&mini, list);
 		mini.pipe = 0;
