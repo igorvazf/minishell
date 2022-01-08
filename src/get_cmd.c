@@ -48,8 +48,7 @@ int	len_node(char **str)
 	len = 0;
 	while (str[i])
 	{
-		if (!ft_strcmp(str[i], "<") || !ft_strcmp(str[i], "<")
-			|| !ft_strcmp(str[i], ">>") || !ft_strcmp(str[i], "<<"))
+		if (str[i][0] == '<' || str[i][0] == '>')
 			i += 2;
 		else
 		{
@@ -57,7 +56,7 @@ int	len_node(char **str)
 			len++;
 		}
 	}
-	return (len);
+	return (len + 1);
 }
 
 int	is_just_quote(char *str)
