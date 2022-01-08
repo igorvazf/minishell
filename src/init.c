@@ -60,6 +60,8 @@ void	init(t_mini *mini, char **environ)
 	mini->is_open_d = 0;
 	mini->is_open_d_str = 0;
 	mini->is_open_s_str = 0;
+	mini->is_final_s = 0;
+	mini->is_final_d = 0;
 	mini->init_with_arrow = 0;
 	mini->pipe = 0;
 	mini->redir = 0;

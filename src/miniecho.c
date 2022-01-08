@@ -41,19 +41,32 @@ void	print(t_mini *mini, t_node *node, int i, int j)
 
 void	is_in_quote_str(char *str, t_mini *mini)
 {
-	if (str[0] == S_QUOTE && str[1] == '\0')
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
 	{
-		if (mini->is_open_s_str == 0 && mini->is_open_d_str == 0)
-			mini->is_open_s_str = 1;
-		else if (mini->is_open_s_str == 1)
-			mini->is_open_s_str = 0;
-	}
-	if (str[0] == D_QUOTE && str[1] == '\0')
-	{
-		if (mini->is_open_d_str == 0 && mini->is_open_s_str == 0)
-			mini->is_open_d_str = 1;
-		else if (mini->is_open_d_str == 1)
-			mini->is_open_d_str = 0;
+		if (str[i] == S_QUOTE)
+		{
+			if (mini->is_open_s_str == 0 && mini->is_open_d_str == 0)
+				mini->is_open_s_str = 1;
+			else if (mini->is_open_s_str == 1)
+			{
+				mini->is_open_s_str = 0;
+				mini->is_final_s = 1;
+			}
+		}
+		if (str[i] == D_QUOTE)
+		{
+			if (mini->is_open_d_str == 0 && mini->is_open_s_str == 0)
+				mini->is_open_d_str = 1;
+			else if (mini->is_open_d_str == 1)
+			{
+				mini->is_open_d_str = 0;
+				mini->is_final_d = 1;
+			}
+		}
+		i++;
 	}
 }
 
@@ -66,6 +79,8 @@ void	miniecho(t_mini *mini, t_node *node)
 	mini->final_s = 0;
 	mini->is_open_s_str = 0;
 	mini->is_open_d_str = 0;
+	mini->is_final_s = 0;
+	mini->is_final_d = 0;
 	while (node->str[i] && !ft_strcmp(node->str[i], "-n"))
 		i++;
 	if (node->str[i])

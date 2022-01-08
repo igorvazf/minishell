@@ -101,6 +101,8 @@ typedef struct s_mini
 	int		final_d;
 	int		is_open_s_str;
 	int		is_open_d_str;
+	int		is_final_s;
+	int		is_final_d;
 	int		pipe;
 	int		redir;
 	int		out;

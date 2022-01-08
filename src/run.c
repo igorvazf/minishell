@@ -92,7 +92,7 @@ void	run_cmd(t_mini *mini, t_list *list, t_node *node)
 		{
 			if (is_this_quote(node->str[i]))
 				open = is_str_quote(node->str[i], open);
-			result = get_result(mini, node, open, i);
+			//result = get_result(mini, node, open, i);
 			i++;
 		}
 		if (!result)
