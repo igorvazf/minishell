@@ -12,18 +12,18 @@
 
 #include "../include/minishell.h"
 
-void	fd_handler(t_mini *mini, int in, int out)
+void	fd_handler(t_mini *mini)
 {
 	(void)mini;
-	if (in != 0)
+	if (mini->in != 0)
 	{
-		dup2(in, 0);
-		close(in);
+		dup2(mini->in, STDIN_FILENO);
+		close(mini->in);
 	}
-	if (out != 1)
+	if (mini->out != 1)
 	{
-		dup2(out, 1);
-		close(out);
+		dup2(mini->out, STDOUT_FILENO);
+		close(mini->out);
 	}
 }
 
@@ -45,14 +45,8 @@ void	execute_child(t_mini *mini, t_node *node)
 void	execute(t_mini *mini, t_list *list, t_node *node)
 {
 	int	pid;
-	int in;
-	int out;
 
-	mini->st_out = dup(STDOUT_FILENO);
-	mini->st_in = dup(STDIN_FILENO);
-	in = mini->in;
-	out = mini->out;
-	fd_handler(mini, in, out);
+	fd_handler(mini);
 	if (is_builtin(node))
 		execute_builtin(is_builtin(node), node, mini, list);
 	else
@@ -139,6 +133,8 @@ void	run(t_mini *mini, t_list *list)
 	node = list->begin;
 	i = 0;
 	mini->last_redir = 0;
+	mini->st_out = dup(STDOUT_FILENO);
+	mini->st_in = dup(STDIN_FILENO);
 	while (i < mini->pipe)
 	{
 		if (pipe(fd) < 0)

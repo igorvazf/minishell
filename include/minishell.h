@@ -136,7 +136,7 @@ int		is_redirect(char c);
 int		redirect_out(t_mini *mini, t_node *node, int i);
 int		redirect_in(t_mini *mini, t_node *node, int i);
 void	run(t_mini *mini, t_list *list);
-void	fd_handler(t_mini *mini, int in, int out);
+void	fd_handler(t_mini *mini);
 void	get_cmd(t_mini *mini, t_node *node);
 void	get_input(t_mini *mini, t_sani *sani);
 int		redir_validate(t_list *list);

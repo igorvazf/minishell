@@ -62,6 +62,8 @@ int	main(void)
 				//print_elements(list);
 				run(&mini, list);
 			}
+			// close (mini.st_in);
+			// close (mini.st_out);
 		}
 		free_reset(&mini, list);
 		mini.pipe = 0;
