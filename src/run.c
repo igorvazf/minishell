@@ -29,6 +29,8 @@ void	fd_handler(t_mini *mini)
 
 void	execute_child(t_mini *mini, t_node *node)
 {
+	close(mini->st_out);
+	close(mini->st_in);
 	get_cmd(mini, node);
 	if (find_path(mini, node->str[0]))
 	{
@@ -69,8 +71,6 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 	}
 	dup2(mini->st_out, STDOUT_FILENO);
 	dup2(mini->st_in, STDIN_FILENO);
-	// close(mini->st_out);
-	// close(mini->st_in);
 }
 
 int	is_str_quote(char *str, int open)
@@ -149,5 +149,9 @@ void	run(t_mini *mini, t_list *list)
 		i++;
 	}
 	if (list->size > 0)
+	{
 		run_cmd(mini, list, node);
+		close(mini->st_out);
+		close(mini->st_in);
+	}
 }
