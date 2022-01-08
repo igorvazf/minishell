@@ -29,6 +29,8 @@ void	miniexit(t_mini *mini, t_node *node, t_list *list)
 			code = ft_atoi(node->str[1]);
 		free_reset(mini, list);
 		free_em_all(mini);
+		close(mini->st_out);
+		close(mini->st_in);
 		exit(code);
 	}
 }

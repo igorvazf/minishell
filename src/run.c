@@ -29,8 +29,14 @@ void	fd_handler(t_mini *mini)
 
 void	execute_child(t_mini *mini, t_node *node)
 {
-	close(mini->st_out);
-	close(mini->st_in);
+	int	i;
+
+	i = 3;
+	while (i < 150)
+	{
+		close(i);
+		i++;
+	}
 	get_cmd(mini, node);
 	if (find_path(mini, node->str[0]))
 	{
