@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:22:10 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2022/01/08 15:43:08 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/08 17:48:11 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,10 @@ typedef struct s_mini
 	int		is_open_d_str;
 	int		is_final_s;
 	int		is_final_d;
+	int		open_s_str;
+	int		open_d_str;
+	int		s_final_s;
+	int		s_final_d;
 	int		pipe;
 	int		redir;
 	int		out;

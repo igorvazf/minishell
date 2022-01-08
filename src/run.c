@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:11:09 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/08 15:48:46 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/08 17:50:16 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	execute_child(t_mini *mini, t_node *node)
 	get_cmd(mini, node);
 	if (find_path(mini, node->str[0]))
 	{
-		execve(mini->correct_path, node->str, __environ);
+		execve(mini->correct_path, node->str, NULL);
 		perror("error");
 		exit(EXIT_FAILURE);
 	}
@@ -77,6 +77,37 @@ int	is_str_quote(char *str, int open)
 	return (0);
 }
 
+void	verify_quotes(t_mini *mini, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == S_QUOTE)
+		{
+			if (mini->open_s_str == 0 && mini->open_d_str == 0)
+				mini->open_s_str = 1;
+			else if (mini->open_s_str == 1)
+			{
+				mini->open_s_str = 0;
+				mini->s_final_s = 1;
+			}
+		}
+		if (str[i] == D_QUOTE)
+		{
+			if (mini->open_d_str == 0 && mini->open_s_str == 0)
+				mini->open_d_str = 1;
+			else if (mini->open_d_str == 1)
+			{
+				mini->open_d_str = 0;
+				mini->s_final_d = 1;
+			}
+		}
+		i++;
+	}
+}
+
 void	run_cmd(t_mini *mini, t_list *list, t_node *node)
 {
 	int	i;
@@ -86,13 +117,18 @@ void	run_cmd(t_mini *mini, t_list *list, t_node *node)
 	i = 0;
 	result = 1;
 	open = 0;
+	mini->open_s_str = 0;
+	mini->open_d_str = 0;
+	mini->s_final_s = 0;
+	mini->s_final_d = 0;
 	if (node != NULL)
 	{
 		while (node->str[i] && result)
 		{
-			if (is_this_quote(node->str[i]))
-				open = is_str_quote(node->str[i], open);
-			//result = get_result(mini, node, open, i);
+			// if (is_this_quote(node->str[i]))
+			// 	open = is_str_quote(node->str[i], open);
+			verify_quotes(mini, node->str[i]);
+			result = get_result(mini, node, open, i);
 			i++;
 		}
 		if (!result)

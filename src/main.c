@@ -6,13 +6,14 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 12:25:44 by igvaz-fe          #+#    #+#             */
-/*   Updated: 2022/01/08 15:48:59 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/08 17:21:15 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 int			g_return;
+extern		char	**environ;
 
 void    print_elements(t_list *list)
 {
@@ -42,7 +43,7 @@ int	main(void)
 	t_list	*list;
 	t_sani	sani;
 
-	init(&mini, __environ);
+	init(&mini, environ);
 	while (1)
 	{
 		signals(1);

@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 15:18:49 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/08 15:19:49 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/08 17:46:43 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ int	get_result(t_mini *mini, t_node *node, int open, int i)
 	int	result;
 
 	result = 1;
-	if (open == 0 && (!ft_strcmp(node->str[i], ">")
+	(void)open;
+	if (mini->open_s_str == 0 && mini->open_d_str == 0 && (!ft_strcmp(node->str[i], ">")
 			|| !ft_strcmp(node->str[i], ">>")))
 		result = redirect_out(mini, node, i);
-	if (open == 0 && (!ft_strcmp(node->str[i], "<")
+	if (mini->open_s_str == 0 && mini->open_d_str == 0 && (!ft_strcmp(node->str[i], "<")
 			|| !ft_strcmp(node->str[i], "<<")))
 		result = redirect_in(mini, node, i);
 	return (result);
