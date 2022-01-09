@@ -19,7 +19,7 @@ void	miniunset(t_env *env, t_node *node)
 
 	aux = env->begin;
 	prev = env->begin;
-	while (aux != NULL)
+	while (aux != NULL && node->str[1])
 	{
 		if (ft_strcmp(aux->key, node->str[1]))
 		{
@@ -37,6 +37,8 @@ void	miniunset(t_env *env, t_node *node)
 			free(aux->key);
 			free(aux->content);
 			free(aux);
+			aux = prev->next;
+			break ;
 		}
 	}
 	g_return = 0;

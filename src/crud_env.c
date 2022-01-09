@@ -16,7 +16,7 @@ t_env	*create_env(void)
 {
 	t_env	*env;
 
-	env = (t_env *)ft_calloc(1, sizeof(t_env));
+	env = malloc(sizeof(t_env));
 	env->begin = NULL;
 	env->end = NULL;
 	env->size = 0;
@@ -27,7 +27,7 @@ t_nodenv	*create_nodenv(char *key, char *content)
 {
 	t_nodenv	*node;
 
-	node = (t_nodenv *)ft_calloc(1, sizeof(t_nodenv));
+	node = malloc(sizeof(t_nodenv));
 	node->key = ft_strdup(key);
 	if (content)
 		node->content = ft_strdup(content);
