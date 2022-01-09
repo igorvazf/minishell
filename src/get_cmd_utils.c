@@ -12,7 +12,7 @@
 
 #include "../include/minishell.h"
 
-int	len_node(char **str)
+int	len_node(t_mini *mini, char **str)
 {
 	int	i;
 	int	len;
@@ -21,7 +21,9 @@ int	len_node(char **str)
 	len = 0;
 	while (str[i])
 	{
-		if (str[i][0] == '<' || str[i][0] == '>')
+		is_in_quote_str(str[i], mini);
+		if ((str[i][0] == '<' || str[i][0] == '>')
+			&& mini->is_open_s_str == 0 && mini->is_open_d_str == 0)
 			i += 2;
 		else
 		{

@@ -156,7 +156,7 @@ int		check_tilda(char *cmd);
 void	get_home(t_mini *mini);
 char	*copy_path(t_mini *mini, char *cmd, int tilda);
 void	get_home(t_mini *mini);
-int		len_node(char **str);
+int		len_node(t_mini *mini, char **str);
 void	expand_var(t_mini *mini, t_node *node, int i);
 void	signals(int signum);
 void	get_cmd_builtin(t_mini *mini, t_node *node);

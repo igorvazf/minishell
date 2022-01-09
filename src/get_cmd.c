@@ -6,7 +6,7 @@
 /*   By: paugusto <paugusto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 21:32:01 by paugusto          #+#    #+#             */
-/*   Updated: 2022/01/07 12:17:26 by paugusto         ###   ########.fr       */
+/*   Updated: 2022/01/09 16:24:04 by paugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	get_cmd(t_mini *mini, t_node *node)
 	int		len;
 
 	i = 0;
-	len = len_node(node->str);
+	len = len_node(mini, node->str);
 	aux = malloc(sizeof(char *) * len + 1);
 	j = 0;
 	while (node->str[i])
@@ -104,7 +104,7 @@ void	get_cmd(t_mini *mini, t_node *node)
 			aux[j++] = ft_strdup(node->str[i++]);
 	}
 	aux[j] = NULL;
-	len = len_node(aux);
+	len = len_node(mini, aux);
 	holder = remove_quotes(aux, len, 0, 0);
 	minifree(node->str);
 	minifree(aux);
@@ -120,7 +120,7 @@ void	get_cmd_builtin(t_mini *mini, t_node *node)
 	int		len;
 
 	i = 0;
-	len = len_node(node->str);
+	len = len_node(mini, node->str);
 	aux = malloc(sizeof(char *) * len + 1);
 	j = 0;
 	while (node->str[i])
