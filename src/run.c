@@ -25,7 +25,7 @@ void	execute_child(t_mini *mini, t_node *node)
 	get_cmd(mini, node);
 	if (find_path(mini, node->str[0]))
 	{
-		execve(mini->correct_path, node->str, NULL);
+		execve(mini->correct_path, node->str, __environ);
 		perror("error");
 		exit(EXIT_FAILURE);
 	}

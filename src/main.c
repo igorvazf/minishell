@@ -13,7 +13,6 @@
 #include "../include/minishell.h"
 
 int			g_return;
-extern		char	**environ;
 
 void    print_elements(t_list *list)
 {
@@ -43,7 +42,7 @@ int	main(void)
 	t_list	*list;
 	t_sani	sani;
 
-	init(&mini, environ);
+	init(&mini, __environ);
 	while (1)
 	{
 		signals(1);
