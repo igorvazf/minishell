@@ -27,7 +27,7 @@ t_node	*create_node(char *str)
 {
 	t_node	*node;
 
-	node = (t_node *)ft_calloc(1, sizeof(t_node));
+	node = malloc(sizeof(t_node));
 	node->str = ft_split(str, ' ');
 	node->next = NULL;
 	return (node);
