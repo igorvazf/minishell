@@ -16,13 +16,11 @@ void	minicd(t_mini *mini, t_node *node)
 {
 	t_nodenv	*env;
 	char		*home;
-	int			is_error;
 
 	env = mini->env->begin;
 	home = NULL;
-	is_error = 0;
 	if (node->str[1])
-		is_error = chdir(node->str[1]);
+		g_return = chdir(node->str[1]);
 	else
 	{
 		while (env != NULL)
@@ -37,6 +35,8 @@ void	minicd(t_mini *mini, t_node *node)
 			free(home);
 		}
 	}
-	if (is_error < 0)
+	if (g_return < 0)
 		printf("cd: no such file or directory\n");
+	if (g_return < 0)
+		g_return = 1;
 }

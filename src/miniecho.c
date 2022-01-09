@@ -99,4 +99,5 @@ void	miniecho(t_mini *mini, t_node *node)
 		if (ft_strncmp(node->str[1], "-n\0", 3))
 			ft_putchar_fd('\n', STDOUT_FILENO);
 	}
+	g_return = 0;
 }

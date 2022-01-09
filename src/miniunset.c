@@ -39,4 +39,5 @@ void	miniunset(t_env *env, t_node *node)
 			free(aux);
 		}
 	}
+	g_return = 0;
 }

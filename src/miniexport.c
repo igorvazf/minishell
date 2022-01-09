@@ -50,11 +50,12 @@ void	miniexport(t_env *env, t_node *node)
 		if (node->str[1][j] != '=' || j <= 0
 			|| (!ft_isalpha(node->str[1][0]) && node->str[1][0] != '_'))
 		{
-			printf("error\n");
+			g_return = 1;
 			return ;
 		}
 		copy_var(env, node->str[1]);
 	}
 	else
 		print_env(env);
+	g_return = 0;
 }
