@@ -37,7 +37,7 @@ void	execute_builtin(int builtin, t_node *node, t_mini *mini, t_list *list)
 {
 	get_cmd_builtin(mini, node);
 	if (builtin == 1)
-		miniecho(mini, node);
+		miniecho(mini, node, 1);
 	if (builtin == 2)
 		minicd(mini, node);
 	if (builtin == 3)
@@ -45,7 +45,7 @@ void	execute_builtin(int builtin, t_node *node, t_mini *mini, t_list *list)
 	if (builtin == 4)
 		miniexport(mini->env, node);
 	if (builtin == 5)
-		miniunset(mini->env, node);
+		miniunset(mini->env, node, mini->env->begin, mini->env->begin);
 	if (builtin == 6)
 		minienv(mini->env);
 	if (builtin == 7)

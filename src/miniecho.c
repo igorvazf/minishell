@@ -39,11 +39,8 @@ void	print(t_mini *mini, t_node *node, int i, int j)
 	}
 }
 
-void	is_in_quote_str(char *str, t_mini *mini)
+void	is_in_quote_str(char *str, t_mini *mini, int i)
 {
-	int	i;
-
-	i = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == S_QUOTE)
@@ -70,11 +67,8 @@ void	is_in_quote_str(char *str, t_mini *mini)
 	}
 }
 
-void	miniecho(t_mini *mini, t_node *node)
+void	miniecho(t_mini *mini, t_node *node, int i)
 {
-	int	i;
-
-	i = 1;
 	mini->final_d = 0;
 	mini->final_s = 0;
 	mini->is_open_s_str = 0;
@@ -87,7 +81,7 @@ void	miniecho(t_mini *mini, t_node *node)
 	{
 		while (node->str[i])
 		{
-			is_in_quote_str(node->str[i], mini);
+			is_in_quote_str(node->str[i], mini, 0);
 			if ((node->str[i][0] == '>' || node->str[i][0] == '<')
 				&& mini->is_open_s_str == 0 && mini->is_open_d_str == 0)
 				break ;

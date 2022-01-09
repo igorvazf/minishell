@@ -125,7 +125,7 @@ void	get_cmd_builtin(t_mini *mini, t_node *node)
 	j = 0;
 	while (node->str[i])
 	{
-		is_in_quote_str(node->str[i], mini);
+		is_in_quote_str(node->str[i], mini, 0);
 		if ((!ft_strcmp(node->str[i], "<") || !ft_strcmp(node->str[i], ">")
 				|| !ft_strcmp(node->str[i], "<<")
 				|| !ft_strcmp(node->str[i], ">>"))

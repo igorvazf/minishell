@@ -64,19 +64,6 @@ void	execute(t_mini *mini, t_list *list, t_node *node)
 	dup2(mini->st_in, STDIN_FILENO);
 }
 
-int	is_str_quote(char *str, int open)
-{
-	if (open == 0 && str[0] == D_QUOTE && str[1] == '\0')
-		return (1);
-	else if (open == 1 && str[0] == D_QUOTE && str[1] == '\0')
-		return (0);
-	else if (open == 0 && str[0] == S_QUOTE && str[1] == '\0')
-		return (1);
-	else if (open == 1 && str[0] == S_QUOTE && str[1] == '\0')
-		return (0);
-	return (0);
-}
-
 void	verify_quotes(t_mini *mini, char *str)
 {
 	int	i;
@@ -89,20 +76,14 @@ void	verify_quotes(t_mini *mini, char *str)
 			if (mini->open_s_str == 0 && mini->open_d_str == 0)
 				mini->open_s_str = 1;
 			else if (mini->open_s_str == 1)
-			{
 				mini->open_s_str = 0;
-				mini->s_final_s = 1;
-			}
 		}
 		if (str[i] == D_QUOTE)
 		{
 			if (mini->open_d_str == 0 && mini->open_s_str == 0)
 				mini->open_d_str = 1;
 			else if (mini->open_d_str == 1)
-			{
 				mini->open_d_str = 0;
-				mini->s_final_d = 1;
-			}
 		}
 		i++;
 	}
@@ -112,23 +93,17 @@ void	run_cmd(t_mini *mini, t_list *list, t_node *node)
 {
 	int	i;
 	int	result;
-	int	open;
 
 	i = 0;
 	result = 1;
-	open = 0;
 	mini->open_s_str = 0;
 	mini->open_d_str = 0;
-	mini->s_final_s = 0;
-	mini->s_final_d = 0;
 	if (node != NULL)
 	{
 		while (node->str[i] && result)
 		{
-			// if (is_this_quote(node->str[i]))
-			// 	open = is_str_quote(node->str[i], open);
 			verify_quotes(mini, node->str[i]);
-			result = get_result(mini, node, open, i);
+			result = get_result(mini, node, i);
 			i++;
 		}
 		if (!result)

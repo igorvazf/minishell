@@ -12,13 +12,8 @@
 
 #include "../include/minishell.h"
 
-void	miniunset(t_env *env, t_node *node)
+void	miniunset(t_env *env, t_node *node, t_nodenv *aux, t_nodenv *prev)
 {
-	t_nodenv	*aux;
-	t_nodenv	*prev;
-
-	aux = env->begin;
-	prev = env->begin;
 	while (aux != NULL && node->str[1])
 	{
 		if (ft_strcmp(aux->key, node->str[1]))

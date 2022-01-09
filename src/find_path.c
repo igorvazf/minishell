@@ -59,10 +59,9 @@ char	**blabla(t_mini *mini)
 	return (path);
 }
 
-int	verify_path(t_mini *mini, char *cmd, int i)
+int	verify_path(t_mini *mini, char *cmd, char *path, int i)
 {
 	char	**holder;
-	char	*path;
 	char	*aux;
 
 	holder = blabla(mini);
@@ -98,7 +97,7 @@ int	find_path(t_mini *mini, char *cmd)
 
 	if (!cmd)
 		return (0);
-	if (verify_path(mini, cmd, 0))
+	if (verify_path(mini, cmd, NULL, 0))
 		return (1);
 	tilda = check_tilda(cmd);
 	if (tilda)

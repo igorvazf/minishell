@@ -105,8 +105,6 @@ typedef struct s_mini
 	int		is_final_d;
 	int		open_s_str;
 	int		open_d_str;
-	int		s_final_s;
-	int		s_final_d;
 	int		pipe;
 	int		redir;
 	int		out;
@@ -163,20 +161,21 @@ void	get_cmd_builtin(t_mini *mini, t_node *node);
 int		is_space(char *str);
 int		input_validate(t_mini *mini);
 int		quotes_closed(t_mini *mini);
-void	is_in_quote_str(char *str, t_mini *mini);
+void	is_in_quote_str(char *str, t_mini *mini, int i);
 int		is_just_quote(char *str);
 int		len_quote(char **str);
 char	*transform(t_mini *mini, t_node *node, int i, int j);
 int		is_this_quote(char *str);
-int		get_result(t_mini *mini, t_node *node, int open, int i);
+int		get_result(t_mini *mini, t_node *node, int i);
 void	fd_handler(t_mini *mini);
+int		is_str_quote(char *str, int open);
 
 /* Builtins */
 void	miniexit(t_mini *mini, t_node *node, t_list *list);
-void	miniunset(t_env *env, t_node *node);
+void	miniunset(t_env *env, t_node *node, t_nodenv *aux, t_nodenv *prev);
 void	minipwd(void);
 void	minicd(t_mini *mini, t_node *node);
-void	miniecho(t_mini *mini, t_node *node);
+void	miniecho(t_mini *mini, t_node *node, int i);
 void	minienv(t_env *env);
 void	miniexport(t_env *env, t_node *node);
 
