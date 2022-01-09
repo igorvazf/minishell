@@ -85,6 +85,7 @@ int	verify_path(t_mini *mini, char *cmd, int i)
 			i++;
 		}
 	}
+	minifree(holder);
 	return (0);
 }
 
@@ -93,7 +94,7 @@ int	verify_path(t_mini *mini, char *cmd, int i)
 */
 int	find_path(t_mini *mini, char *cmd)
 {
-	int		tilda;
+	int	tilda;
 
 	if (verify_path(mini, cmd, 0))
 		return (1);
