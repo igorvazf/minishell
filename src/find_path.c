@@ -96,6 +96,8 @@ int	find_path(t_mini *mini, char *cmd)
 {
 	int	tilda;
 
+	if (!cmd)
+		return (0);
 	if (verify_path(mini, cmd, 0))
 		return (1);
 	tilda = check_tilda(cmd);
