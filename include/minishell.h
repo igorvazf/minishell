@@ -150,7 +150,7 @@ int		redirect_in(t_mini *mini, t_node *node, int i);
 void	run(t_mini *mini, t_list *list, int i);
 void	fd_handler(t_mini *mini);
 void	get_cmd(t_mini *mini, t_node *node);
-void	get_input(t_mini *mini, t_sani *sani);
+void	get_input(t_mini *mini, t_sani *sani, t_list *list);
 int		redir_validate(t_list *list);
 int		check_tilda(char *cmd);
 void	get_home(t_mini *mini);

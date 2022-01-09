@@ -27,7 +27,7 @@ int	main(void)
 		mini.in = STDIN_FILENO;
 		mini.out = STDOUT_FILENO;
 		list = create_list();
-		get_input(&mini, &sani);
+		get_input(&mini, &sani, list);
 		if (ft_strlen(mini.input) != 0 && mini.input[0] != '|')
 		{
 			if (!input_validate(&mini) || !quotes_closed(&mini))

@@ -110,7 +110,7 @@ int	redir_validate(t_list *list)
 /*
 ** function that takes input from user and add to the history
 */
-void	get_input(t_mini *mini, t_sani *sani)
+void	get_input(t_mini *mini, t_sani *sani, t_list *list)
 {
 	mini->is_open_s = 0;
 	mini->is_open_d = 0;
@@ -123,6 +123,11 @@ void	get_input(t_mini *mini, t_sani *sani)
 	}
 	else
 	{
+		free_list(&list);
+		free(mini->input_sanitized);
+		if (mini->correct_path != NULL)
+			free(mini->correct_path);
+		free_em_all(mini);
 		printf("exit\n");
 		exit(130);
 	}

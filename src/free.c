@@ -34,8 +34,8 @@ void	free_reset(t_mini *mini, t_list *list)
 		if (mini->input[0] == '|')
 			printf("minishell: syntax error. Unexpected token \'|\'\n");
 		free(mini->input);
-		free(mini->input_sanitized);
 	}
+	free(mini->input_sanitized);
 	if (mini->correct_path != NULL)
 		free(mini->correct_path);
 }
