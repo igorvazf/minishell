@@ -26,13 +26,13 @@ Rode o executável *minishell*, como no exemplo:
 Isso iniciará, dentro do próprio terminal, o minishell, no qual é possível utilizar vários comandos disponíveis no shell padrão.
 
 #### Builtins implementados:
-echo
-pwd
-cd
-export
-unset
-env
-exit
+* echo
+* pwd
+* cd
+* export
+* unset
+* env
+* exit
 
 
 #### More about School 42 you can find here: https://en.wikipedia.org/wiki/42_(school)
